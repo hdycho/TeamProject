@@ -4,7 +4,8 @@ enum STAGESTATE
 {
 	IN_GAME,		//게임중
 	STORE,			//상점
-	BOSS_ROOM		//보스방
+	BOSS_ROOM,		//보스방
+	FADE_OUT		//페이드아웃
 };
 class GameScene:public gameNode
 {

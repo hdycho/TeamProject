@@ -24,6 +24,8 @@ HRESULT GameScene::init()
 	
 	IMAGEMANAGER->addFrameImage("충돌맵", PathFile("image", "충돌맵").c_str(), 20000, 1000, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("스테이지", PathFile("image", "스테이지").c_str(), 20000, 1000, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("보스방", PathFile("image", "보스방").c_str(), 1600, 800, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("보스방충돌맵", PathFile("image", "보스방충돌맵").c_str(), 1600, 800, 1, 1, false, NULL);
 	EFFECTMANAGER->addEffect("폭발", PathFile("image", "폭발").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
 
 	sState = IN_GAME;
@@ -59,6 +61,16 @@ void GameScene::update()
 			}
 
 			CamMove(4);
+
+			//보스방 입장
+			if (KEYMANAGER->isOnceKeyDown(VK_F1))
+			{
+				sState = BOSS_ROOM;
+				CAM->CamInit(DYNAMIC_CAMERA,500, 500, 300, 150, 4);
+			}
+			//===============이건 만지지 않도록===============//
+			CAM->CamUpdate(rc, 0, GAMESIZEX, 0, GAMESIZEY);
+			//==============================================//
 		}
 		break;
 		case STORE:
@@ -68,14 +80,23 @@ void GameScene::update()
 		break;
 		case BOSS_ROOM:
 		{
+			if (KEYMANAGER->isOnceKeyDown(VK_F1))
+			{
+				sState = IN_GAME;
+			}
+
+			CamMove(4);
+			//===============이건 만지지 않도록===============//
+			CAM->CamUpdate(rc, 0, 1600, 0, 800);
+			//==============================================//
+		}
+		break;
+		case FADE_OUT:
+		{
 
 		}
 		break;
 	}
-	
-	//===============이건 만지지 않도록===============//
-	CAM->CamUpdate(rc, 0, GAMESIZEX, 0, GAMESIZEY);
-	//==============================================//
 }
 
 void GameScene::render()
@@ -98,6 +119,15 @@ void GameScene::render()
 		}
 		break;
 		case BOSS_ROOM:
+		{
+			IMAGEMANAGER->findImage("보스방")->render(getMemDC(), 0, 0);
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+				IMAGEMANAGER->findImage("보스방충돌맵")->render(getMemDC(), 0, 0);
+
+			CamRender();
+		}
+		break;
+		case FADE_OUT:
 		{
 
 		}
