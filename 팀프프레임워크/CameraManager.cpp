@@ -204,24 +204,24 @@ void CameraManager::CamUpdate(RECT & rc, int LeftX, int rightX, int topY, int bo
 		{
 			if (GetCenterPos(rc).x + 5 < GetCenterPos(camRc).x)
 			{
-				camRc.left -= (camSpeed - (camSpeed-2));
-				camRc.right -= (camSpeed - (camSpeed-2));
+				camRc.left -= 1;
+				camRc.right -= 1;
 			}
 			else if (GetCenterPos(rc).x - 5 > GetCenterPos(camRc).x)
 			{
-				camRc.left += (camSpeed - (camSpeed - 2));
-				camRc.right += (camSpeed - (camSpeed - 2));
+				camRc.left += 1;
+				camRc.right += 1;
 			}
 
 			if (GetCenterPos(rc).y + 5 < GetCenterPos(camRc).y)
 			{
-				camRc.top -= (camSpeed - (camSpeed - 2));
-				camRc.bottom -= (camSpeed - (camSpeed - 2));
+				camRc.top -= 1;
+				camRc.bottom -= 1;
 			}
 			else if (GetCenterPos(rc).y - 5 > GetCenterPos(camRc).y)
 			{
-				camRc.top += (camSpeed - (camSpeed - 2));
-				camRc.bottom += (camSpeed - (camSpeed - 2));
+				camRc.top += 1;
+				camRc.bottom += 1;
 			}
 		}
 		else

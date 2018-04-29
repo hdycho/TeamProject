@@ -22,8 +22,11 @@ HRESULT GameScene::init()
 	BULLET->BulletSetting("ÃÑ¾Ë", IMAGEMANAGER->findImage("Å×½ºÆ®ÃÑ¾Ë"), 30, true, 10);
 	//=======================================//
 	
-	IMAGEMANAGER->addFrameImage("½ºÅ×ÀÌÁö2", PathFile("image", "½ºÅ×ÀÌÁö2").c_str(), 6141, 1000, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("Ãæµ¹¸Ê", PathFile("image", "Ãæµ¹¸Ê").c_str(), 20000, 1000, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("½ºÅ×ÀÌÁö", PathFile("image", "½ºÅ×ÀÌÁö").c_str(), 20000, 1000, 1, 1, false, NULL);
 	EFFECTMANAGER->addEffect("Æø¹ß", PathFile("image", "Æø¹ß").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
+
+	sState = IN_GAME;
 
 	rc = RectMakeCenter(600, 600, 50, 50);
 	rc2 = RectMakeCenter(800, 600, 100, 100);
@@ -37,22 +40,39 @@ void GameScene::release()
 
 void GameScene::update()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	switch (sState)
 	{
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y, 0, 0.1, 5);
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y-50, 0, 0.1, 5);
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y-25, 0, 0.1, 5);
+		case IN_GAME:
+		{
+			if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+			{
+				BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y, 0, 0.1, 5);
+				BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y - 50, 0, 0.1, 5);
+				BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y - 25, 0, 0.1, 5);
+			}
+
+			//ÃÑ¾ËÅÍÁö´Â À§Ä¡ ±¸ÇÏ±âÀ§ÇØ¼­
+			static int x = 0, y = 0;
+			if (BULLET->IsCollision("ÃÑ¾Ë", &x, &y, false, NULL, rc2))
+			{
+				EFFECTMANAGER->play("Æø¹ß", x, y);
+			}
+
+			CamMove(4);
+		}
+		break;
+		case STORE:
+		{
+
+		}
+		break;
+		case BOSS_ROOM:
+		{
+
+		}
+		break;
 	}
-
-	//ÃÑ¾ËÅÍÁö´Â À§Ä¡ ±¸ÇÏ±âÀ§ÇØ¼­
-	static int x=0, y = 0;
-	if (BULLET->IsCollision("ÃÑ¾Ë",&x,&y ,false, NULL, rc2))
-	{
-		EFFECTMANAGER->play("Æø¹ß", x, y);
-	}
-
-	CamMove(4);
-
+	
 	//===============ÀÌ°Ç ¸¸ÁöÁö ¾Êµµ·Ï===============//
 	CAM->CamUpdate(rc, 0, GAMESIZEX, 0, GAMESIZEY);
 	//==============================================//
@@ -60,9 +80,29 @@ void GameScene::update()
 
 void GameScene::render()
 {
-	IMAGEMANAGER->findImage("½ºÅ×ÀÌÁö2")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
-	Rectangle(getMemDC(), rc2.left, rc2.top, rc2.right, rc2.bottom);
-	CamRender();
+	switch (sState)
+	{
+		case IN_GAME:
+		{
+			IMAGEMANAGER->findImage("½ºÅ×ÀÌÁö")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
+			if(KEYMANAGER->isToggleKey(VK_TAB))
+				IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
+			
+			Rectangle(getMemDC(), rc2.left, rc2.top, rc2.right, rc2.bottom);
+			CamRender();
+		}
+		break;
+		case STORE:
+		{
+
+		}
+		break;
+		case BOSS_ROOM:
+		{
+
+		}
+		break;
+	}
 }
 
 void GameScene::CamMove(int speed)

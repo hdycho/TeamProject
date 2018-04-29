@@ -45,7 +45,7 @@ using namespace NONA_UTIL;
 #define WINSTARTY 50		//윈도우 시작좌표 Y
 #define WINSIZEX 800		//윈도우 가로크기
 #define WINSIZEY 600		//윈도우 세로크기
-#define GAMESIZEX 6141		//실제 게임맵 가로사이즈
+#define GAMESIZEX 20000		//실제 게임맵 가로사이즈
 #define GAMESIZEY 1000		//실제 게임맵 세로사이즈
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
 
