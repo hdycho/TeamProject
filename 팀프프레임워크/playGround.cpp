@@ -12,7 +12,7 @@ playGround::~playGround()
 
 }
 
-//초기화 해주는 곳
+//초기화 해주는 곳임
 HRESULT playGround::init()
 {
 	gameNode::init(true);
