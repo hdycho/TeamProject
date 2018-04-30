@@ -33,14 +33,6 @@ HRESULT GameScene::init()
 	rc = RectMakeCenter(600, 600, 50, 50);
 	rc2 = RectMakeCenter(800, 600, 100, 100);
 
-	//================ Store init ==================
-	_store = new Store;
-	_store->setGameSceneAddress(this);
-	_store->init();
-	_money = 0;
-	_store->setLinkMoney(&_money);
-	//==============================================
-
 	return S_OK;
 }
 
@@ -76,11 +68,6 @@ void GameScene::update()
 				sState = BOSS_ROOM;
 				CAM->CamInit(DYNAMIC_CAMERA,500, 500, 300, 150, 4);
 			}
-			if (KEYMANAGER->isOnceKeyDown(VK_F2))
-			{
-				sState = STORE;
-				//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 0);
-			}
 			//===============이건 만지지 않도록===============//
 			CAM->CamUpdate(rc, 0, GAMESIZEX, 0, GAMESIZEY);
 			//==============================================//
@@ -88,13 +75,7 @@ void GameScene::update()
 		break;
 		case STORE:
 		{
-			if (KEYMANAGER->isOnceKeyDown(VK_F2))
-			{
-				_store->_message = "무엇이든 가장 저렴하게 물건을 파는 상점입니다.";
-				sState = IN_GAME;
-			}
-			//_store->setLinkMoney(&_money);
-			_store->update();
+
 		}
 		break;
 		case BOSS_ROOM:
@@ -134,8 +115,7 @@ void GameScene::render()
 		break;
 		case STORE:
 		{
-			_store->render();
-			//CamRender();
+
 		}
 		break;
 		case BOSS_ROOM:

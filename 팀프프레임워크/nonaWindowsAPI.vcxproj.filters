@@ -183,9 +183,6 @@
     <ClInclude Include="PixelCol.h">
       <Filter>2DGameFramework\PixelCollision</Filter>
     </ClInclude>
-    <ClInclude Include="Store.h">
-      <Filter>playGround\GameScene\Store</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -262,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="PixelCol.cpp">
       <Filter>2DGameFramework\PixelCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="Store.cpp">
-      <Filter>playGround\GameScene\Store</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

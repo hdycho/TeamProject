@@ -1,9 +1,5 @@
 #pragma once
 #include "gameNode.h"
-#include "Store.h"
-class Store;
-struct ITEM;
-
 enum STAGESTATE
 {
 	IN_GAME,		//게임중
@@ -19,13 +15,6 @@ private:
 	RECT rc2;
 
 	STAGESTATE sState;
-
-//============== Store 변수 ==============
-	Store* _store;
-	vector<ITEM*> _vItem;
-	int	_money;
-	GameScene* _gc = this;
-//========================================
 public:
 	GameScene();
 	~GameScene();
@@ -38,10 +27,5 @@ public:
 	//테스트용
 	void CamMove(int speed);
 	void CamRender();
-
-//============== Store 함수 ==============
-	vector<ITEM*> getVItem() { return _vItem; }
-	void setsState(STAGESTATE state) { sState = state; }
-//========================================
 };
 
