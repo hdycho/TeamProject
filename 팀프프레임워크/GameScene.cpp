@@ -54,6 +54,7 @@ void GameScene::update()
 	{
 		case IN_GAME:
 		{
+			_store->update();
 			if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 			{
 				BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y, 0, 0.1, 5);
