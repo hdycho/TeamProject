@@ -186,6 +186,9 @@
     <ClInclude Include="Store.h">
       <Filter>playGround\GameScene\Store</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\GameScene\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -265,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="Store.cpp">
       <Filter>playGround\GameScene\Store</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\GameScene\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

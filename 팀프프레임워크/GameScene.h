@@ -12,6 +12,8 @@ enum STAGESTATE
 	BOSS_ROOM,		//보스방
 	FADE_OUT		//페이드아웃
 };
+
+class player;
 class GameScene:public gameNode
 {
 private:
@@ -20,6 +22,8 @@ private:
 	RECT rc2;
 
 	STAGESTATE sState;
+
+	player* _metaKnight;
 
 	//============== Store 변수 ==============
 	Store* _store;
