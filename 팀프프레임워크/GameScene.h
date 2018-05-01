@@ -23,9 +23,8 @@ private:
 
 	//============== Store 변수 ==============
 	Store* _store;
-	vector<ITEM*> _vItem;
+	vector<ITEM*> _vItem;  // 플레이어와 연동필요
 	int	_money;
-	GameScene* _gc = this;
 	//========================================
 public:
 	GameScene();

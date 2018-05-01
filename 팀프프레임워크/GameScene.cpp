@@ -33,13 +33,13 @@ HRESULT GameScene::init()
 	rc = RectMakeCenter(600, 600, 50, 50);
 	rc2 = RectMakeCenter(800, 600, 100, 100);
 
-//================ Store init ==================
+	//================ Store init ==================
+	_money = 2000;	// 머니는 플레이어와 연동 필요 테스트를 위해, 일단 2000
 	_store = new Store;
 	_store->setGameSceneAddress(this);
-	_store->init();
-	_money = 0;
 	_store->setLinkMoney(&_money);
-//==============================================
+	_store->init();
+	//==============================================
 
 	return S_OK;
 }
@@ -80,6 +80,7 @@ void GameScene::update()
 			if (KEYMANAGER->isOnceKeyDown(VK_F2))
 			{
 				sState = STORE;
+				_store->_message = "아이템이 가장 저렴한 상점입니다.";
 				//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 0);
 			}
 			//===============이건 만지지 않도록===============//
@@ -91,10 +92,8 @@ void GameScene::update()
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_F2))
 			{
-				_store->_message = "무엇이든 가장 저렴하게 물건을 파는 상점입니다.";
 				sState = IN_GAME;
 			}
-			//_store->setLinkMoney(&_money);
 			_store->update();
 		}
 		break;

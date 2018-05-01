@@ -29,6 +29,7 @@ struct ITEM
 
 	float		x, y;
 	RECT		rc;
+	bool		isSell;
 };
 
 struct BUTTON
@@ -68,7 +69,7 @@ public:
 	BUTTONTYPE Store::buttonCollision(int* pIndex);
 	void setLinkMoney(int* money) { this->_money = money; }
 	void setGameSceneAddress(GameScene* gc) { _gc = gc; }
-	//void Store::setGameSceneAddress(GameScene* gc) { _gc = gc; }
+
 	Store();
 	~Store();
 };
