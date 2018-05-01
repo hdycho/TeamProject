@@ -222,6 +222,7 @@ void player::knightAttack()
 			_isAttack = true;
 		}
 	}
+
 	// ∞¯∞›¿ª ∏ÿ√Ë¿ª∂ß
 	if (_knightDirection == RIGHT_ATTACK)
 	{
@@ -239,7 +240,7 @@ void player::knightAttack()
 			_isAttack = false;
 		}
 	}
-
+	
 
 	// attack
 	if (_isAttack == true)

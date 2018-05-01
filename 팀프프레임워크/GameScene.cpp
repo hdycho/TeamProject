@@ -34,6 +34,14 @@ HRESULT GameScene::init()
 	//===============카메라 셋팅===============//
 	CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
 	//========================================//
+
+	//================ Store init ==================
+	_money = 2000;			// 머니는 플레이어와 연동 필요
+	_store = new Store;
+	_store->setGameSceneAddress(this);
+	_store->setLinkMoney(&_money);
+	_store->init();
+	//==============================================
 	return S_OK;
 }
 
@@ -69,14 +77,27 @@ void GameScene::update()
 			sState = BOSS_ROOM;
 			CAM->CamInit(DYNAMIC_CAMERA, 500, 500, 300, 150, 4);
 		}
+		if (KEYMANAGER->isOnceKeyDown(VK_F2))
+		{
+			sState = STORE;
+			_store->_message = "아이템이 가장 저렴한 상점입니다.";
+			//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 0);
+		}
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
 		//==============================================//
+
+		_metaKnight->update();
+		_store->update();
 	}
 	break;
 	case STORE:
 	{
-
+		if (KEYMANAGER->isOnceKeyDown(VK_F2))
+		{
+			sState = IN_GAME;
+		}
+		_store->update();
 	}
 	break;
 	case BOSS_ROOM:
@@ -98,9 +119,6 @@ void GameScene::update()
 	}
 	break;
 	}
-
-	_metaKnight->update();
-
 }
 
 void GameScene::render()
@@ -115,11 +133,13 @@ void GameScene::render()
 
 		Rectangle(getMemDC(), rc2.left, rc2.top, rc2.right, rc2.bottom);
 		CamRender();
+
+		_metaKnight->render();
 	}
 	break;
 	case STORE:
 	{
-
+		_store->render();
 	}
 	break;
 	case BOSS_ROOM:
@@ -138,7 +158,6 @@ void GameScene::render()
 	break;
 	}
 
-	_metaKnight->render();
 
 }
 
