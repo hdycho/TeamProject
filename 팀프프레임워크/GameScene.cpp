@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "player.h"
 #include "enemyManager.h"
+#include "ItemManager.h"
 
 GameScene::GameScene()
 {
@@ -45,6 +46,8 @@ HRESULT GameScene::init()
 	_em = new enemyManager;
 	_em->init();
 	_em->setBaby();
+	_im = new ItemManager;
+	_im->init();
 	//==============================================
 	return S_OK;
 }
@@ -94,6 +97,14 @@ void GameScene::update()
 		_metaKnight->update();
 		_store->update();
 		_em->update();
+		_im->update();
+
+		//°ñµå µå¶ø
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		{
+			_im->DropGold(_metaKnight->getKnightImage().rc.left, _metaKnight->getKnightImage().rc.top);
+		}
+
 	}
 	break;
 	case STORE:
@@ -138,10 +149,11 @@ void GameScene::render()
 			IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
 
 		Rectangle(getMemDC(), rc2.left, rc2.top, rc2.right, rc2.bottom);
-		CamRender();
+		//CamRender();
 
 		_metaKnight->render();
 		_em->render();
+		_im->render();
 	}
 	break;
 	case STORE:

@@ -88,7 +88,7 @@
     <Filter Include="playGround\GameScene\Obstacle">
       <UniqueIdentifier>{502dc433-5e84-4563-9038-f8d8d4d799bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\GameScene\item">
+    <Filter Include="playGround\GameScene\Item">
       <UniqueIdentifier>{814c6e73-9794-4f7e-bcc7-09773add8ab0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -198,6 +198,12 @@
     <ClInclude Include="enemyManager.h">
       <Filter>playGround\GameScene\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>playGround\GameScene\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -289,6 +295,12 @@
     </ClCompile>
     <ClCompile Include="enemyManager.cpp">
       <Filter>playGround\GameScene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
