@@ -39,6 +39,11 @@ HRESULT player::init()
 	pCol = new PixelCol;
 
 	pCol->init(70, 20);
+
+	//====== Skill ======
+	_skill = new Skill;
+	_skill->init();
+
 	return S_OK;
 }
 
@@ -152,11 +157,14 @@ void player::update()
 	PlayerCollision();
 	_knight.rc = RectMakeCenter(_playerX, _playerY, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
+
+	_skill->update();
 }
 
 void player::render()
 {
 	_knight.img->frameRender(getMemDC(), _knight.rc.left, _knight.rc.top);
+	_skill->render();
 }
 
 void player::knightJump()
@@ -212,6 +220,7 @@ void player::knightAttack()
 		{
 			_index = 0;
 			_isAttack = true;
+			_skill->makeSlash(_playerX, _playerY, 40, false);
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
@@ -220,6 +229,7 @@ void player::knightAttack()
 		{
 			_index = 18;
 			_isAttack = true;
+			_skill->makeSlash(_playerX, _playerY, 40, true);
 		}
 	}
 

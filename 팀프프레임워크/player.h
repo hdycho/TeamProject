@@ -1,8 +1,10 @@
 #pragma once
 #include "gameNode.h"
 #include "PixelCol.h"
+#include "Skill.h"
 
 #define KNIGHTSPEED 4;
+class Skill;
 
 enum KNIGHTDIRECTION
 {
@@ -50,6 +52,8 @@ private:
 
 	// for Attack
 	bool _isAttack;
+
+	Skill* _skill;
 public:
 	player();
 	~player();

@@ -91,6 +91,9 @@
     <Filter Include="playGround\GameScene\Item">
       <UniqueIdentifier>{814c6e73-9794-4f7e-bcc7-09773add8ab0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\GameScene\Skill">
+      <UniqueIdentifier>{6774c93e-6411-41b9-a4d7-258f0a5bbb2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -204,6 +207,9 @@
     <ClInclude Include="ItemManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>playGround\GameScene\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -301,6 +307,9 @@
     </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>playGround\GameScene\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
