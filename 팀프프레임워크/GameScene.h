@@ -14,6 +14,8 @@ enum STAGESTATE
 };
 
 class player;
+class enemyManager;
+
 class GameScene:public gameNode
 {
 private:
@@ -24,6 +26,7 @@ private:
 	STAGESTATE sState;
 
 	player* _metaKnight;
+	enemyManager* _em;
 
 	//============== Store º¯¼ö ==============
 	Store* _store;

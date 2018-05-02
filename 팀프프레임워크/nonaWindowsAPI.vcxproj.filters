@@ -189,6 +189,15 @@
     <ClInclude Include="player.h">
       <Filter>playGround\GameScene\Player</Filter>
     </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="baby.h">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>playGround\GameScene\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -271,6 +280,15 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>playGround\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="baby.cpp">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>playGround\GameScene\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "player.h"
+#include "enemyManager.h"
 
 GameScene::GameScene()
 {
@@ -41,6 +42,9 @@ HRESULT GameScene::init()
 	_store->setGameSceneAddress(this);
 	_store->setLinkMoney(&_money);
 	_store->init();
+	_em = new enemyManager;
+	_em->init();
+	_em->setBaby();
 	//==============================================
 	return S_OK;
 }
@@ -89,6 +93,7 @@ void GameScene::update()
 
 		_metaKnight->update();
 		_store->update();
+		_em->update();
 	}
 	break;
 	case STORE:
@@ -119,6 +124,7 @@ void GameScene::update()
 	}
 	break;
 	}
+	
 }
 
 void GameScene::render()
@@ -135,6 +141,7 @@ void GameScene::render()
 		CamRender();
 
 		_metaKnight->render();
+		_em->render();
 	}
 	break;
 	case STORE:
@@ -158,7 +165,7 @@ void GameScene::render()
 	break;
 	}
 
-
+	
 }
 
 void GameScene::CamMove(int speed)
