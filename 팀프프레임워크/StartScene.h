@@ -8,6 +8,9 @@ private:
 	button*start;
 	button*edit;
 	
+	image*fadeout;
+
+	int alpha;
 public:
 	StartScene();
 	~StartScene();
