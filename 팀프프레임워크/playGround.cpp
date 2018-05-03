@@ -18,8 +18,14 @@ HRESULT playGround::init()
 	gameNode::init(true);
 	gameScene = new GameScene;
 	gameScene->init();
+
+	startScene = new StartScene;
+	startScene->init();
+
 	SCENEMANAGER->addScene("∞‘¿”æ¿", gameScene);
-	SCENEMANAGER->changeScene("∞‘¿”æ¿");
+	SCENEMANAGER->addScene("Ω√¿€æ¿", startScene);
+
+	SCENEMANAGER->changeScene("Ω√¿€æ¿");
 
 	return S_OK;
 }

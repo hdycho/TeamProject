@@ -1,76 +1,80 @@
 #include "stdafx.h"
 #include "button.h"
-
-
 button::button()
+	:img(nullptr), bState(BUTTON_NULL), isClick(false)
 {
 }
-
-
 button::~button()
 {
 }
 
-HRESULT button::init(const char* imageName,
-	int x, int y, POINT btnDownFramePoint,
-	POINT btnUpFramePoint, CALLBACK_FUNCTION cbFunction)
+HRESULT button::Init(image * img, string bName, float x, float y)
 {
-	//콜백함수 대입
-	_callbackFunction = static_cast<CALLBACK_FUNCTION>(cbFunction);
+	this->img = new image;
+	*(this->img) = *img;
 
-	_direction = BUTTONDIRECTION_NULL;
+	this->x = x;
+	this->y = y;
+	rc = RectMakeCenter(x, y, this->img->getFrameWidth(), this->img->getFrameHeight());
+	frameX = 0;
+	this->img->setFrameX(frameX);
 
-	_x = x;
-	_y = y;
-
-	_btnUpFramePoint = btnUpFramePoint;
-	_btnDownFramePoint = btnDownFramePoint;
-
-	_imageName = imageName;
-	_image = IMAGEMANAGER->findImage(imageName);
-
-	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
+	bState = BUTTON_UP;
+	buttonName = bName;
 
 	return S_OK;
 }
 
-void button::release(void)
+void button::Render()
 {
+	if (bState == BUTTON_DOWN)
+		img->frameRender(getMemDC(), rc.left, rc.top, 0, 1);
+	else
+		img->frameRender(getMemDC(), rc.left, rc.top, 0, 0);
+	ButtonNameDraw();
 
+
+	//Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
 }
 
-void button::update(void)
+void button::Update(int key)
 {
-	if (PtInRect(&_rc, _ptMouse))
+
+	if (PtInRect(&rc, _ptMouse))
 	{
-		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		if (KEYMANAGER->isOnceKeyDown(key))
 		{
-			_direction = BUTTONDIRECTION_DOWN;
-			
+			bState = BUTTON_DOWN;
 		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON) && _direction == BUTTONDIRECTION_DOWN)
+		else if (KEYMANAGER->isOnceKeyUp(key) && bState == BUTTON_DOWN)
 		{
-			_direction = BUTTONDIRECTION_UP;
-			_callbackFunction();
-			
+			bState = BUTTON_UP;
+			isClick = true;
 		}
 	}
-	else _direction = BUTTONDIRECTION_NULL;
+	else
+		bState = BUTTON_NULL;
+
+	if (bState == BUTTON_NULL)
+	{
+		if (KEYMANAGER->isStayKeyDown(key))
+			isClick = false;
+	}
 }
 
-void button::render(void)
+void button::Release()
 {
-	switch (_direction)
-	{
-	
-		case BUTTONDIRECTION_NULL: case BUTTONDIRECTION_UP:
-			_image->frameRender(getMemDC(), _rc.left, _rc.top,
-				_btnUpFramePoint.x, _btnUpFramePoint.y);
-		break;
-		case BUTTONDIRECTION_DOWN:
-			_image->frameRender(getMemDC(), _rc.left, _rc.top,
-				_btnDownFramePoint.x, _btnDownFramePoint.y);
-		break;
-	
-	}
+}
+
+void button::ButtonNameDraw()
+{
+	HFONT font, oldFont;
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	font = CreateFont(30, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("궁서체"));
+	oldFont = (HFONT)SelectObject(getMemDC(), font);
+	SetBkMode(getMemDC(), TRANSPARENT);
+	DrawText(getMemDC(), buttonName.c_str(), strlen(buttonName.c_str()), &rc,
+		DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	SelectObject(getMemDC(), oldFont);
+	DeleteObject(font);
 }

@@ -210,6 +210,9 @@
     <ClInclude Include="Skill.h">
       <Filter>playGround\GameScene\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>playGround\StartScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -310,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>playGround\GameScene\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>playGround\StartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,55 +1,40 @@
 #pragma once
 #include "gameNode.h"
 
-//콜백함수 -> 함수포인터
-typedef void(*CALLBACK_FUNCTION)(void);
-
-//성인요로분은~
-//콜백함수가 전역으로 선언으로 선언이 되어있어서
-//static을 붙이지 않으면 사용할수가 없다
-//매개변수를 사용할수가 있을까?!?!?!?!?!
-
-//<Functional>
-//bind, move, 
-
-//객체 & 객체의 변수도 매개변수로 넣어서 사용할 수 있게
-//변형시켜보기!
-//의외로 쉽다는게 함정인데, 의외로 감도안오는것도 함정
-
-
-enum BUTTONDIRECTION
-{
-	BUTTONDIRECTION_NULL,
-	BUTTONDIRECTION_UP,
-	BUTTONDIRECTION_DOWN
-};
 
 class button : public gameNode
 {
 private:
-	BUTTONDIRECTION _direction;
+	enum BUTTONSTATE
+	{
+		BUTTON_DOWN,
+		BUTTON_UP,
+		BUTTON_NULL
+	};
+private:
+	BUTTONSTATE bState;
+	image*img;
+	RECT rc;
+	float x, y;
 
-	const char* _imageName;
-	image* _image;
-	RECT _rc;
-	float _x, _y;
+	int frameX;
+	bool isClick;
 
-	POINT _btnDownFramePoint;
-	POINT _btnUpFramePoint;
+	string buttonName;
 
-	CALLBACK_FUNCTION _callbackFunction;
 
 public:
 	button();
 	~button();
 
-	HRESULT init(const char* imageName,
-		int x, int y, POINT btnDownFramePoint,
-		POINT btnUpFramePoint, CALLBACK_FUNCTION cbFunction);
+	//버튼사용하기 위해서 미리만들어놔야한다
+	HRESULT Init(image*img, string bName, float x, float y);
+	void Render();
+	void Update(int key);
+	void Release();
 
-	void release(void);
-	void update(void);
-	void render(void);
+	void ButtonNameDraw();
 
+	inline bool IsClick() { return isClick; }
+	inline RECT GetRect() { return rc; }
 };
-
