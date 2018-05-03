@@ -9,8 +9,7 @@ HRESULT Skill::init()
 	string name = "slash";
 	string slashName = "slash";
 	IMAGEMANAGER->addFrameImage("slash", "image/slash.bmp", 800, 74, 8, 1, true, RGB(255, 0, 255));
-	int arrSlash[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-	KEYANIMANAGER->addArrayFrameAnimation("slash", "slash", arrSlash, 8, 10, true);
+
 	return S_OK;
 }
 

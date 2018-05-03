@@ -85,6 +85,7 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="EditScene.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemy.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="EditScene.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemy.cpp" />

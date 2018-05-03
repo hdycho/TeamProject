@@ -4,6 +4,10 @@
 
 playGround::playGround()
 {
+	IMAGEMANAGER->addFrameImage("충돌맵", PathFile("image", "충돌맵").c_str(), 20000, 1000, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("스테이지", PathFile("image", "스테이지").c_str(), 20000, 1000, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("보스방", PathFile("image", "보스방").c_str(), 1600, 800, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("보스방충돌맵", PathFile("image", "보스방충돌맵").c_str(), 1600, 800, 1, 1, false, NULL);
 }
 
 
@@ -22,8 +26,12 @@ HRESULT playGround::init()
 	startScene = new StartScene;
 	startScene->init();
 
+	editScene = new EditScene;
+	editScene->init();
+
 	SCENEMANAGER->addScene("게임씬", gameScene);
 	SCENEMANAGER->addScene("시작씬", startScene);
+	SCENEMANAGER->addScene("수정씬", editScene);
 
 	SCENEMANAGER->changeScene("시작씬");
 

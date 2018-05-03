@@ -94,6 +94,9 @@
     <Filter Include="playGround\GameScene\Skill">
       <UniqueIdentifier>{6774c93e-6411-41b9-a4d7-258f0a5bbb2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\EditScene">
+      <UniqueIdentifier>{5ff164f7-9f56-44c4-95e7-f0272a84ab4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -204,14 +207,17 @@
     <ClInclude Include="Item.h">
       <Filter>playGround\GameScene\Item</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>playGround\GameScene\Skill</Filter>
     </ClInclude>
     <ClInclude Include="StartScene.h">
       <Filter>playGround\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EditScene.h">
+      <Filter>playGround\EditScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>playGround\GameScene\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,14 +314,17 @@
     <ClCompile Include="Item.cpp">
       <Filter>playGround\GameScene\Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>playGround\GameScene\Skill</Filter>
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>playGround\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EditScene.cpp">
+      <Filter>playGround\EditScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>playGround\GameScene\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -44,13 +44,23 @@ void StartScene::update()
 	if (start->IsClick())
 	{
 		alpha+=4;
+		if (alpha>254)
+		{
+			SCENEMANAGER->changeScene("°ÔÀÓ¾À");
+			alpha = 0;
+		}
 	}
 
-	if (alpha>254)
+	if (edit->IsClick())
 	{
-		SCENEMANAGER->changeScene("°ÔÀÓ¾À");
-		alpha = 0;
+		alpha += 4;
+		if (alpha>254)
+		{
+			SCENEMANAGER->changeScene("¼öÁ¤¾À");
+			alpha = 0;
+		}
 	}
+
 }
 
 void StartScene::render()

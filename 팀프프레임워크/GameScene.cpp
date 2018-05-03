@@ -10,11 +10,6 @@ GameScene::GameScene()
 	IMAGEMANAGER->addFrameImage("Å×½ºÆ®ÃÑ¾Ë", PathFile("image", "½Ä¹°1ÃÑ¾Ë").c_str(), 70, 25, 3, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("ÃÑ¾Ë", IMAGEMANAGER->findImage("Å×½ºÆ®ÃÑ¾Ë"), 30, true, 10);
 	//=======================================//
-
-	IMAGEMANAGER->addFrameImage("Ãæµ¹¸Ê", PathFile("image", "Ãæµ¹¸Ê").c_str(), 20000, 1000, 1, 1, false, NULL);
-	IMAGEMANAGER->addFrameImage("½ºÅ×ÀÌÁö", PathFile("image", "½ºÅ×ÀÌÁö").c_str(), 20000, 1000, 1, 1, false, NULL);
-	IMAGEMANAGER->addFrameImage("º¸½º¹æ", PathFile("image", "º¸½º¹æ").c_str(), 1600, 800, 1, 1, false, NULL);
-	IMAGEMANAGER->addFrameImage("º¸½º¹æÃæµ¹¸Ê", PathFile("image", "º¸½º¹æÃæµ¹¸Ê").c_str(), 1600, 800, 1, 1, false, NULL);
 	EFFECTMANAGER->addEffect("Æø¹ß", PathFile("image", "Æø¹ß").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
 }
 
