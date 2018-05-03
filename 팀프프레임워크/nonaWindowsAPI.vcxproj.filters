@@ -219,6 +219,9 @@
     <ClInclude Include="ItemManager.h">
       <Filter>playGround\GameScene\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -325,6 +328,9 @@
     </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>playGround\GameScene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>playGround\GameScene\Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -99,6 +99,7 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PixelCol.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PixelCol.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />

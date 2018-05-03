@@ -26,6 +26,10 @@ HRESULT EditScene::init()
 	
 	save = new button;
 	save->Init(IMAGEMANAGER->findImage("세이브버튼"), "SAVE", 0, 0);
+
+	Loby = new button;
+	Loby->Init(IMAGEMANAGER->findImage("세이브버튼"), "LOBY", 0, 0);
+
 	return S_OK;
 }
 
@@ -46,9 +50,17 @@ void EditScene::update()
 	Item[1]->x = GetCenterPos(Item[1]->rc).x;
 	Item[1]->y = GetCenterPos(Item[1]->rc).y;
 
-	save->GetRect() = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y-230 , 250, 60);
+	save->GetRect() = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y-200 , 250, 60);
 	save->Update(VK_LBUTTON,false);
 	
+	Loby->GetRect()= RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y + 220, 250, 60);
+	Loby->Update(VK_LBUTTON, false);
+	
+	if (Loby->IsClick())
+	{
+		SCENEMANAGER->changeScene("시작씬");
+	}
+
 	SelectObj();
 	DropObj();
 	SaveObj();
@@ -69,6 +81,7 @@ void EditScene::render()
 	{
 		EditDraw();
 		save->Render();
+		Loby->Render();
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -83,10 +96,15 @@ void EditScene::render()
 			clickObj->img->render(getMemDC(), clickObj->x, clickObj->y);
 	}
 	
-	SetTextColor(getMemDC(),RGB(0,0,0));
+	HFONT font, oldFont;
+	font = CreateFont(30, 0,0, 0, 400, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("궁서체"));
+	oldFont = (HFONT)SelectObject(getMemDC(), font);
+	SetTextColor(getMemDC(),RGB(0,255,255));
 	char temp[256];
-	sprintf(temp, "x:%d y:%d", GetCenterPos(rc).x, GetCenterPos(rc).y);
-	TextOut(getMemDC(), rc.left-30, rc.top-30, temp, strlen(temp));
+	sprintf(temp, "[x:%d y:%d]", GetCenterPos(rc).x, GetCenterPos(rc).y);
+	TextOut(getMemDC(), rc.left, rc.top-30, temp, strlen(temp));
+	SelectObject(getMemDC(), oldFont);
+	DeleteObject(font);
 }
 
 void EditScene::SelectObj()
@@ -163,6 +181,7 @@ void EditScene::EditDraw()
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	TextOut(getMemDC(), Item[0]->rc.left+13, Item[0]->rc.top-53, "ITEM", strlen("ITEM"));
+	TextOut(getMemDC(), Item[0]->rc.left + 13, Item[0]->rc.top+53, "TILE", strlen("TILE"));
 	SelectObject(getMemDC(), oldFont);
 	DeleteObject(font);
 
