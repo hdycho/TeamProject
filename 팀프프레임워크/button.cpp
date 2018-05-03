@@ -37,28 +37,60 @@ void button::Render()
 	//Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
 }
 
-void button::Update(int key)
+void button::Update(int key,bool isUseCam)
 {
-
-	if (PtInRect(&rc, _ptMouse))
+	if (isUseCam)
 	{
-		if (KEYMANAGER->isOnceKeyDown(key))
+		if (PtInRect(&rc, _ptMouse))
 		{
-			bState = BUTTON_DOWN;
+			if (KEYMANAGER->isOnceKeyDown(key))
+			{
+				printf("d");
+				bState = BUTTON_DOWN;
+			}
+			else if (KEYMANAGER->isOnceKeyUp(key) && bState == BUTTON_DOWN)
+			{
+				bState = BUTTON_UP;
+				isClick = true;
+			}
 		}
-		else if (KEYMANAGER->isOnceKeyUp(key) && bState == BUTTON_DOWN)
+		else
+			bState = BUTTON_NULL;
+
+		if (bState == BUTTON_NULL)
 		{
-			bState = BUTTON_UP;
-			isClick = true;
+			if (KEYMANAGER->isStayKeyDown(key))
+				isClick = false;
 		}
 	}
 	else
-		bState = BUTTON_NULL;
-
-	if (bState == BUTTON_NULL)
 	{
-		if (KEYMANAGER->isStayKeyDown(key))
-			isClick = false;
+		static POINT mPos1 = { 0,0 };
+		mPos1.x = _ptMouse.x;
+		mPos1.y = _ptMouse.y;
+		mPos1.x += CAM->getCamRc().left;
+		mPos1.y += CAM->getCamRc().top;
+		
+		if (PtInRect(&rc, mPos1))
+		{
+			if (KEYMANAGER->isOnceKeyDown(key))
+			{
+				bState = BUTTON_DOWN;
+			}
+			else if (KEYMANAGER->isOnceKeyUp(key) && bState == BUTTON_DOWN)
+			{
+				bState = BUTTON_UP;
+				isClick = true;
+			}
+		}
+		else
+			bState = BUTTON_NULL;
+
+		if (bState == BUTTON_NULL)
+		{
+			if (KEYMANAGER->isStayKeyDown(key))
+				isClick = false;
+		}
 	}
 }
 

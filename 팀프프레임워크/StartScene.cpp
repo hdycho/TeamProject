@@ -38,8 +38,8 @@ void StartScene::release()
 
 void StartScene::update()
 {
-	start->Update(VK_LBUTTON);
-	edit->Update(VK_LBUTTON);
+	start->Update(VK_LBUTTON,true);
+	edit->Update(VK_LBUTTON,true);
 
 	if (start->IsClick())
 	{
