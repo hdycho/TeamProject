@@ -12,7 +12,9 @@ private:
 	vItem _vMapItem;
 	vItem _vGold;
 
-	int _index;
+private:
+	int index;
+	int GoldUp[30], GoldDown[30];
 
 public:
 	ItemManager();
@@ -23,7 +25,8 @@ public:
 	void update();
 	void render();
 
-	void DropGold(int x, int y);
+	void DropGold(int x, int y, int goldUp, int goldDown);
+	void GroundCollision();
 
 	inline vItem&GetMapItemVec() { return _vMapItem; }
 	inline vItem&GetGoldItecVec() { return _vGold; }

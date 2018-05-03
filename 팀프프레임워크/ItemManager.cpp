@@ -15,9 +15,10 @@ HRESULT ItemManager::init()
 {
 	IMAGEMANAGER->addImage("tomato", "./image/tomato.bmp", 30, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("banana", "./image/banana.bmp", 30, 30, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("gold", "./image/gold.bmp", 30, 30, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addImage("gold", "./image/gold.bmp", 30, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("AniGold", "./image/AniGold.bmp", 210, 30, 7, 1, true, RGB(255, 0, 255));
 
-	_index = 0;
+	index = 0;
 
 	//==============================//
 
@@ -125,8 +126,8 @@ HRESULT ItemManager::init()
 
 	for (int i = 0; i < 30; i++)
 	{
-		Item* gold = new Item;
-		gold->init(IMAGEMANAGER->findImage("gold"), GOLD_ITEM, 0, 0);
+		Item* gold = new Item; +
+			gold->init(IMAGEMANAGER->findImage("AniGold"), GOLD_ITEM, 0, 0);
 		gold->GetShowState() = false;
 		_vGold.push_back(gold);
 	}
@@ -141,7 +142,14 @@ void ItemManager::release()
 
 void ItemManager::update()
 {
-
+	for (int i = 0; i < _vGold.size(); ++i)
+	{
+		if (_vGold[i]->GetShowState())
+		{
+			_vGold[i]->update();
+		}
+	}
+	GroundCollision();
 }
 
 void ItemManager::render()
@@ -159,18 +167,39 @@ void ItemManager::render()
 		if (_vGold[i]->GetShowState())
 		{
 			_vGold[i]->render();
+			if (!_vGold[i]->GetCollision())
+			{
+				_vGold[i]->GetRect().top -= GoldUp[i];
+				_vGold[i]->GetRect().bottom -= GoldUp[i];
+				GoldUp[i] -= GoldDown[i];
+			}
 		}
 	}
 }
 
-void ItemManager::DropGold(int x, int y)
+void ItemManager::DropGold(int x, int y, int goldUp, int goldDown)
 {
-	_vGold[_index]->GetRect() = RectMakeCenter(x, y, 30, 30);
-	_vGold[_index]->GetShowState() = true;
+	GoldUp[index] = goldUp;
+	GoldDown[index] = goldDown;
+	_vGold[index]->GetRect() = RectMakeCenter(x, y, 30, 30);
+	_vGold[index]->GetShowState() = true;
+	_vGold[index]->GetCollision() = false;
+	index++;
 
-	_index++;
-
-	if (_index > _vGold.size() - 1)
-		_index = 0;
+	if (index > _vGold.size() - 1)
+	{
+		index = 0;
+	}
 }
 
+void ItemManager::GroundCollision()
+{
+	for (int i = 0; i < _vGold.size(); i++)
+	{
+		if (_vGold[i]->GetCollision())
+		{
+			GoldUp[i] = 0;
+			GoldDown[i] = 0;
+		}
+	}
+}

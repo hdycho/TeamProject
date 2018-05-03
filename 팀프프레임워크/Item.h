@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-
+#include "PixelCol.h"
 
 enum ITEMTYPES
 {
@@ -10,26 +10,40 @@ enum ITEMTYPES
 };
 class Item : public gameNode
 {
+private:
+	enum GOLDSTATE
+	{
+		GOLD_AIR,
+		GOLD_GROUND
+	};
 
 protected:
-	image * _img;			//이미지 추가
-	RECT _rc;				//렉트(충돌에 쓰임)
-	ITEMTYPES _itemTypes;	//아이템 종류에 따라
-	float _x, _y;
-	bool _isShow;			//상태 보여주기
+	image * _img;
+	PixelCol* _pc;
+	RECT _rc;
+	ITEMTYPES _itemTypes;
+	GOLDSTATE gState;
+	int _x, _y;
+	int _count, _index;
+	float gravity;
+	float jumpPower;
+	bool _isShow;
+	bool _isCollision;
 
 public:
 
 	Item();
 	~Item();
 
-	HRESULT init(image* img, ITEMTYPES itemTypes, float x, float y);
+	HRESULT init(image* img, ITEMTYPES itemTypes, int x, int y);
 	void release();
 	void update();
 	void render();
+	void GoldUpdate();
 
 	inline ITEMTYPES&GetItemType() { return _itemTypes; }
-	inline bool&GetShowState() { return _isShow; }
 	inline RECT&GetRect() { return _rc; }
+	inline bool&GetShowState() { return _isShow; }
+	inline bool&GetCollision() { return _isCollision; }
 };
 

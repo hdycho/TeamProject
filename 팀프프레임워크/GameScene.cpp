@@ -89,7 +89,7 @@ void GameScene::update()
 		//°ñµå µå¶ø
 		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		{
-			_im->DropGold(_metaKnight->getKnightImage().rc.left, _metaKnight->getKnightImage().rc.top);
+			_im->DropGold(_metaKnight->getKnightImage().rc.left, _metaKnight->getKnightImage().rc.top, 10, 1);
 		}
 
 	}
