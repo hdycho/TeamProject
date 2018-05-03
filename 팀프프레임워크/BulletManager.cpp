@@ -170,8 +170,6 @@ void BulletManager::Destroy(string bulletName, int bulletIdx)
 void BulletManager::UseCollision(string bulletName, int proveX, int proveY)
 {
 	bulletMapIter bMapIter = bMap.find(bulletName);
-	if (bMapIter != bMap.end())
-		return;
 
 	bulletIter bIter = bMapIter->second.begin();
 	for (;bIter != bMapIter->second.end(); bIter++)

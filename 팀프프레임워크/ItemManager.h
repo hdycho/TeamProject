@@ -25,6 +25,7 @@ public:
 	void update();
 	void render();
 
+	void LoadItem();
 	void DropGold(int x, int y, int goldUp, int goldDown);
 	void GroundCollision();
 
