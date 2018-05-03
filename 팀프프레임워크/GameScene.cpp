@@ -6,15 +6,6 @@
 
 GameScene::GameScene()
 {
-}
-
-
-GameScene::~GameScene()
-{
-}
-
-HRESULT GameScene::init()
-{
 	//===============ÃÑ¾Ë ¼ÂÆÃ================//
 	IMAGEMANAGER->addFrameImage("Å×½ºÆ®ÃÑ¾Ë", PathFile("image", "½Ä¹°1ÃÑ¾Ë").c_str(), 70, 25, 3, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("ÃÑ¾Ë", IMAGEMANAGER->findImage("Å×½ºÆ®ÃÑ¾Ë"), 30, true, 10);
@@ -25,9 +16,17 @@ HRESULT GameScene::init()
 	IMAGEMANAGER->addFrameImage("º¸½º¹æ", PathFile("image", "º¸½º¹æ").c_str(), 1600, 800, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("º¸½º¹æÃæµ¹¸Ê", PathFile("image", "º¸½º¹æÃæµ¹¸Ê").c_str(), 1600, 800, 1, 1, false, NULL);
 	EFFECTMANAGER->addEffect("Æø¹ß", PathFile("image", "Æø¹ß").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
+}
 
+
+GameScene::~GameScene()
+{
+}
+
+HRESULT GameScene::init()
+{
 	sState = IN_GAME;
-
+	fadeOut = IMAGEMANAGER->findImage("°ËÀºÈ­¸é");
 	rc2 = RectMakeCenter(800, 600, 100, 100);
 
 	_metaKnight = new player;
@@ -62,13 +61,6 @@ void GameScene::update()
 	{
 	case IN_GAME:
 	{
-		/*if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		{
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y, 0, 0.1, 5);
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y - 50, 0, 0.1, 5);
-		BULLET->Shot("ÃÑ¾Ë", GetCenterPos(rc).x, GetCenterPos(rc).y - 25, 0, 0.1, 5);
-		}*/
-
 		//ÃÑ¾ËÅÍÁö´Â À§Ä¡ ±¸ÇÏ±âÀ§ÇØ¼­
 		static int x = 0, y = 0;
 		if (BULLET->IsCollision("ÃÑ¾Ë", &x, &y, false, NULL, rc2))

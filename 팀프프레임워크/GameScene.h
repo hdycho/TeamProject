@@ -23,7 +23,7 @@ private:
 	//객체들 넣어서 사용하면 됩니다.
 	RECT rc;
 	RECT rc2;
-
+	image*fadeOut;
 	STAGESTATE sState;
 
 	player* _metaKnight;
