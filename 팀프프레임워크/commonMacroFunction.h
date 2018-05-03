@@ -131,3 +131,18 @@ inline string PathFile(string FolderName, string FileName)
 
 	return FolderName+"\\"+FileName+".bmp";
 }
+
+inline void DrawRect(HDC hdc, RECT rc, int penSize, COLORREF color)
+{
+	HPEN pen, oldPen;
+	pen = CreatePen(PS_SOLID, penSize, color);
+	oldPen = (HPEN)SelectObject(hdc, pen);
+
+	LineMake(hdc, rc.left, rc.top, rc.right, rc.top);
+	LineMake(hdc, rc.left, rc.bottom, rc.right, rc.bottom);
+	LineMake(hdc, rc.left, rc.top, rc.left, rc.bottom);
+	LineMake(hdc, rc.right, rc.top, rc.right, rc.bottom);
+
+	SelectObject(hdc, oldPen);
+	DeleteObject(pen);
+}
