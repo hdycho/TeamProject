@@ -181,6 +181,8 @@ void ItemManager::LoadItem()
 	FILE*fp = nullptr;
 	fopen_s(&fp, "오브젝트데이터.txt", "r");
 
+	if (!fp)return;
+	
 	char name[256];
 	int x, y;
 	

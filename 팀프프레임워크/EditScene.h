@@ -34,6 +34,7 @@ private:
 	int itemIdx;
 
 	button*save;
+	button*Loby;
 public:
 	EditScene();
 	~EditScene();

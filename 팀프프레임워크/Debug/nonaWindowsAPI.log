@@ -2,7 +2,7 @@
 c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(144): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(156): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(164): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(227): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(235): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(229): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\itemmanager.cpp(237): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)
