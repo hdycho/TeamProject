@@ -2,7 +2,7 @@
 #include "gameNode.h"
 #include "GameScene.h"
 
-class GameScene;
+
 enum ITEMTYPE {
 	WEAPON,
 	AMOR,
@@ -42,6 +42,8 @@ struct BUTTON
 	RECT		rc;
 };
 
+class GameScene;
+class player;
 class Store : public gameNode
 {
 private:
@@ -58,6 +60,8 @@ private:
 	GameScene*	_gc;
 	ITEM*		_temp;
 	//==================================
+
+	player* _metaKnight;
 public:
 	char*		_message;
 
@@ -69,6 +73,9 @@ public:
 	BUTTONTYPE Store::buttonCollision(int* pIndex);
 	void setLinkMoney(int* money) { this->_money = money; }
 	void setGameSceneAddress(GameScene* gc) { _gc = gc; }
+
+	// player와의 링크함수
+	void setPlayerAddress(player* plr) { _metaKnight = plr; }
 
 	Store();
 	~Store();

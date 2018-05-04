@@ -32,9 +32,10 @@ HRESULT GameScene::init()
 	//========================================//
 
 	//================ Store init ==================
-	_money = 2000;			// 머니는 플레이어와 연동 필요
+	
 	_store = new Store;
 	_store->setGameSceneAddress(this);
+
 	_store->setLinkMoney(&_money);
 	_store->init();
 	_em = new enemyManager;
@@ -42,7 +43,14 @@ HRESULT GameScene::init()
 	_em->setBaby();
 	_im = new ItemManager;
 	_im->init();
+
+	// player/store link 함수
+	_store->setPlayerAddress(_metaKnight);
+	_metaKnight->setStoreAddress(_store);
 	//==============================================
+
+	// Store/player link 함수 for player (money)
+	_store->setLinkMoney(&_metaKnight->_money);
 	return S_OK;
 }
 

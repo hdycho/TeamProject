@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Store.h"
+#include "player.h"
 
 Store::Store() {}
 Store::~Store() {}
@@ -185,7 +186,10 @@ ITEM* Store::buyItem(int index, int* money)
 			if (index == 0)
 				_vItem[index]->image = IMAGEMANAGER->findImage("스킬2_OFF");
 			else if (index == 1)
+			{
 				_vItem[index]->image = IMAGEMANAGER->findImage("스킬3_OFF");
+				_metaKnight->setSkill2Bool(true);
+			}
 			return _vItem[index];
 		}
 		else
