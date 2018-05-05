@@ -114,7 +114,7 @@ void Store::update()
 	if (buttonType == BUY_BUTTON)
 	{
 		_temp = buyItem(_index, _money);	//_money == 포인터
-		if (_temp != NULL)
+		if (_temp != NULL);
 			_gc->getVItem().push_back(_temp);	// 나중에 플레이어가 지닌 아이템 백터에 push_back해줄 것
 	}
 	else if (buttonType == BACK_BUTTON)
@@ -173,6 +173,7 @@ BUTTONTYPE Store::buttonCollision(int* pIndex)
 }
 
 ITEM* Store::buyItem(int index, int* money)
+//void Store::buyItem(int index, int* money)
 {
 	if (_vItem[index]->isSell)		// 아이템이 팔렸다면
 		_message = "이미 팔린 아이템 입니다.";

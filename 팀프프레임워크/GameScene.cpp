@@ -3,6 +3,8 @@
 #include "player.h"
 #include "enemyManager.h"
 #include "ItemManager.h"
+#include "ObstacleManager.h"
+#include "Store.h"
 
 GameScene::GameScene()
 {
@@ -36,13 +38,17 @@ HRESULT GameScene::init()
 	_store = new Store;
 	_store->setGameSceneAddress(this);
 
-	_store->setLinkMoney(&_money);
+	//_store->setLinkMoney(&_money);
 	_store->init();
 	_em = new enemyManager;
 	_em->init();
 	_em->setBaby();
 	_im = new ItemManager;
 	_im->init();
+	_om = new ObstacleManager;
+	_om->init();
+
+	//bossEnterRc=RectMakeCenter()
 
 	// player/store link 함수
 	_store->setPlayerAddress(_metaKnight);
@@ -51,6 +57,8 @@ HRESULT GameScene::init()
 
 	// Store/player link 함수 for player (money)
 	_store->setLinkMoney(&_metaKnight->_money);
+
+	bossEnterRc = RectMakeCenter(18910, 720, 100, 100);
 	return S_OK;
 }
 
@@ -64,50 +72,49 @@ void GameScene::update()
 	{
 	case IN_GAME:
 	{
-		//총알터지는 위치 구하기위해서
-		static int x = 0, y = 0;
-		if (BULLET->IsCollision("총알", &x, &y, false, NULL, rc2))
-		{
-			EFFECTMANAGER->play("폭발", x, y);
-		}
-
 		//CamMove(4);
-
 		//보스방 입장
+		RECT temp;
+		if (IntersectRect(&temp, &bossEnterRc, &_metaKnight->getKnightImage().rc))
+		{
+			if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+			{
+				sState = BOSS_ROOM;
+				_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
+				CAM->CamInit(DYNAMIC_CAMERA, 500, 500, 300, 150, 4);
+			}
+		}
 		if (KEYMANAGER->isOnceKeyDown(VK_F1))
 		{
 			sState = BOSS_ROOM;
-			CAM->CamInit(DYNAMIC_CAMERA, 500, 500, 300, 150, 4);
+			_metaKnight->getKnightImage().x = 100;
+			_metaKnight->getKnightImage().y = 500;
+			_metaKnight->getKnightImage().rc = RectMakeCenter(100, 500, 70, 56);
+			CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_F2))
+		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
 			sState = STORE;
 			_store->_message = "아이템이 가장 저렴한 상점입니다.";
-			//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 0);
 		}
-		//===============이건 만지지 않도록===============//
-		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
-		//==============================================//
-
-		_metaKnight->update();
+		_metaKnight->update(IMAGEMANAGER->findImage("충돌맵")->getMemDC());
 		_store->update();
 		_em->update();
 		_im->update();
+		_om->update();
 
-		//골드 드랍
-		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		{
-			_im->DropGold(_metaKnight->getKnightImage().rc.left, _metaKnight->getKnightImage().rc.top, 10, 1);
-		}
-
+		//===============이건 만지지 않도록===============//
+		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
+		//==============================================//
 	}
 	break;
 	case STORE:
 	{
-		if (KEYMANAGER->isOnceKeyDown(VK_F2))
+		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
 			sState = IN_GAME;
 		}
+		_metaKnight->update(IMAGEMANAGER->findImage("충돌맵")->getMemDC());
 		_store->update();
 	}
 	break;
@@ -117,7 +124,7 @@ void GameScene::update()
 		{
 			sState = IN_GAME;
 		}
-
+		_metaKnight->update(IMAGEMANAGER->findImage("보스방충돌맵")->getMemDC());
 		//CamMove(4);
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, 1600, 0, 800);
@@ -149,6 +156,7 @@ void GameScene::render()
 		_metaKnight->render();
 		_em->render();
 		_im->render();
+		_om->render();
 	}
 	break;
 	case STORE:
@@ -162,7 +170,8 @@ void GameScene::render()
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 			IMAGEMANAGER->findImage("보스방충돌맵")->render(getMemDC(), 0, 0);
 
-		CamRender();
+		_metaKnight->render();
+		//CamRender();
 	}
 	break;
 	case FADE_OUT:

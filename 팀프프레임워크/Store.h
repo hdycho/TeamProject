@@ -70,6 +70,7 @@ public:
 	virtual void update();
 	virtual void render();
 	ITEM* Store::buyItem(int index, int* money);
+//	void Store::buyItem(int index, int* money);
 	BUTTONTYPE Store::buttonCollision(int* pIndex);
 	void setLinkMoney(int* money) { this->_money = money; }
 	void setGameSceneAddress(GameScene* gc) { _gc = gc; }

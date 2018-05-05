@@ -1,7 +1,6 @@
 #pragma once
 #include "gameNode.h"
 //=========== Store =============
-#include "Store.h"
 class Store;
 struct ITEM;
 //===============================
@@ -9,6 +8,7 @@ enum STAGESTATE
 {
 	IN_GAME,		//게임중
 	STORE,			//상점
+	BOSS_ENTER,		//보스방 입장로딩
 	BOSS_ROOM,		//보스방
 	FADE_OUT		//페이드아웃
 };
@@ -16,6 +16,7 @@ enum STAGESTATE
 class player;
 class enemyManager;
 class ItemManager;
+class ObstacleManager;
 
 class GameScene:public gameNode
 {
@@ -29,12 +30,16 @@ private:
 	player* _metaKnight;
 	enemyManager* _em;
 	ItemManager* _im;
+	ObstacleManager* _om;
 
 	//============== Store 변수 ==============
 	Store* _store;
 	vector<ITEM*> _vItem;  // 플레이어와 연동필요
-	int	_money;
+	//int	_money;
 	//========================================
+
+	//보스방 입장렉트
+	RECT bossEnterRc;
 public:
 	GameScene();
 	~GameScene();

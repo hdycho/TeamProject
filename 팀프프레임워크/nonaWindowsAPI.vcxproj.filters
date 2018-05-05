@@ -222,6 +222,18 @@
     <ClInclude Include="Obstacle.h">
       <Filter>playGround\GameScene\Obstacle</Filter>
     </ClInclude>
+    <ClInclude Include="Wood.h">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Iron.h">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleManager.h">
+      <Filter>playGround\GameScene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -330,6 +342,18 @@
       <Filter>playGround\GameScene\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Wood.cpp">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Iron.cpp">
+      <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleManager.cpp">
+      <Filter>playGround\GameScene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
       <Filter>playGround\GameScene\Obstacle</Filter>
     </ClCompile>
   </ItemGroup>

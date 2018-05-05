@@ -8,6 +8,9 @@ EditScene::EditScene()
 	IMAGEMANAGER->addFrameImage("¹Ù³ª³ª¾ÆÀÌÅÛ", PathFile("image", "banana").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¿¡µ÷Ã¢", PathFile("image", "¿¡µ÷Ã¢").c_str(), 250, 417, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("¼¼ÀÌºê¹öÆ°", PathFile("image", "¹öÆ°").c_str(), 250, 121, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("³ª¹«", PathFile("image", "³ª¹«Àå¾Ö¹°").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¼è", PathFile("image", "¼èÀå¾Ö¹°").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("ÆøÅº", PathFile("image", "ÆøÅºÀå¾Ö¹°").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
 }
 
 
@@ -23,12 +26,18 @@ HRESULT EditScene::init()
 
 	Item[0] = new Object(IMAGEMANAGER->findImage("Åä¸¶Åä¾ÆÀÌÅÛ"), 0, 0, "Åä¸¶Åä");
 	Item[1] = new Object(IMAGEMANAGER->findImage("¹Ù³ª³ª¾ÆÀÌÅÛ"), 0, 0, "¹Ù³ª³ª");
-	
+	Item[2] = new Object(IMAGEMANAGER->findImage("³ª¹«"), 0, 0, "³ª¹«");
+	Item[3] = new Object(IMAGEMANAGER->findImage("¼è"), 0, 0, "¼è");
+	Item[4] = new Object(IMAGEMANAGER->findImage("ÆøÅº"), 0, 0, "ÆøÅº");
+
 	save = new button;
 	save->Init(IMAGEMANAGER->findImage("¼¼ÀÌºê¹öÆ°"), "SAVE", 0, 0);
 
 	Loby = new button;
 	Loby->Init(IMAGEMANAGER->findImage("¼¼ÀÌºê¹öÆ°"), "LOBY", 0, 0);
+
+	fadeout = IMAGEMANAGER->findImage("°ËÀºÈ­¸é");
+	alpha = 0;
 
 	return S_OK;
 }
@@ -41,22 +50,38 @@ void EditScene::update()
 {
 	CamMove(10);
 	CAM->CamUpdate(rc, 0, GAMESIZEX, 0, GAMESIZEY);
-	
-	Item[0]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x+240, GetCenterPos(CAM->getCamRc()).y-100, 30, 30);
+
+	Item[0]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 240, GetCenterPos(CAM->getCamRc()).y - 100, 30, 30);
 	Item[0]->x = GetCenterPos(Item[0]->rc).x;
 	Item[0]->y = GetCenterPos(Item[0]->rc).y;
 
-	Item[1]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 300, GetCenterPos(CAM->getCamRc()).y-100, 30, 30);
+	Item[1]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 300, GetCenterPos(CAM->getCamRc()).y - 100, 30, 30);
 	Item[1]->x = GetCenterPos(Item[1]->rc).x;
 	Item[1]->y = GetCenterPos(Item[1]->rc).y;
 
-	save->GetRect() = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y-200 , 250, 60);
-	save->Update(VK_LBUTTON,false);
-	
-	Loby->GetRect()= RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y + 220, 250, 60);
+	Item[2]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 230, GetCenterPos(CAM->getCamRc()).y, 30, 30);
+	Item[2]->x = GetCenterPos(Item[1]->rc).x;
+	Item[2]->y = GetCenterPos(Item[1]->rc).y;
+
+	Item[3]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 270, GetCenterPos(CAM->getCamRc()).y, 30, 30);
+	Item[3]->x = GetCenterPos(Item[1]->rc).x;
+	Item[3]->y = GetCenterPos(Item[1]->rc).y;
+
+	Item[4]->rc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 310, GetCenterPos(CAM->getCamRc()).y, 30, 30);
+	Item[4]->x = GetCenterPos(Item[1]->rc).x;
+	Item[4]->y = GetCenterPos(Item[1]->rc).y;
+
+	save->GetRect() = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y - 200, 250, 60);
+	save->Update(VK_LBUTTON, false);
+
+	Loby->GetRect() = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x + 275, GetCenterPos(CAM->getCamRc()).y + 220, 250, 60);
 	Loby->Update(VK_LBUTTON, false);
-	
+
 	if (Loby->IsClick())
+	{
+		alpha += 4;
+	}
+	if (alpha > 254)
 	{
 		SCENEMANAGER->changeScene("½ÃÀÛ¾À");
 	}
@@ -70,7 +95,7 @@ void EditScene::render()
 {
 	IMAGEMANAGER->findImage("½ºÅ×ÀÌÁö")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
 	Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
-	
+
 	for (int i = 0; i < objVec.size(); i++)
 	{
 		if (objVec[i]->isShow)
@@ -84,7 +109,7 @@ void EditScene::render()
 		Loby->Render();
 	}
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (Item[i]->isClick)
 			DrawRect(getMemDC(), Item[i]->rc, 5, RGB(0, 0, 255));
@@ -92,23 +117,25 @@ void EditScene::render()
 
 	if (clickObj != nullptr)
 	{
-		if(clickObj->isMove)
+		if (clickObj->isMove)
 			clickObj->img->render(getMemDC(), clickObj->x, clickObj->y);
 	}
-	
+
 	HFONT font, oldFont;
-	font = CreateFont(30, 0,0, 0, 400, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("±Ã¼­Ã¼"));
+	font = CreateFont(30, 0, 0, 0, 400, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("±Ã¼­Ã¼"));
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
-	SetTextColor(getMemDC(),RGB(0,255,255));
+	SetTextColor(getMemDC(), RGB(0, 255, 255));
 	char temp[256];
 	sprintf(temp, "[x:%d y:%d]", GetCenterPos(rc).x, GetCenterPos(rc).y);
-	TextOut(getMemDC(), rc.left, rc.top-30, temp, strlen(temp));
+	TextOut(getMemDC(), rc.left, rc.top - 30, temp, strlen(temp));
 	SelectObject(getMemDC(), oldFont);
 	DeleteObject(font);
+
+	fadeout->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 }
 
 void EditScene::SelectObj()
-{	
+{
 	static POINT mPos = { 0,0 };
 	mPos.x = _ptMouse.x;
 	mPos.y = _ptMouse.y;
@@ -124,7 +151,7 @@ void EditScene::SelectObj()
 		}
 	}
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (PtInRect(&Item[i]->rc, mPos))
 		{
@@ -142,7 +169,7 @@ void EditScene::SelectObj()
 		}
 		else
 		{
-			if(KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+			if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 				Item[i]->isClick = false;
 		}
 	}
@@ -163,7 +190,7 @@ void EditScene::DropObj()
 					clickObj->y,
 					clickObj->objName);
 				pushObj->isShow = true;
-				pushObj->rc = RectMakeCenter(pushObj->x+15, pushObj->y+15, 30, 30);
+				pushObj->rc = RectMakeCenter(pushObj->x + 15, pushObj->y + 15, 30, 30);
 				objVec.push_back(pushObj);
 			}
 		}
@@ -173,15 +200,17 @@ void EditScene::DropObj()
 void EditScene::EditDraw()
 {
 	IMAGEMANAGER->findImage("¿¡µ÷Ã¢")->render(getMemDC(), GetCenterPos(CAM->getCamRc()).x + 150, GetCenterPos(CAM->getCamRc()).y - 200);
-	Item[0]->img->render(getMemDC(), Item[0]->rc.left, Item[0]->rc.top);
-	Item[1]->img->render(getMemDC(), Item[1]->rc.left, Item[1]->rc.top);
+
+	for (int i = 0; i<5; i++)
+		Item[i]->img->render(getMemDC(), Item[i]->rc.left, Item[i]->rc.top);
+
 
 	HFONT font, oldFont;
 	font = CreateFont(30, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("±Ã¼­Ã¼"));
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
-	TextOut(getMemDC(), Item[0]->rc.left+13, Item[0]->rc.top-53, "ITEM", strlen("ITEM"));
-	TextOut(getMemDC(), Item[0]->rc.left + 13, Item[0]->rc.top+53, "TILE", strlen("TILE"));
+	TextOut(getMemDC(), Item[0]->rc.left + 13, Item[0]->rc.top - 53, "ITEM", strlen("ITEM"));
+	TextOut(getMemDC(), Item[0]->rc.left + 13, Item[0]->rc.top + 53, "TILE", strlen("TILE"));
 	SelectObject(getMemDC(), oldFont);
 	DeleteObject(font);
 
@@ -201,7 +230,7 @@ void EditScene::SaveObj()
 		string Temp;
 		Temp = "ObjectName\tPosX\tPosY\n";
 		fwrite(Temp.c_str(), Temp.size(), 1, fp);
-		
+
 		for (int i = 0; i < objVec.size(); i++)
 		{
 			Temp = objVec[i]->objName +

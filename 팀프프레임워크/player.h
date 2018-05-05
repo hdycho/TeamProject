@@ -92,7 +92,7 @@ public:
 
 	HRESULT init();
 	void release();
-	void update();
+	void update(HDC hdc);
 	void render();
 
 	void knightJump();
@@ -101,10 +101,11 @@ public:
 	void knightSkill_1();
 	void knightSkill_2();
 
-	void PlayerCollision();
+	void PlayerCollision(HDC hdc);
 
 	//image* getPlayerImage() {return }
-	KNIGHTPOSITION getKnightImage() { return _knight; }
+	KNIGHTPOSITION&getKnightImage() { return _knight; }
+	KNIGHTPOSITION&getAttackRc() { return _attackRange; }
 	void setKnightPosition(KNIGHTPOSITION position) { _knight = position; }
 
 	// Skill_2 (bool) get,set

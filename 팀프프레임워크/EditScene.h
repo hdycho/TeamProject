@@ -2,14 +2,14 @@
 #include "gameNode.h"
 #include "button.h"
 #include <vector>
-class EditScene:public gameNode
+class EditScene :public gameNode
 {
 private:
 	struct Object
 	{
 		image*img;
 		RECT rc;
-		int x,y;
+		int x, y;
 		string objName;
 		bool isClick;
 		bool isMove;	//	클릭하면 마우스따라다니고
@@ -17,7 +17,7 @@ private:
 		bool isShow;
 		Object() {}
 		Object(image*_img, int _x, int _y, string name)
-			:img(_img),x(_x),y(_y),objName(name)
+			:img(_img), x(_x), y(_y), objName(name)
 		{
 			isClick = false;
 			isMove = false;
@@ -26,7 +26,7 @@ private:
 	};
 private:
 	RECT rc;
-	Object*Item[2];		//	화면에 찍는놈
+	Object*Item[5];		//	화면에 찍는놈
 	Object*clickObj;
 
 	vector<Object*>				objVec;
@@ -35,6 +35,9 @@ private:
 
 	button*save;
 	button*Loby;
+
+	image*fadeout;
+	int alpha;
 public:
 	EditScene();
 	~EditScene();

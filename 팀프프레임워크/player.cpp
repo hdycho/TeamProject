@@ -79,7 +79,7 @@ void player::release()
 {
 }
 
-void player::update()
+void player::update(HDC hdc)
 {
 	// idle
 	if (KEYMANAGER->isOnceKeyUp('D'))
@@ -276,7 +276,7 @@ void player::update()
 
 		_countAttack = 0;
 	}
-	PlayerCollision();
+	PlayerCollision(hdc);
 	_knight.rc = RectMakeCenter(_playerX, _playerY, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 
@@ -465,10 +465,10 @@ void player::knightSkill_2()
 	}
 }
 
-void player::PlayerCollision()
+void player::PlayerCollision(HDC hdc)
 {
 	// ¹Ù´ÚÃæµ¹
-	if (pCol->RayCastingDownY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0))
+	if (pCol->RayCastingDownY(hdc, 255, 0, 0))
 	{
 		if (_jumpPower <= 0)
 		{
@@ -496,7 +496,7 @@ void player::PlayerCollision()
 	}
 
 	// ÃµÀåÃæµ¹
-	if (pCol->RayCastingUpY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0))
+	if (pCol->RayCastingUpY(hdc, 255, 0, 0))
 	{
 		if (_jumpPower > 0)
 		{
@@ -507,7 +507,7 @@ void player::PlayerCollision()
 	}
 
 	// º® Ãæµ¹
-	if (pCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
+	if (pCol->RayCastingX(hdc, 0, 0, 255, 0))
 	{
 		if (_knightDirection == RIGHT_RUN || _knightDirection == RIGHT_JUMP)
 		{
