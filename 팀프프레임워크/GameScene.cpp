@@ -13,6 +13,8 @@ GameScene::GameScene()
 	BULLET->BulletSetting("총알", IMAGEMANAGER->findImage("테스트총알"), 30, true, 10);
 	//=======================================//
 	EFFECTMANAGER->addEffect("폭발", PathFile("image", "폭발").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
+	EFFECTMANAGER->addEffect("아이템먹을때", PathFile("image", "아이템먹었을때").c_str(), 210, 30, 30, 30, 20, 1, 30);
+	EFFECTMANAGER->addEffect("동전먹을때", PathFile("image", "동전먹었을때").c_str(), 90, 32, 30, 32, 20, 1, 30);
 	IMAGEMANAGER->addFrameImage("검은화면1", PathFile("image", "검은화면").c_str(), 800, 600, 1, 1, false, NULL);
 }
 
@@ -78,6 +80,12 @@ void GameScene::update()
 	{
 		//CamMove(4);
 		//보스방 입장
+
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		{
+			_im->DropGold(300, 300, 8, 1);
+		}
+
 		RECT temp;
 		if (IntersectRect(&temp, &bossEnterRc, &_metaKnight->getKnightImage().rc))
 		{
@@ -298,32 +306,39 @@ void GameScene::PlayerCollision()
 	//토마토,바나나
 	for (int i = 0; i < _im->GetMapItemVec().size(); i++)
 	{
+		if (!_im->GetMapItemVec()[i]->GetShowState())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetMapItemVec()[i]->GetRect()))
 		{
 			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
 			{
+				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
 				//아이템 먹을때 이펙트
 				//플레이어 체력올려준다
 			}
 			else if (_im->GetMapItemVec()[i]->GetItemType() == POTION_MP)
 			{
+				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
 				//아이템 먹을때 이펙트
 				//플레이어 마나올려준다
 			}
 			_im->GetMapItemVec()[i]->GetShowState() = false;
+			_im->GetMapItemVec()[i]->GetRect() = RectMake(0, 0, 0, 0);
 		}
 	}
 
 	//동전
 	for (int i = 0; i < _im->GetGoldItecVec().size(); i++)
 	{
+		if (!_im->GetGoldItecVec()[i]->GetShowState())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
 		{
-			//동전먹는이펙트
+			//동전먹는이펙트aaa
 			//플레이어 돈 올려준다
+			EFFECTMANAGER->play("동전먹을때", GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).y + 15);
 			_im->GetGoldItecVec()[i]->GetShowState() = false;
+			_im->GetGoldItecVec()[i]->GetRect() = RectMake(0, 0, 0, 0);
 		}
 	}
 	//===================================//
