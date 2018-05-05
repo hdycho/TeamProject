@@ -1,6 +1,25 @@
-﻿  enemyManager.cpp
-c:\users\admin\desktop\독수리\teamproject\팀프프레임워크\skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\admin\desktop\독수리\teamproject\팀프프레임워크\enemymanager.cpp(27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\admin\desktop\독수리\teamproject\팀프프레임워크\enemymanager.cpp(38): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  nonaWindowsAPI.vcxproj -> C:\Users\admin\Desktop\독수리\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
-  nonaWindowsAPI.vcxproj -> C:\Users\admin\Desktop\독수리\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)
+﻿  GameScene.cpp
+c:\users\hwang\desktop\teamproject\팀프프레임워크\skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(53): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(63): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(396): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(419): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(435): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(466): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(481): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(485): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(496): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(580): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(585): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(595): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(600): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(608): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\hwang\desktop\teamproject\팀프프레임워크\gamescene.cpp(613): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  nonaWindowsAPI.vcxproj -> C:\Users\hwang\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
+  nonaWindowsAPI.vcxproj -> C:\Users\hwang\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)

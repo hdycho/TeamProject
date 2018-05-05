@@ -1,0 +1,3 @@
+ClearState	Time
+LOSE	0	3
+@

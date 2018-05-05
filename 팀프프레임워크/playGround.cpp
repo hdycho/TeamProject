@@ -29,9 +29,17 @@ HRESULT playGround::init()
 	editScene = new EditScene;
 	editScene->init();
 
-	SCENEMANAGER->addScene("∞‘¿”æ¿", gameScene);
+	gameoverScene = new GameOverScene;
+	gameoverScene->init();
+
+	clearScene = new ClearScene;
+	clearScene->init();
+
 	SCENEMANAGER->addScene("Ω√¿€æ¿", startScene);
+	SCENEMANAGER->addScene("∞‘¿”æ¿", gameScene);
 	SCENEMANAGER->addScene("ºˆ¡§æ¿", editScene);
+	SCENEMANAGER->addScene("∞‘¿”ø¿πˆæ¿", gameoverScene);
+	SCENEMANAGER->addScene("≈¨∏ÆæÓæ¿", clearScene);
 
 	SCENEMANAGER->changeScene("Ω√¿€æ¿");
 

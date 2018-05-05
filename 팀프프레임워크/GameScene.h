@@ -11,7 +11,9 @@ enum STAGESTATE
 	BOSS_ENTER,		//보스방 입장로딩
 	BOSS_ROOM,		//보스방
 	FADE_OUT,		//페이드아웃
-	BOSS_DIE
+	BOSS_DIE,
+	PLAYER_DIE,
+	GAME_OVER		//게임오버
 };
 
 class player;
@@ -45,6 +47,20 @@ private:
 	int alpha;
 	int MetaStageData;
 	bool onceShow = false;
+
+	//카메라속도
+	int camSpeed;
+
+	//플레이어 죽은위치
+	int diePosX;
+	int diePosY;
+
+	//클리어여부
+	bool isClear;
+	float gameTime;
+	int revertTime;
+	int min;
+	int sec;
 public:
 	GameScene();
 	~GameScene();
@@ -65,6 +81,9 @@ public:
 
 	void PlayerCollision();
 	void OtherCollision();
+	void PlayerDieSet();
 	
+	void SaveTime();
+	void ShowGameTime();
 };
 

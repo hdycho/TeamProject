@@ -61,9 +61,6 @@
     <Filter Include="playGround\ClearScene">
       <UniqueIdentifier>{0cf96a05-55cf-4160-85cf-3f4776ed6f63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\LoadingScene">
-      <UniqueIdentifier>{66ed8216-9527-4e26-a093-68919f23a0d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\BULLET">
       <UniqueIdentifier>{2f61adfe-8884-48fd-b3e0-674ae491b683}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,9 @@
     </Filter>
     <Filter Include="playGround\EditScene">
       <UniqueIdentifier>{5ff164f7-9f56-44c4-95e7-f0272a84ab4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameOverScene">
+      <UniqueIdentifier>{0564d393-6c62-4005-a10b-d2942c639398}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +243,12 @@
     <ClInclude Include="bug.h">
       <Filter>playGround\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>playGround\GameOverScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>playGround\ClearScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -373,6 +379,12 @@
     </ClCompile>
     <ClCompile Include="bug.cpp">
       <Filter>playGround\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>playGround\GameOverScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>playGround\ClearScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
