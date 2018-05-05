@@ -13,6 +13,7 @@ GameScene::GameScene()
 	BULLET->BulletSetting("총알", IMAGEMANAGER->findImage("테스트총알"), 30, true, 10);
 	//=======================================//
 	EFFECTMANAGER->addEffect("폭발", PathFile("image", "폭발").c_str(), 4500, 150, 4500 / 25, 150, 60, 1, 30);
+	IMAGEMANAGER->addFrameImage("검은화면1", PathFile("image", "검은화면").c_str(), 800, 600, 1, 1, false, NULL);
 }
 
 
@@ -23,8 +24,7 @@ GameScene::~GameScene()
 HRESULT GameScene::init()
 {
 	sState = IN_GAME;
-	fadeOut = IMAGEMANAGER->findImage("검은화면");
-	rc2 = RectMakeCenter(800, 600, 100, 100);
+	fadeOut = IMAGEMANAGER->findImage("검은화면1");
 
 	_metaKnight = new player;
 	_metaKnight->init();
@@ -48,8 +48,6 @@ HRESULT GameScene::init()
 	_om = new ObstacleManager;
 	_om->init();
 
-	//bossEnterRc=RectMakeCenter()
-
 	// player/store link 함수
 	_store->setPlayerAddress(_metaKnight);
 	_metaKnight->setStoreAddress(_store);
@@ -58,6 +56,7 @@ HRESULT GameScene::init()
 	// Store/player link 함수 for player (money)
 	_store->setLinkMoney(&_metaKnight->_money);
 
+	alpha = 0;
 	bossEnterRc = RectMakeCenter(18910, 720, 100, 100);
 	return S_OK;
 }
@@ -79,21 +78,24 @@ void GameScene::update()
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 			{
-				sState = BOSS_ROOM;
+				sState = FADE_OUT;
+				_metaKnight->getKnightImage().x = 300;
+				_metaKnight->getKnightImage().y = 500;
 				_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
-				CAM->CamInit(DYNAMIC_CAMERA, 500, 500, 300, 150, 4);
+				MetaStageData = BOSS_ENTER;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_F1))
 		{
-			sState = BOSS_ROOM;
-			_metaKnight->getKnightImage().x = 100;
+			sState = FADE_OUT;
+			_metaKnight->getKnightImage().x = 300;
 			_metaKnight->getKnightImage().y = 500;
-			_metaKnight->getKnightImage().rc = RectMakeCenter(100, 500, 70, 56);
-			CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
+			_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
+			MetaStageData = BOSS_ENTER;
 		}
 		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
+			alpha = 20;
 			sState = STORE;
 			_store->_message = "아이템이 가장 저렴한 상점입니다.";
 		}
@@ -112,6 +114,8 @@ void GameScene::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
+			onceShow = false;
+			alpha = 0;
 			sState = IN_GAME;
 		}
 		_metaKnight->update(IMAGEMANAGER->findImage("충돌맵")->getMemDC());
@@ -129,11 +133,38 @@ void GameScene::update()
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, 1600, 0, 800);
 		//==============================================//
+
+
+		////보스체력다달면 몇초간 보스터지면서 
+		////다터지고 페이드아웃으로 넘어가고
+		//if (/*보스죽으면*/)
+		//{
+		//	//이펙트보여주기
+		//	static float bossDieTime = 0;
+		//	bossDieTime += TIMEMANAGER->getElapsedTime();
+		//	
+		//	if (bossDieTime > 3)
+		//	{
+		//		bossDieTime = 0;
+		//		alpha = 0;
+		//		sState = FADE_OUT;
+		//		MetaStageData = BOSS_DIE;
+		//	}
+		//}
 	}
 	break;
-	case FADE_OUT:
+	case BOSS_ENTER:
 	{
+		static float bossRoomTime = 0;
+		bossRoomTime += TIMEMANAGER->getElapsedTime();
 
+		if (bossRoomTime > 3)
+		{
+			bossRoomTime = 0;
+			alpha = 0;
+			sState = FADE_OUT;
+			MetaStageData = BOSS_ROOM;
+		}
 	}
 	break;
 	}
@@ -150,7 +181,6 @@ void GameScene::render()
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 			IMAGEMANAGER->findImage("충돌맵")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
 
-		Rectangle(getMemDC(), rc2.left, rc2.top, rc2.right, rc2.bottom);
 		//CamRender();
 
 		_metaKnight->render();
@@ -160,7 +190,12 @@ void GameScene::render()
 	}
 	break;
 	case STORE:
-	{
+	{	
+		if (!onceShow)
+		{
+			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, 200);
+			onceShow = true;
+		}
 		_store->render();
 	}
 	break;
@@ -176,12 +211,49 @@ void GameScene::render()
 	break;
 	case FADE_OUT:
 	{
+		if (MetaStageData == BOSS_ENTER)
+		{
+			alpha+=3;
+			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
+			
+			if (alpha > 254)
+			{
+				alpha = 0;
+				sState = BOSS_ENTER;
+			}
+		}
+		if (MetaStageData == BOSS_ROOM)
+		{
+			alpha+=3;
+			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
+
+			if (alpha > 254)
+			{
+				alpha = 0;
+				sState = BOSS_ROOM;
+				CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
+			}
+		}
+		if (MetaStageData == BOSS_DIE)
+		{
+			alpha+=3;
+			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
+
+			if (alpha > 254)
+			{
+				alpha = 0;
+				//씬이동시키기
+			}
+		}
+	}
+	break;
+	case BOSS_ENTER:
+	{
+		//로딩화면보여줌
 
 	}
 	break;
 	}
-
-	
 }
 
 void GameScene::CamMove(int speed)
@@ -212,4 +284,8 @@ void GameScene::CamRender()
 {
 	Rectangle(getMemDC(), CAM->getViewRc().left, CAM->getViewRc().top, CAM->getViewRc().right, CAM->getViewRc().bottom);
 	//Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
+}
+
+void GameScene::PlayerCollision()
+{
 }

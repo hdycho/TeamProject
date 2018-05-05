@@ -19,8 +19,8 @@ HRESULT player::init()
 	_jump = IMAGEMANAGER->addFrameImage("jump", PathFile("image", "jump_sprite").c_str(), 603, 144, 9, 2, true, RGB(255, 0, 255));
 	_attack = IMAGEMANAGER->addFrameImage("attack", PathFile("image", "attack_sprite").c_str(), 2700, 172, 19, 2, true, RGB(255, 0, 255));
 
-	_playerX = 600;
-	_playerY = 200;
+	_knight.x = 600;
+	_knight.y = 200;
 
 	// Skill_1 images
 	_skill_1 = IMAGEMANAGER->addFrameImage("skill1", PathFile("image", "Skill1_sprite").c_str(), 1850, 180, 11, 2, true, RGB(255, 0, 255));
@@ -45,7 +45,7 @@ HRESULT player::init()
 	_knight.img = _stand;
 	_knightDirection = RIGHT_STAND;
 
-	_knight.rc = RectMakeCenter(_playerX, _playerY, _knight.img->getFrameWidth(), _knight.img->getFrameX());
+	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameX());
 
 	_count = _index = _indexExtra = 0;
 	_countAttack = 0;
@@ -94,12 +94,12 @@ void player::update(HDC hdc)
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
 		_knightDirection = RIGHT_RUN;
-		_playerX += _speed;
+		_knight.x += _speed;
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
 		_knightDirection = LEFT_RUN;
-		_playerX -= _speed;
+		_knight.x -= _speed;
 	}
 	// (speed reset) for 벽 충돌
 	if (KEYMANAGER->isOnceKeyDown('D'))
@@ -182,10 +182,10 @@ void player::update(HDC hdc)
 
 				if (_countSkill2 == 4)
 				{
-					_skill_2_Right.x = _playerX - 100; // skill_2_Right 'x' position
-					_skill_2_Right.y = _playerY; // skill_2_Right 'y' position
-					_skill_2_Left.x = _playerX - 100; // skill_2_Right 'x' position
-					_skill_2_Left.y = _playerY; // skill_2_Right 'y' position
+					_skill_2_Right.x = _knight.x - 100; // skill_2_Right 'x' position
+					_skill_2_Right.y = _knight.y; // skill_2_Right 'y' position
+					_skill_2_Left.x = _knight.x - 100; // skill_2_Right 'x' position
+					_skill_2_Left.y = _knight.y; // skill_2_Right 'y' position
 
 					_index = 0;
 					_countSkill2 = 0;
@@ -277,7 +277,7 @@ void player::update(HDC hdc)
 		_countAttack = 0;
 	}
 	PlayerCollision(hdc);
-	_knight.rc = RectMakeCenter(_playerX, _playerY, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
+	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 
 	_skill->update();
@@ -321,7 +321,7 @@ void player::knightJump()
 		}
 	}
 
-	_playerY -= _jumpPower;
+	_knight.y -= _jumpPower;
 	_jumpPower -= _gravity;
 
 	// jump
@@ -348,7 +348,7 @@ void player::knightAttack()
 		{
 			_index = 0;
 			_isAttack = true;
-			_skill->makeSlash(_playerX, _playerY, 40, false);
+			_skill->makeSlash(_knight.x, _knight.y, 40, false);
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
@@ -357,7 +357,7 @@ void player::knightAttack()
 		{
 			_index = 18;
 			_isAttack = true;
-			_skill->makeSlash(_playerX, _playerY, 40, true);
+			_skill->makeSlash(_knight.x, _knight.y, 40, true);
 		}
 	}
 
@@ -386,12 +386,12 @@ void player::knightAttack()
 		if (_knightDirection == RIGHT_STAND)
 		{
 			_knightDirection = RIGHT_ATTACK;
-			_attackRange.rc = RectMakeCenter(_playerX + 30, _playerY, 80, 50);
+			_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
 		}
 		if (_knightDirection == LEFT_STAND)
 		{
 			_knightDirection = LEFT_ATTACK;
-			_attackRange.rc = RectMakeCenter(_playerX - 30, _playerY, 80, 50);
+			_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
 		}
 		// move 도중 attack 했을때
 		if (_knightDirection == RIGHT_RUN)
@@ -426,8 +426,8 @@ void player::knightSkill_1()
 		if (KEYMANAGER->isOnceKeyDown('Q'))
 		{
 			_knightDirection = RIGHT_SKILL1;
-			BULLET->Shot("bulletSwordRight", _playerX, _playerY, 0, 0, 10);
-			BULLET->Shot("bulletSwordRight", _playerX, _playerY - 15, 0, 0, 10);
+			BULLET->Shot("bulletSwordRight", _knight.x, _knight.y, 0, 0, 10);
+			BULLET->Shot("bulletSwordRight", _knight.x, _knight.y - 15, 0, 0, 10);
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN || _knightDirection == LEFT_JUMP)
@@ -435,8 +435,8 @@ void player::knightSkill_1()
 		if (KEYMANAGER->isOnceKeyDown('Q'))
 		{
 			_knightDirection = LEFT_SKILL1;
-			BULLET->Shot("bulletSwordLeft", _playerX, _playerY, PI, 0, 10);
-			BULLET->Shot("bulletSwordLeft", _playerX, _playerY - 15, PI, 0, 10);
+			BULLET->Shot("bulletSwordLeft", _knight.x, _knight.y, PI, 0, 10);
+			BULLET->Shot("bulletSwordLeft", _knight.x, _knight.y - 15, PI, 0, 10);
 		}
 	}
 }
@@ -447,10 +447,10 @@ void player::knightSkill_2()
 	{
 		if (KEYMANAGER->isOnceKeyDown('E'))
 		{
-			_skill_2_Right.x = _playerX - 100; // skill_2_Right 'x' position
-			_skill_2_Right.y = _playerY; // skill_2_Right 'y' position
-			_skill_2_Left.x = _playerX - 100; // skill_2_Right 'x' position
-			_skill_2_Left.y = _playerY; // skill_2_Right 'y' position
+			_skill_2_Right.x = _knight.x - 100; // skill_2_Right 'x' position
+			_skill_2_Right.y = _knight.y; // skill_2_Right 'y' position
+			_skill_2_Left.x = _knight.x - 100; // skill_2_Right 'x' position
+			_skill_2_Left.y = _knight.y; // skill_2_Right 'y' position
 
 			_knightDirection = KNIGHT_SPIN;
 		}
@@ -472,7 +472,7 @@ void player::PlayerCollision(HDC hdc)
 	{
 		if (_jumpPower <= 0)
 		{
-			pCol->setPosDownY(_playerY);
+			pCol->setPosDownY(_knight.y);
 			_isJump = false;
 
 			_jumpPower = 0.0f;
@@ -500,7 +500,7 @@ void player::PlayerCollision(HDC hdc)
 	{
 		if (_jumpPower > 0)
 		{
-			pCol->setPosUpY(_playerY);
+			pCol->setPosUpY(_knight.y);
 
 			_jumpPower = 0;
 		}
@@ -512,12 +512,12 @@ void player::PlayerCollision(HDC hdc)
 		if (_knightDirection == RIGHT_RUN || _knightDirection == RIGHT_JUMP)
 		{
 			_speed = 0;
-			_playerX -= 4;
+			_knight.x -= 4;
 		}
 		if (_knightDirection == LEFT_RUN || _knightDirection == LEFT_JUMP)
 		{
 			_speed = 0;
-			_playerX += 4;
+			_knight.x += 4;
 		}
 	}
 }

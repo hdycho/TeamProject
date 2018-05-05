@@ -490,16 +490,48 @@ void image::alphaRender(HDC hdc, BYTE alpha)
 			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _transColor);
 
 		AlphaBlend(hdc, _imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height,
-			_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+			_blendImage->hMemDC,
+			0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
 	}
 	else
 	{
 		AlphaBlend(hdc, _imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height,
-			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+			_imageInfo->hMemDC,
+			0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
 	}
 }
 
 void image::alphaRender(HDC hdc, int destX, int destY, BYTE alpha)
+{
+	//실제 이미지에 알파블렌드를 접목시켜주는 함수
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	//마젠타 색상처럼 제외시킬 색상이 있다면
+	if (_trans)
+	{
+		//블랜딩DC영역에 메모리 DC영역에 이미지 부분에 그려진걸 복사함
+		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
+			hdc, destX, destY, SRCCOPY);
+
+		//블랜딩DC영역에 이미지(우리가 보여주는)영역을 복사=>이미지가 들어간 DC영역이므로
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
+			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _transColor);
+
+		//이렇게 블랜딩DC에 복사된 이미지를 다시 메모리 DC영역에 복사(알파값줘야함)
+		AlphaBlend(hdc, destX, destY, _imageInfo->width, _imageInfo->height,
+			_blendImage->hMemDC,
+			0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+	}
+	else
+	{
+		//마젠타로 지울영역이 없을때는 알파블랜드함수만 사용하여 복사하면 됨
+		AlphaBlend(hdc, destX, destY, _imageInfo->width, _imageInfo->height,
+			_imageInfo->hMemDC,
+			0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+	}
+}
+
+void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha)
 {
 	//실제 이미지에 알파블렌드를 접목시켜주는 함수
 	_blendFunc.SourceConstantAlpha = alpha;
@@ -513,20 +545,16 @@ void image::alphaRender(HDC hdc, int destX, int destY, BYTE alpha)
 		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
 			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _transColor);
 
-		AlphaBlend(hdc, destX, destY, _imageInfo->width, _imageInfo->height,
-			_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+		AlphaBlend(hdc, destX, destY, sourWidth, sourHeight, _blendImage->hMemDC,
+			sourX, sourY, sourWidth, sourHeight, _blendFunc);
 	}
 	else
 	{
-		AlphaBlend(hdc, destX, destY, _imageInfo->width, _imageInfo->height,
-			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
+		AlphaBlend(hdc, destX, destY, sourWidth, sourHeight, _imageInfo->hMemDC,
+			sourX, sourY, sourWidth, sourHeight, _blendFunc);
 	}
 }
 
-void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha)
-{
-	
-}
 
 void image::loopRender(HDC hdc, const LPRECT drawArea, int offSetX, int offSetY)
 {

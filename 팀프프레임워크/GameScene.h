@@ -10,7 +10,8 @@ enum STAGESTATE
 	STORE,			//상점
 	BOSS_ENTER,		//보스방 입장로딩
 	BOSS_ROOM,		//보스방
-	FADE_OUT		//페이드아웃
+	FADE_OUT,		//페이드아웃
+	BOSS_DIE
 };
 
 class player;
@@ -23,8 +24,6 @@ class GameScene:public gameNode
 private:
 	//객체들 넣어서 사용하면 됩니다.
 	RECT rc;
-	RECT rc2;
-	image*fadeOut;
 	STAGESTATE sState;
 
 	player* _metaKnight;
@@ -40,6 +39,12 @@ private:
 
 	//보스방 입장렉트
 	RECT bossEnterRc;
+	
+	//페이드아웃
+	image*fadeOut;
+	int alpha;
+	int MetaStageData;
+	bool onceShow = false;
 public:
 	GameScene();
 	~GameScene();
@@ -57,5 +62,8 @@ public:
 	vector<ITEM*> getVItem() { return _vItem; }
 	void setsState(STAGESTATE state) { sState = state; }
 	//========================================
+
+	void PlayerCollision();
+	void OtherCollision();
 };
 
