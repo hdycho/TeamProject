@@ -65,5 +65,6 @@ public:
 
 	void PlayerCollision();
 	void OtherCollision();
+	
 };
 

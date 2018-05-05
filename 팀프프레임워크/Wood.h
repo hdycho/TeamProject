@@ -3,7 +3,7 @@
 class Wood :public Obstacle
 {
 private:
-
+	float pushPower;
 public:
 	Wood();
 	~Wood();

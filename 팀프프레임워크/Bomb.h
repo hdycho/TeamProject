@@ -3,7 +3,8 @@
 class Bomb :public Obstacle
 {
 private:
-
+	bool isCollision;
+	float angle;
 public:
 	Bomb();
 	~Bomb();

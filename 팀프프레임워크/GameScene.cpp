@@ -48,6 +48,11 @@ HRESULT GameScene::init()
 	_om = new ObstacleManager;
 	_om->init();
 
+	for (int i = 0; i < _om->GetObjVec().size(); i++)
+	{
+		_om->GetObjVec()[i]->LinkPlayer(_metaKnight);
+	}
+
 	// player/store link 함수
 	_store->setPlayerAddress(_metaKnight);
 	_metaKnight->setStoreAddress(_store);
@@ -104,7 +109,7 @@ void GameScene::update()
 		_em->update();
 		_im->update();
 		_om->update();
-
+		PlayerCollision();
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
 		//==============================================//
@@ -288,4 +293,65 @@ void GameScene::CamRender()
 
 void GameScene::PlayerCollision()
 {
+	//==========플레이어 아이템충돌===========//
+	
+	//토마토,바나나
+	for (int i = 0; i < _im->GetMapItemVec().size(); i++)
+	{
+		RECT temp;
+		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetMapItemVec()[i]->GetRect()))
+		{
+			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
+			{
+				//아이템 먹을때 이펙트
+				//플레이어 체력올려준다
+			}
+			else if (_im->GetMapItemVec()[i]->GetItemType() == POTION_MP)
+			{
+				//아이템 먹을때 이펙트
+				//플레이어 마나올려준다
+			}
+			_im->GetMapItemVec()[i]->GetShowState() = false;
+		}
+	}
+
+	//동전
+	for (int i = 0; i < _im->GetGoldItecVec().size(); i++)
+	{
+		RECT temp;
+		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
+		{
+			//동전먹는이펙트
+			//플레이어 돈 올려준다
+			_im->GetGoldItecVec()[i]->GetShowState() = false;
+		}
+	}
+	//===================================//
+
+	//플레이어 에너미
+
+	//플레이어 에너미 폭탄
+
+	//플레이어 에너미 부메랑
+
+	//플레이어 보스
+	
+	//플레이어 보스총알1
+
+	//플레이어 보스총알2
+}
+
+void GameScene::OtherCollision()
+{
+	//플레이어 평타 에너미들
+
+	//플레이어 평타 보스
+
+	//플레이어 스킬1=>총알임 에너미
+
+	//플레이어 스킬1 보스
+
+	//플레이어 스킬2 에너미
+
+	//플레이어 스킬2 보스
 }

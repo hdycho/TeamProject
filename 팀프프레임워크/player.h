@@ -114,4 +114,5 @@ public:
 
 	// Store과의 링크함수
 	void setStoreAddress(Store* str) { _store = str; }
+	inline void InitGravity() { _gravity = 0;_jumpPower = 0; }
 };

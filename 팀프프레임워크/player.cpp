@@ -293,6 +293,7 @@ void player::render()
 		_skill_2_Right.img->frameRender(getMemDC(), _skill_2_Right.rc.left + 30, _skill_2_Right.rc.top - 30);
 		_skill_2_Left.img->frameRender(getMemDC(), _skill_2_Left.rc.left + 30, _skill_2_Left.rc.top - 30);
 	}
+	//Rectangle(getMemDC(), _attackRange.rc.left, _attackRange.rc.top, _attackRange.rc.right, _attackRange.rc.bottom);
 }
 
 void player::knightJump()

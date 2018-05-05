@@ -61,7 +61,7 @@ void Item::render()
 {
 	if (_itemTypes == POTION_HP || _itemTypes == POTION_MP)
 	{
-		_img->render(getMemDC(), _rc.left, _rc.top);
+		_img->render(getMemDC(), GetCenterPos(_rc).x, GetCenterPos(_rc).y);
 	}
 	if (_itemTypes == GOLD_ITEM)
 	{

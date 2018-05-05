@@ -1,5 +1,7 @@
 #pragma once
 #include "gameNode.h"
+
+class player;
 class Obstacle :public gameNode
 {
 protected:
@@ -8,6 +10,8 @@ protected:
 	string oName;
 	int x, y;
 	bool isShow;
+
+	player*p;
 public:
 	Obstacle();
 	~Obstacle();
@@ -20,5 +24,6 @@ public:
 	virtual void ObstacleUpdate() = 0;
 
 	inline bool&GetShowState() { return isShow; }
+	inline void LinkPlayer(player*_p) { p = _p; }
 };
 

@@ -13,8 +13,9 @@ ItemManager::~ItemManager()
 
 HRESULT ItemManager::init()
 {
-	IMAGEMANAGER->addImage("tomato", "./image/tomato.bmp", 30, 30, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("banana", "./image/banana.bmp", 30, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("tomato", PathFile("image", "tomato").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("banana", PathFile("image", "banana").c_str(), 30, 30, 1, 1, true, RGB(255, 0, 255));
+
 	//IMAGEMANAGER->addImage("gold", "./image/gold.bmp", 30, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("AniGold", "./image/AniGold.bmp", 210, 30, 7, 1, true, RGB(255, 0, 255));
 

@@ -19,5 +19,7 @@ public:
 	void release();
 
 	void LoadObstacle();
+
+	inline vector<Obstacle*>&GetObjVec() { return obsVec; }
 };
 
