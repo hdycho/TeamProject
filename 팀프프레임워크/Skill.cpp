@@ -22,10 +22,10 @@ void Skill::update()
 {
 	for (int i = 0; i < _vSlash.size(); ++i)
 	{
-		_vSlash[i]->gravity += 0.3f;
-		_vSlash[i]->move();
+		//_vSlash[i]->gravity += 0.3f;
+		//_vSlash[i]->move();
 		_vSlash[i]->slashMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
-		if (fabs(_vSlash[i]->fireX - _vSlash[i]->x) >= 400)//if (!_vSlash[i]->slashMotion->isPlay())
+		if (!_vSlash[i]->slashMotion->isPlay())//if (!_vSlash[i]->slashMotion->isPlay())
 		{	
 			SAFE_DELETE(_vSlash[i]);
 			_vSlash.erase(_vSlash.begin() + i);
@@ -72,7 +72,7 @@ void Skill::makeSlash(float x, float y, int damage, bool isLeft)
 	string slashName = "slash";
 	slashName += imageCount;
 	int arrSlash[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-	KEYANIMANAGER->addArrayFrameAnimation(slashName, "slash", arrSlash, 8, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation(slashName, "slash", arrSlash, 8, 3, false);
 	_slash->slashMotion = KEYANIMANAGER->findAnimation(slashName);
 
 	_slash->slashMotion->start();

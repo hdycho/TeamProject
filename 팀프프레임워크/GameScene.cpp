@@ -16,6 +16,8 @@ GameScene::GameScene()
 	EFFECTMANAGER->addEffect("아이템먹을때", PathFile("image", "아이템먹었을때").c_str(), 210, 30, 30, 30, 20, 1, 30);
 	EFFECTMANAGER->addEffect("동전먹을때", PathFile("image", "동전먹었을때").c_str(), 90, 32, 30, 32, 20, 1, 30);
 	IMAGEMANAGER->addFrameImage("검은화면1", PathFile("image", "검은화면").c_str(), 800, 600, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("로딩화면", PathFile("image", "로딩화면").c_str(), 800, 600, 1, 1, false, NULL);
+	IMAGEMANAGER->addFrameImage("로딩창", PathFile("image", "로딩창").c_str(), 3000, 100, 9, 1, true, RGB(255,0,255));
 }
 
 
@@ -170,10 +172,16 @@ void GameScene::update()
 	{
 		static float bossRoomTime = 0;
 		bossRoomTime += TIMEMANAGER->getElapsedTime();
-
-		if (bossRoomTime > 3)
+		static int idx = 0;
+		if (bossRoomTime > 0.5f)
 		{
 			bossRoomTime = 0;
+			idx++;
+		}
+		IMAGEMANAGER->findImage("로딩창")->setFrameX(idx);
+		if (idx > 8)
+		{
+			idx = 0;
 			alpha = 0;
 			sState = FADE_OUT;
 			MetaStageData = BOSS_ROOM;
@@ -263,7 +271,9 @@ void GameScene::render()
 	case BOSS_ENTER:
 	{
 		//로딩화면보여줌
-
+		IMAGEMANAGER->render("로딩화면", getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top);
+		IMAGEMANAGER->frameRender("로딩창", getMemDC(), CAM->getCamRc().left + 250, CAM->getCamRc().top + 500);
+		
 	}
 	break;
 	}

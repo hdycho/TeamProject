@@ -31,10 +31,10 @@ HRESULT EditScene::init()
 	Item[4] = new Object(IMAGEMANAGER->findImage("폭탄"), 0, 0, "폭탄");
 
 	save = new button;
-	save->Init(IMAGEMANAGER->findImage("세이브버튼"), "SAVE", 0, 0);
+	save->Init(IMAGEMANAGER->findImage("세이브버튼"), "SAVE", 0, 0,"휴먼둥근헤드라인");
 
 	Loby = new button;
-	Loby->Init(IMAGEMANAGER->findImage("세이브버튼"), "LOBY", 0, 0);
+	Loby->Init(IMAGEMANAGER->findImage("세이브버튼"), "LOBY", 0, 0,"휴먼둥근헤드라인");
 
 	fadeout = IMAGEMANAGER->findImage("검은화면");
 	alpha = 0;

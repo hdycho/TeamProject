@@ -1,7 +1,6 @@
 #pragma once
 #include "gameNode.h"
 
-
 class button : public gameNode
 {
 private:
@@ -21,14 +20,14 @@ private:
 	bool isClick;
 
 	string buttonName;
-
+	string fontstyle;
 
 public:
 	button();
 	~button();
 
 	//버튼사용하기 위해서 미리만들어놔야한다
-	HRESULT Init(image*img, string bName, float x, float y);
+	HRESULT Init(image*img, string bName, float x, float y,string fontStyle);
 	void Render();
 	void Update(int key, bool isUseCam);
 	void Release();

@@ -21,10 +21,10 @@ HRESULT StartScene::init()
 	//========================================//
 
 	start = new button;
-	start->Init(IMAGEMANAGER->findImage("버튼"), "시작", WINSIZEX / 2+150, WINSIZEY / 2+100);
+	start->Init(IMAGEMANAGER->findImage("버튼"), "START", WINSIZEX / 2+150, WINSIZEY / 2+100,"휴먼둥근헤드라인");
 
 	edit = new button;
-	edit->Init(IMAGEMANAGER->findImage("버튼"), "에뒷", WINSIZEX / 2 + 150, WINSIZEY / 2 + 200);
+	edit->Init(IMAGEMANAGER->findImage("버튼"), "EDIT", WINSIZEX / 2 + 150, WINSIZEY / 2 + 200, "휴먼둥근헤드라인");
 
 	fadeout = IMAGEMANAGER->findImage("검은화면");
 

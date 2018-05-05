@@ -207,7 +207,12 @@ void player::update(HDC hdc)
 			_knight.img->setFrameY(0);
 			_knight.img->setFrameX(_index);
 			_index++;
-			if (_index > 18) _index = 0;
+			if (_index >= 18)
+			{
+				_isAttack = false;
+				_knightDirection = RIGHT_STAND;
+				_index = 0;
+			}
 		}
 		else if (_knightDirection == LEFT_ATTACK)
 		{
@@ -215,7 +220,12 @@ void player::update(HDC hdc)
 			_knight.img->setFrameY(1);
 			_knight.img->setFrameX(_index);
 			_index--;
-			if (_index < 0) _index = 18;
+			if (_index < 0)
+			{
+				_isAttack = false;
+				_knightDirection = LEFT_STAND;
+				_index = 18;
+			}
 		}
 		else if (_knightDirection == RIGHT_SKILL1)
 		{
@@ -293,7 +303,7 @@ void player::render()
 		_skill_2_Right.img->frameRender(getMemDC(), _skill_2_Right.rc.left + 30, _skill_2_Right.rc.top - 30);
 		_skill_2_Left.img->frameRender(getMemDC(), _skill_2_Left.rc.left + 30, _skill_2_Left.rc.top - 30);
 	}
-	//Rectangle(getMemDC(), _attackRange.rc.left, _attackRange.rc.top, _attackRange.rc.right, _attackRange.rc.bottom);
+	Rectangle(getMemDC(), _attackRange.rc.left, _attackRange.rc.top, _attackRange.rc.right, _attackRange.rc.bottom);
 }
 
 void player::knightJump()
@@ -345,40 +355,42 @@ void player::knightAttack()
 	// stand,move 방향에 따른 attack 방향/attack 키
 	if (_knightDirection == RIGHT_STAND || _knightDirection == RIGHT_RUN)
 	{
-		if (KEYMANAGER->isStayKeyDown('F'))
+		if (KEYMANAGER->isOnceKeyDown('F'))
 		{
-			_index = 0;
 			_isAttack = true;
+			_index = 0;
+			_knightDirection = RIGHT_ATTACK;
 			_skill->makeSlash(_knight.x, _knight.y, 40, false);
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
 	{
-		if (KEYMANAGER->isStayKeyDown('F'))
+		if (KEYMANAGER->isOnceKeyDown('F'))
 		{
-			_index = 18;
 			_isAttack = true;
+			_index = 18;
+			_knightDirection = LEFT_ATTACK;
 			_skill->makeSlash(_knight.x, _knight.y, 40, true);
 		}
 	}
 
-	// 공격을 멈췄을때
-	if (_knightDirection == RIGHT_ATTACK)
-	{
-		if (KEYMANAGER->isOnceKeyUp('F'))
-		{
-			_index = 0;
-			_isAttack = false;
-		}
-	}
-	if (_knightDirection == LEFT_ATTACK)
-	{
-		if (KEYMANAGER->isOnceKeyUp('F'))
-		{
-			_index = 18;
-			_isAttack = false;
-		}
-	}
+	//// 공격을 멈췄을때
+	//if (_knightDirection == RIGHT_ATTACK)
+	//{
+	//	if (KEYMANAGER->isOnceKeyUp('F'))
+	//	{
+	//		_index = 0;
+	//		_isAttack = false;
+	//	}
+	//}
+	//if (_knightDirection == LEFT_ATTACK)
+	//{
+	//	if (KEYMANAGER->isOnceKeyUp('F'))
+	//	{
+	//		_index = 18;
+	//		_isAttack = false;
+	//	}
+	//}
 	
 
 	// attack
@@ -394,17 +406,17 @@ void player::knightAttack()
 			_knightDirection = LEFT_ATTACK;
 			_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
 		}
-		// move 도중 attack 했을때
-		if (_knightDirection == RIGHT_RUN)
-		{
-			_index = 0;
-			_knightDirection = RIGHT_ATTACK;
-		}
-		if (_knightDirection == LEFT_RUN)
-		{
-			_index = 18;
-			_knightDirection = LEFT_ATTACK;
-		}
+		//// move 도중 attack 했을때
+		//if (_knightDirection == RIGHT_RUN)
+		//{
+		//	_index = 0;
+		//	_knightDirection = RIGHT_ATTACK;
+		//}
+		//if (_knightDirection == LEFT_RUN)
+		//{
+		//	_index = 18;
+		//	_knightDirection = LEFT_ATTACK;
+		//}
 	}
 	if (_isAttack == false)
 	{

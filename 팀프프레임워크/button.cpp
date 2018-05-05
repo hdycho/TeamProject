@@ -8,7 +8,7 @@ button::~button()
 {
 }
 
-HRESULT button::Init(image * img, string bName, float x, float y)
+HRESULT button::Init(image * img, string bName, float x, float y, string fontStyle)
 {
 	this->img = new image;
 	*(this->img) = *img;
@@ -21,7 +21,7 @@ HRESULT button::Init(image * img, string bName, float x, float y)
 
 	bState = BUTTON_UP;
 	buttonName = bName;
-
+	fontstyle = fontStyle;
 	return S_OK;
 }
 
@@ -102,7 +102,7 @@ void button::ButtonNameDraw()
 {
 	HFONT font, oldFont;
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
-	font = CreateFont(30, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT("±Ã¼­Ã¼"));
+	font = CreateFont(30, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, TEXT(fontstyle.c_str()));
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
 	SetBkMode(getMemDC(), TRANSPARENT);
 	DrawText(getMemDC(), buttonName.c_str(), strlen(buttonName.c_str()), &rc,
