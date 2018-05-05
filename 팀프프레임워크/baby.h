@@ -4,7 +4,7 @@
 class baby : public enemy
 {
 private:
-	float getTime;
+
 public:
 	baby();
 	~baby();
@@ -18,5 +18,6 @@ public:
 
 	virtual void move();
 	virtual void draw();		//그려주는 함수
+	virtual void enemyCollision();
 };
 

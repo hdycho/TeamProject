@@ -46,7 +46,13 @@ HRESULT GameScene::init()
 	_store->init();
 	_em = new enemyManager;
 	_em->init();
-	_em->setBaby();
+	_em->setMinion();
+
+	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
+	{
+		_em->GetEnemyVec()[i]->setPlayerMemoryAddressLink(_metaKnight);
+	}
+
 	_im = new ItemManager;
 	_im->init();
 	_om = new ObstacleManager;

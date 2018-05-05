@@ -234,6 +234,15 @@
     <ClInclude Include="Bomb.h">
       <Filter>playGround\GameScene\Obstacle</Filter>
     </ClInclude>
+    <ClInclude Include="bomberman.h">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="boomerang.h">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="bug.h">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -355,6 +364,15 @@
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>playGround\GameScene\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="boomerang.cpp">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="bomberman.cpp">
+      <Filter>playGround\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="bug.cpp">
+      <Filter>playGround\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

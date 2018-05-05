@@ -1,7 +1,12 @@
 #pragma once
 #include "gameNode.h"
 #include "baby.h"
+#include "bug.h"
+#include "bomberman.h"
+#include "boomerang.h"
 #include <vector>
+
+class player;
 
 class enemyManager : public gameNode
 {
@@ -23,7 +28,8 @@ public:
 	void render();
 
 	//미니언 셋팅 함수
-	void setBaby();
-	
+	void setMinion();
+
+	inline vEnemy&GetEnemyVec() { return _vMinion; }
 };
 

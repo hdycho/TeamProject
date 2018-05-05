@@ -21,10 +21,14 @@ HRESULT baby::init(int x, int y)
 	this->x = x;
 	this->y = y;
 
+	enemy::init();
+
 	IMAGEMANAGER->addFrameImage("baby", PathFile("image", "baby").c_str(), 257, 120, 5, 2, true, RGB(255, 0, 255));
 	img = new image;
 	img->init(PathFile("image", "baby").c_str(), 257, 120, 5, 2, true, RGB(255, 0, 255));
 
+	epCol = new PixelCol;
+	epCol->init(70, 20);
 
 	//currentFrameX = currentFrameY = 0;
 
@@ -51,6 +55,7 @@ HRESULT baby::init(int x, int y)
 	isRight = false;
 	speed = 2.0f;
 	getTime = 0;
+	gravity = 1.0f;
 	return S_OK;
 }
 
@@ -91,9 +96,12 @@ void baby::release()
 
 void baby::update()
 {
+	enemy::update();
 	KEYANIMANAGER->update();
 	move();
 	rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
+	enemyCollision();
+	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 }
 
 void baby::render()
@@ -140,3 +148,29 @@ void baby::draw()
 	img->aniRender(getMemDC(), rc.left, rc.top, eMotion);
 }
 
+void baby::enemyCollision()
+{
+	//¹Ù´Ú
+	if (epCol->RayCastingDownY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0))
+	{
+		epCol->setPosDownY(y);
+		gravity = 0;
+	}
+	else
+	{
+		y += gravity;
+		gravity = 1.0f;
+	}
+
+	//ÃµÀå
+	if (epCol->RayCastingUpY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0))
+	{
+		epCol->setPosUpY(y);
+	}
+
+	//º®
+	//if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
+	//{
+	//	speed = 0;
+	//}
+}
