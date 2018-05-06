@@ -20,7 +20,7 @@ class ItemManager;
 class ObstacleManager;
 class PlayerUI;
 
-class GameScene:public gameNode
+class GameScene :public gameNode
 {
 private:
 	//객체들 넣어서 사용하면 됩니다.
@@ -33,11 +33,10 @@ private:
 	ObstacleManager* _om;
 	Store* _store;
 	PlayerUI* _Ui;
-	
 
 	//보스방 입장렉트
 	RECT bossEnterRc;
-	
+
 	//페이드아웃
 	image*fadeOut;
 	int alpha;
@@ -75,7 +74,7 @@ public:
 	void PlayerCollision();
 	void OtherCollision();
 	void PlayerDieSet();
-	
+
 	void SaveTime();
 	void ShowGameTime();
 };

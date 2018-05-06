@@ -81,6 +81,14 @@ void BulletManager::BulletUpdate()
 			(*bIter)->y += -sinf((*bIter)->angle)*(*bIter)->speed+ (*bIter)->gravity;
 			(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getFrameWidth(), (*bIter)->img->getFrameHeight());
 
+			if (getDistance((*bIter)->initX, (*bIter)->initY, (*bIter)->x, (*bIter)->y) > 350)
+			{
+				(*bIter)->isShot = false;
+				(*bIter)->rc = { 0,0,0,0 };
+				(*bIter)->gravity = 0;
+				(*bIter)->addGravity = 0;
+			}
+
 			if ((*bIter)->isAnimation)
 				(*bIter)->anim->frameUpdate(TIMEMANAGER->getElapsedTime());
 

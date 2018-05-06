@@ -18,7 +18,7 @@ HRESULT GameOverScene::init()
 	CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 4);
 	//========================================//
 	alpha = 0;
-	fadeout= IMAGEMANAGER->findImage("검은화면");
+	fadeout = IMAGEMANAGER->findImage("검은화면");
 
 	Loby = new button;
 	Loby->Init(IMAGEMANAGER->findImage("버튼"), "LOBY", WINSIZEX / 2 - 240, WINSIZEY / 2 + 160, "휴먼둥근헤드라인");
@@ -54,7 +54,7 @@ void GameOverScene::update()
 	if (sceneChange)
 	{
 		alpha += 3;
-		
+
 		if (alpha > 254)
 		{
 			if (metaData == 0)
@@ -75,16 +75,16 @@ void GameOverScene::render()
 	IMAGEMANAGER->render("게임오버화면", getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top);
 	Quit->Render();
 	Loby->Render();
-	
+
 	HFONT font, oldFont;
 	SetTextColor(getMemDC(), RGB(255, 0, 0));
 	font = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, "휴먼둥근헤드라인");
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
-	TextOut(getMemDC(), CAM->getCamRc().left+490, CAM->getCamRc().top+470, time.c_str(), time.size());
+	TextOut(getMemDC(), CAM->getCamRc().left + 490, CAM->getCamRc().top + 470, time.c_str(), time.size());
 	SelectObject(getMemDC(), oldFont);
 	DeleteObject(font);
 
-	fadeout->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top,alpha);
+	fadeout->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 }
 
 void GameOverScene::LoadTime()
@@ -99,7 +99,7 @@ void GameOverScene::LoadTime()
 	int second;
 	while (true)
 	{
-		fscanf_s(fp,"%s" ,temp, sizeof(temp));
+		fscanf_s(fp, "%s", temp, sizeof(temp));
 		if (string(temp).find("Time", 0) != string::npos)//데이터찾으면
 			break;
 	}
@@ -111,12 +111,12 @@ void GameOverScene::LoadTime()
 
 		fscanf_s(fp, "%d%d", &minute, &second);
 	}
-	
+
 	if (minute < 10)
 	{
 		if (second < 10)
 		{
-			time = '0' + to_string(minute)+':' + '0' + to_string(second);
+			time = '0' + to_string(minute) + ':' + '0' + to_string(second);
 		}
 		else
 		{
@@ -134,4 +134,5 @@ void GameOverScene::LoadTime()
 			time = to_string(minute) + ':' + to_string(second);
 		}
 	}
+	fclose(fp);
 }

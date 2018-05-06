@@ -48,7 +48,12 @@ HRESULT sceneManager::init()
 
 void sceneManager::release()
 {
+	mapSceneIter mIter = _mSceneList.begin();
 
+	for (; mIter != _mSceneList.end(); mIter++)
+	{
+		mIter->second->release();
+	}
 }
 
 void sceneManager::update()

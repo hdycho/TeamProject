@@ -137,4 +137,7 @@ public:
 
 	// player (money) get
 	int&getMoney() { return _money; }
+
+	inline float&GetHp() { return _playerHP; }
+	inline float&GetMp() { return _playerMP; }
 };

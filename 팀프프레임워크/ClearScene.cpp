@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClearScene.h"
-
+#include "StartScene.h"
 
 ClearScene::ClearScene()
 {
@@ -38,6 +38,7 @@ void ClearScene::release()
 
 void ClearScene::update()
 {
+
 	Loby->Update(VK_LBUTTON, true);
 	Quit->Update(VK_LBUTTON, true);
 	if (Loby->IsClick())
@@ -135,5 +136,6 @@ void ClearScene::LoadTime()
 			time = to_string(minute) + ':' + to_string(second);
 		}
 	}
+	fclose(fp);
 }
 

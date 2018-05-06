@@ -133,8 +133,8 @@ void GameScene::update()
 	case IN_GAME:
 	{
 		//CamMove(4);
-		//보스방 입장
 		gameTime += TIMEMANAGER->getElapsedTime();
+
 	/*	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		{
 			_im->DropGold(300, 300, 8, 1);
@@ -178,6 +178,16 @@ void GameScene::update()
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
 		//==============================================//
+		
+		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		{
+			alpha = 0;
+			//클리어씬이동시키기
+			isClear = true;
+			SaveTime();
+			SCENEMANAGER->changeScene("클리어씬");
+		}
+	
 	}
 	break;
 	case STORE:
@@ -402,6 +412,8 @@ void GameScene::PlayerCollision()
 	//토마토,바나나
 	for (int i = 0; i < _im->GetMapItemVec().size(); i++)
 	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_im->GetMapItemVec()[i]->GetRect()))continue;
 		if (!_im->GetMapItemVec()[i]->GetShowState())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetMapItemVec()[i]->GetRect()))
@@ -425,6 +437,8 @@ void GameScene::PlayerCollision()
 	//동전
 	for (int i = 0; i < _im->GetGoldItecVec().size(); i++)
 	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_im->GetGoldItecVec()[i]->GetRect()))continue;
 		if (!_im->GetGoldItecVec()[i]->GetShowState())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
@@ -441,10 +455,13 @@ void GameScene::PlayerCollision()
 	//플레이어 에너미
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
 	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_em->GetEnemyVec()[i]->getRect()))continue;
 		if (_em->GetEnemyVec()[i]->GetisEnemyDie())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getKnightImage().rc))
 		{
+			
 			/*sState = PLAYER_DIE;
 			diePosX = _metaKnight->getKnightImage().x;
 			diePosY = _metaKnight->getKnightImage().y;
@@ -472,6 +489,8 @@ void GameScene::OtherCollision()
 	//플레이어 평타 에너미들
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
 	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_em->GetEnemyVec()[i]->getRect()))continue;
 		if (_em->GetEnemyVec()[i]->GetisEnemyDie())continue;
 		RECT temp;
 		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getAttackRc().rc))
@@ -487,6 +506,8 @@ void GameScene::OtherCollision()
 	//플레이어 스킬1=>총알임 에너미
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
 	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_em->GetEnemyVec()[i]->getRect()))continue;
 		if (_em->GetEnemyVec()[i]->GetisEnemyDie())continue;
 		RECT temp;
 		for (int j = 0; j < BULLET->GetBulletVec("bulletSwordRight").size(); j++)
@@ -523,23 +544,34 @@ void GameScene::OtherCollision()
 void GameScene::PlayerDieSet()
 {
 	//플레이어체력이0보다 낮아지면
-	//if (sState == IN_GAME)
-	//{
-	//	//플레이어 다이로보내준다
-	//}
-	//else if (sState == BOSS_ROOM)
-	//{
-	//	//페이드아웃후 게임오버로 보내준다
-
-	//	sState = FADE_OUT;
-	//	MetaStageData = GAME_OVER;
-	//}
+	if (sState == IN_GAME)
+	{
+		if (_metaKnight->GetHp() < 0)
+		{
+			sState = PLAYER_DIE;
+			_metaKnight->GetHp() = 100;
+			_metaKnight->GetMp() = 100;
+			diePosX = _metaKnight->getKnightImage().x;
+			diePosY = _metaKnight->getKnightImage().y;
+			_metaKnight->getKnightImage().x = 300;
+			_metaKnight->getKnightImage().y = 200;
+		}
+		//플레이어 다이로보내준다
+	}
+	else if (sState == BOSS_ROOM)
+	{
+		//페이드아웃후 게임오버로 보내준다
+		if (_metaKnight->GetHp() < 0)
+		{
+			sState = FADE_OUT;
+			MetaStageData = GAME_OVER;
+		}
+	}
 }
 
 void GameScene::SaveTime()
 {
 	//클리어여부		시간		
-
 	string data;
 
 	FILE*fp = nullptr;
@@ -585,12 +617,12 @@ void GameScene::ShowGameTime()
 		if (sec < 10)
 		{
 			sprintf(temp, "PlayTime: 00:0%d", sec);
-			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top,temp,strlen(temp));
+			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top+100,temp,strlen(temp));
 		}
 		else
 		{
 			sprintf(temp, "PlayTime: 00:%d", sec);
-			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, temp, strlen(temp));
+			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 		}
 	}
 	else
@@ -600,12 +632,12 @@ void GameScene::ShowGameTime()
 			if (sec < 10)
 			{
 				sprintf(temp, "PlayTime: 0%d:0%d", min,sec);
-				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, temp, strlen(temp));
+				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 			}
 			else
 			{
 				sprintf(temp, "PlayTime: 0%d:%d", min, sec);
-				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, temp, strlen(temp));
+				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 			}
 		}
 		else
@@ -613,12 +645,12 @@ void GameScene::ShowGameTime()
 			if (sec < 10)
 			{
 				sprintf(temp, "PlayTime: %d:0%d", min, sec);
-				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, temp, strlen(temp));
+				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 			}
 			else
 			{
 				sprintf(temp, "PlayTime: %d:%d", min, sec);
-				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, temp, strlen(temp));
+				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 			}
 		}
 	}

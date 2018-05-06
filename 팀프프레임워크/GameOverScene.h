@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "button.h"
-class GameOverScene:public gameNode
+class GameOverScene :public gameNode
 {
 private:
 	button*Loby;

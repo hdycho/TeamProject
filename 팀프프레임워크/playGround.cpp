@@ -50,7 +50,7 @@ HRESULT playGround::init()
 void playGround::release()
 {
 	gameNode::release();
-
+	SCENEMANAGER->release();
 }
 
 //¿¬»ê

@@ -30,8 +30,8 @@ void Bomb::ObstacleUpdate()
 		EFFECTMANAGER->play("ÆøÅºÀå¾Ö¹°Æø¹ß", GetCenterPos(rc).x, GetCenterPos(rc).y);
 		angle = getAngle(GetCenterPos(rc).x, GetCenterPos(rc).y, GetCenterPos(p->getKnightImage().rc).x, GetCenterPos(p->getKnightImage().rc).y);
 		
-		p->getKnightImage().x += cosf(angle) * 35;
-		p->getKnightImage().y += -sinf(angle) * 35;
+		p->GetHp() -= 102;
+		p->knightDamaged(rc);
 		isCollision = true;
 		isShow = false;
 

@@ -73,25 +73,25 @@ HRESULT PlayerUI::init()
 void PlayerUI::update()
 {
 	//HpUI ÁÂÇ¥
-	_hpimagerc = RectMake(CAM->getCamRc().left, CAM->getCamRc().top, 200, 89);
+	//_hpimagerc = RectMake(CAM->getCamRc().left, CAM->getCamRc().top, 200, 89);
 
 	//skillQ ÁÂÇ¥
-	_skillq.imagerc = RectMake(CAM->getCamRc().left + 350, CAM->getCamRc().top, 150, 77);
+	//_skillq.imagerc = RectMake(CAM->getCamRc().left + 350, CAM->getCamRc().top, 150, 77);
 
 	//skillW ÁÂÇ¥
-	_skillw.imagerc = RectMake(CAM->getCamRc().left + 500, CAM->getCamRc().top, 150, 77);
-
+	//_skillw.imagerc = RectMake(CAM->getCamRc().left + 500, CAM->getCamRc().top, 150, 77);
+	
 	//skillE ÁÂÇ¥
-	_skille.imagerc = RectMake(CAM->getCamRc().left + 650, CAM->getCamRc().top, 150, 77);
+	//_skille.imagerc = RectMake(CAM->getCamRc().left + 650, CAM->getCamRc().top, 150, 77);
 
 	//HPLine ÁÂÇ¥
-	_hpline.imagerc = RectMake(CAM->getCamRc().left + 75, CAM->getCamRc().top + 11, _hpline.img->getFrameWidth(), _hpline.img->getFrameHeight());
+	//_hpline.imagerc = RectMake(CAM->getCamRc().left + 75, CAM->getCamRc().top + 11, _hpline.img->getFrameWidth(), _hpline.img->getFrameHeight());
 
 	//PTLine ÁÂÇ¥
-	_ptline.imagerc = RectMake(CAM->getCamRc().left + 7, CAM->getCamRc().top + 70, _ptline.img->getFrameWidth(), _ptline.img->getFrameHeight());
+	//_ptline.imagerc = RectMake(CAM->getCamRc().left + 7, CAM->getCamRc().top + 70, _ptline.img->getFrameWidth(), _ptline.img->getFrameHeight());
 
 	//shoprc
-	_shopimagerc = RectMake(CAM->getCamRc().left + 210, CAM->getCamRc().top, 130, 77);
+	//_shopimagerc = RectMake(CAM->getCamRc().left + 210, CAM->getCamRc().top, 130, 77);
 
 	SkillQImageChange();
 	SkillWImageChange();
@@ -130,42 +130,42 @@ void PlayerUI::update()
 void PlayerUI::render()
 {
 	//Rectangle(getMemDC(), _hpimagerc.left, _hpimagerc.top, _hpimagerc.right, _hpimagerc.bottom);
-	_hpimage->render(getMemDC(), _hpimagerc.left, _hpimagerc.top);//HPUI
+	_hpimage->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top);//HPUI
 																  //Rectangle(getMemDC(), _hpline.imagerc.left, _hpline.imagerc.top, _hpline.imagerc.right, _hpline.imagerc.bottom);
-	_hpline.img->render(getMemDC(), _hpline.imagerc.left, _hpline.imagerc.top, 0, 0, _hpline.width, 17);//HPLine
+	_hpline.img->render(getMemDC(),CAM->getCamRc().left+75, CAM->getCamRc().top+11, 0, 0, _hpline.width, 17);//HPLine
 																										//Rectangle(getMemDC(), _ptline.imagerc.left, _ptline.imagerc.top, _ptline.imagerc.right, _ptline.imagerc.bottom);
-	_ptline.img->render(getMemDC(), _ptline.imagerc.left, _ptline.imagerc.top, 0, 0, _ptline.width, 15);//PtLine
+	_ptline.img->render(getMemDC(), CAM->getCamRc().left + 7, CAM->getCamRc().top + 70, 0, 0, _ptline.width, 15);//PtLine
 
 	if (_skillq.UION == false)
 	{
 		//Rectangle(getMemDC(), _skillq.imagerc.left, _skillq.imagerc.top, _skillq.imagerc.right, _skillq.imagerc.bottom);
-		_skillq.img->render(getMemDC(), _skillq.imagerc.left, _skillq.imagerc.top);
+		_skillq.img->render(getMemDC(), CAM->getCamRc().left + 350, CAM->getCamRc().top);
 	}
 	if (_skillw.UION == false)
 	{
 		//Rectangle(getMemDC(), _skillw.imagerc.left, _skillw.imagerc.top, _skillw.imagerc.right, _skillw.imagerc.bottom);
-		_skillw.img->render(getMemDC(), _skillw.imagerc.left, _skillw.imagerc.top);
+		_skillw.img->render(getMemDC(), CAM->getCamRc().left + 500, CAM->getCamRc().top);
 	}
 	if (_skille.UION == false)
 	{
 		//Rectangle(getMemDC(), _skille.imagerc.left, _skille.imagerc.top, _skille.imagerc.right, _skille.imagerc.bottom);
-		_skille.img->render(getMemDC(), _skille.imagerc.left, _skille.imagerc.top);
+		_skille.img->render(getMemDC(), CAM->getCamRc().left + 650, CAM->getCamRc().top);
 	}
 	if (_skillq.UION == true)
 	{
-		_skillq.img->frameRender(getMemDC(), _skillq.imagerc.left, _skillq.imagerc.top);
+		_skillq.img->frameRender(getMemDC(), CAM->getCamRc().left + 350, CAM->getCamRc().top);
 	}
 	if (_skillw.UION == true)
 	{
-		_skillw.img->frameRender(getMemDC(), _skillw.imagerc.left, _skillw.imagerc.top);
+		_skillw.img->frameRender(getMemDC(), CAM->getCamRc().left + 500, CAM->getCamRc().top);
 	}
 	if (_skille.UION == true)
 	{
-		_skille.img->frameRender(getMemDC(), _skille.imagerc.left, _skille.imagerc.top);
+		_skille.img->frameRender(getMemDC(), CAM->getCamRc().left + 650, CAM->getCamRc().top);
 	}
 
 	//shop
-	_shopimage->render(getMemDC(), _shopimagerc.left, _shopimagerc.top);
+	_shopimage->render(getMemDC(), CAM->getCamRc().left+210, CAM->getCamRc().top);
 }
 
 //_skillui->update() ¾È¾µ¶§ ¾²´Â°Å

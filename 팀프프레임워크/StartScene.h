@@ -1,7 +1,14 @@
 #pragma once
 #include "gameNode.h"
 #include "button.h"
-class StartScene:public gameNode
+
+struct ScoreData
+{
+	int min;
+	int sec;
+	int time;
+};
+class StartScene :public gameNode
 {
 private:
 	RECT rc;
@@ -12,8 +19,10 @@ private:
 	image*fadeout;
 
 	int alpha;
-	
-	vector<string>		scoreVec;
+
+	vector<ScoreData>		scoreVec;
+	bool isonce;
+
 public:
 	StartScene();
 	~StartScene();
@@ -22,6 +31,13 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	void ScoreUpdate();	//	스코어 실시간비교
+	void ScoreShow();
+
+	void LoadScore();
+	void LoadAllScore();
+	void SaveScore();
 
 };
 
