@@ -242,6 +242,7 @@ void player::update(HDC hdc)
 	{
 		if (_knightDirection == RIGHT_ATTACK)
 		{
+			_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
 			_knight.img = _attack;
 			_knight.img->setFrameY(0);
 			_knight.img->setFrameX(_index);
@@ -251,10 +252,12 @@ void player::update(HDC hdc)
 				_isAttack = false;
 				_knightDirection = RIGHT_STAND;
 				_index = 0;
+				_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
 			}
 		}
 		else if (_knightDirection == LEFT_ATTACK)
 		{
+			_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
 			_knight.img = _attack;
 			_knight.img->setFrameY(1);
 			_knight.img->setFrameX(_index);
@@ -264,6 +267,7 @@ void player::update(HDC hdc)
 				_isAttack = false;
 				_knightDirection = LEFT_STAND;
 				_index = 18;
+				_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
 			}
 		}
 		else if (_knightDirection == RIGHT_SKILL1)
@@ -410,7 +414,7 @@ void player::knightAttack()
 			_isAttack = true;
 			_index = 0;
 			_knightDirection = RIGHT_ATTACK;
-			_skill->makeSlash(_knight.x, _knight.y, 40, false);
+			//_skill->makeSlash(_knight.x, _knight.y, 40, false);
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
@@ -420,28 +424,9 @@ void player::knightAttack()
 			_isAttack = true;
 			_index = 18;
 			_knightDirection = LEFT_ATTACK;
-			_skill->makeSlash(_knight.x, _knight.y, 40, true);
+			//_skill->makeSlash(_knight.x, _knight.y, 40, true);
 		}
 	}
-
-	//// 공격을 멈췄을때
-	//if (_knightDirection == RIGHT_ATTACK)
-	//{
-	//	if (KEYMANAGER->isOnceKeyUp('F'))
-	//	{
-	//		_index = 0;
-	//		_isAttack = false;
-	//	}
-	//}
-	//if (_knightDirection == LEFT_ATTACK)
-	//{
-	//	if (KEYMANAGER->isOnceKeyUp('F'))
-	//	{
-	//		_index = 18;
-	//		_isAttack = false;
-	//	}
-	//}
-	
 
 	// attack
 	if (_isAttack == true)
@@ -449,24 +434,11 @@ void player::knightAttack()
 		if (_knightDirection == RIGHT_STAND)
 		{
 			_knightDirection = RIGHT_ATTACK;
-			_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
 		}
 		if (_knightDirection == LEFT_STAND)
 		{
 			_knightDirection = LEFT_ATTACK;
-			_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
 		}
-		//// move 도중 attack 했을때
-		//if (_knightDirection == RIGHT_RUN)
-		//{
-		//	_index = 0;
-		//	_knightDirection = RIGHT_ATTACK;
-		//}
-		//if (_knightDirection == LEFT_RUN)
-		//{
-		//	_index = 18;
-		//	_knightDirection = LEFT_ATTACK;
-		//}
 	}
 	if (_isAttack == false)
 	{
