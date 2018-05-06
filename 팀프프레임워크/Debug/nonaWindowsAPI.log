@@ -1,27 +1,12 @@
-﻿  GameScene.cpp
+﻿  image.cpp
+c:\users\adyda\desktop\teamproject\팀프프레임워크\image.cpp(343): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\image.cpp(353): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\image.cpp(508): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\image.cpp(515): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\image.cpp(521): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Bomb.cpp
 c:\users\adyda\desktop\teamproject\팀프프레임워크\skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(67): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(413): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(438): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(456): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(490): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(507): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(513): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(524): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(554): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(555): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(620): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(625): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(635): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(640): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(648): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(653): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bomb.cpp(31): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)

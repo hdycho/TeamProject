@@ -358,6 +358,11 @@ void image::render(HDC hdc)
 //렌더링 함수 뿌릴DC, left, top 좌표
 void image::render(HDC hdc, int destX, int destY)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->width, _imageInfo->height);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+	
 	if (_trans)
 	{
 		GdiTransparentBlt(
@@ -384,6 +389,11 @@ void image::render(HDC hdc, int destX, int destY)
 
 void image::render(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->width, _imageInfo->height);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+
 	if (_trans)
 	{
 		GdiTransparentBlt(
@@ -410,6 +420,11 @@ void image::render(HDC hdc, int destX, int destY, int sourX, int sourY, int sour
 
 void image::frameRender(HDC hdc, int destX, int destY)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+
 	if (_trans)
 	{
 		GdiTransparentBlt(
@@ -442,6 +457,12 @@ void image::frameRender(HDC hdc, int destX, int destY)
 
 void image::frameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+
+
 	_imageInfo->currentFrameX = currentFrameX;
 	_imageInfo->currentFrameY = currentFrameY;
 
@@ -503,6 +524,11 @@ void image::alphaRender(HDC hdc, BYTE alpha)
 
 void image::alphaRender(HDC hdc, int destX, int destY, BYTE alpha)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->width, _imageInfo->height);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+
 	//실제 이미지에 알파블렌드를 접목시켜주는 함수
 	_blendFunc.SourceConstantAlpha = alpha;
 
@@ -533,6 +559,11 @@ void image::alphaRender(HDC hdc, int destX, int destY, BYTE alpha)
 
 void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha)
 {
+	RECT rc = RectMake(destX, destY, _imageInfo->width, _imageInfo->height);
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
+
 	//실제 이미지에 알파블렌드를 접목시켜주는 함수
 	_blendFunc.SourceConstantAlpha = alpha;
 
@@ -621,6 +652,10 @@ void image::loopRender(HDC hdc, const LPRECT drawArea, int offSetX, int offSetY)
 
 void image::aniRender(HDC hdc, int destX, int destY, animation * ani)
 {
+	RECT rc = RectMake(destX, destY, ani->getFrameWidth(), ani->getFrameHeight());
+
+	RECT temp;
+	if (!IntersectRect(&temp, &CAM->getCamRc(), &rc))return;
 	//프레임 위치에 맞게 이미지를 뿌려준다
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }

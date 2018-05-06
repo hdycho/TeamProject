@@ -110,7 +110,7 @@ void GameScene::update()
 
 		if (!oncePlay)
 		{
-			CAM->CamInit(DYNAMIC_CAMERA, diePosX, diePosY, 300, 150, 8);
+			CAM->CamInit(DYNAMIC_CAMERA, diePosX, diePosY, 300, 150, 12);
 			oncePlay = true;
 		}
 		//===============이건 만지지 않도록===============//
@@ -421,11 +421,15 @@ void GameScene::PlayerCollision()
 			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
 			{
 				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
+				if(_metaKnight->GetHp()<100)
+					_metaKnight->GetHp() += 10;
 				//플레이어 체력올려준다
 			}
 			else if (_im->GetMapItemVec()[i]->GetItemType() == POTION_MP)
 			{
 				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
+				if (_metaKnight->GetMp()<100)
+					_metaKnight->GetMp() += 10;
 				//플레이어 마나올려준다
 			}
 			_im->GetMapItemVec()[i]->GetShowState() = false;
@@ -444,6 +448,7 @@ void GameScene::PlayerCollision()
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
 		{
 			//플레이어 돈 올려준다
+			_metaKnight->getMoney() += 100;
 			EFFECTMANAGER->play("동전먹을때", GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).y + 15);
 			_im->GetGoldItecVec()[i]->GetShowState() = false;
 			_im->GetGoldItecVec()[i]->GetRect() = RectMake(0, 0, 0, 0);
@@ -461,13 +466,8 @@ void GameScene::PlayerCollision()
 		RECT temp;
 		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getKnightImage().rc))
 		{
-			
-			/*sState = PLAYER_DIE;
-			diePosX = _metaKnight->getKnightImage().x;
-			diePosY = _metaKnight->getKnightImage().y;
-			_metaKnight->getKnightImage().x = 300;
-			_metaKnight->getKnightImage().y = 300;
-			_metaKnight->getKnightImage().rc = RectMakeCenter(_metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y, 70, 56);*/
+			_metaKnight->knightDamaged(_em->GetEnemyVec()[i]->getRect());
+			_metaKnight->GetHp() -= 10;
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
 			break;
 		}
@@ -537,6 +537,7 @@ void GameScene::OtherCollision()
 	//플레이어 스킬1 보스
 
 	//플레이어 스킬2 에너미
+
 
 	//플레이어 스킬2 보스
 }
