@@ -84,6 +84,7 @@
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="bomberman.h" />
     <ClInclude Include="boomerang.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="bug.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="button.h" />
@@ -136,6 +137,10 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="bomberman.cpp" />
     <ClCompile Include="boomerang.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossImage.cpp" />
+    <ClCompile Include="BossMotion.cpp" />
+    <ClCompile Include="BossPixelCol.cpp" />
     <ClCompile Include="bug.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="button.cpp" />

@@ -97,6 +97,24 @@
     <Filter Include="playGround\GameOverScene">
       <UniqueIdentifier>{0564d393-6c62-4005-a10b-d2942c639398}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\GameScene\Boss">
+      <UniqueIdentifier>{211dd2ab-9e06-4e26-8c92-bc90012f3ac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameScene\Boss\BossBase">
+      <UniqueIdentifier>{f59dd295-a6da-4f4c-877e-3bd92bd9df4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameScene\Boss\BossImg">
+      <UniqueIdentifier>{84c7f026-ce75-4bc0-b181-78abae139b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameScene\Boss\BossMotion">
+      <UniqueIdentifier>{c5e4f7fa-d7fe-4acb-b662-f339303a17bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameScene\Boss\BossH">
+      <UniqueIdentifier>{8b82ba9c-f1fb-4dfe-a69a-83b87eb25507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\GameScene\Boss\BossPixelCol">
+      <UniqueIdentifier>{81200e7a-e144-4a0e-b675-220f3c9e329e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -252,6 +270,9 @@
     <ClInclude Include="PlayerUI.h">
       <Filter>playGround\GameScene\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>playGround\GameScene\Boss\BossH</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -391,6 +412,18 @@
     </ClCompile>
     <ClCompile Include="PlayerUI.cpp">
       <Filter>playGround\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BossImage.cpp">
+      <Filter>playGround\GameScene\Boss\BossImg</Filter>
+    </ClCompile>
+    <ClCompile Include="BossMotion.cpp">
+      <Filter>playGround\GameScene\Boss\BossMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>playGround\GameScene\Boss\BossBase</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPixelCol.cpp">
+      <Filter>playGround\GameScene\Boss\BossPixelCol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
