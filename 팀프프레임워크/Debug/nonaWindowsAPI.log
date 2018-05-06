@@ -1,2 +1,17 @@
-﻿  nonaWindowsAPI.vcxproj -> C:\Users\ergok\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
-  nonaWindowsAPI.vcxproj -> C:\Users\ergok\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)
+﻿  player.cpp
+c:\users\younj\desktop\teamproject\팀프프레임워크\skill.h(23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(306): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(307): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(318): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(319): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(329): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(330): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(452): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(457): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(568): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(569): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  nonaWindowsAPI.vcxproj -> C:\Users\younj\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe

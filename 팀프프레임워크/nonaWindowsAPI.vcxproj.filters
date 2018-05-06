@@ -249,6 +249,9 @@
     <ClInclude Include="ClearScene.h">
       <Filter>playGround\ClearScene</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>playGround\GameScene\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -385,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="ClearScene.cpp">
       <Filter>playGround\ClearScene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>playGround\GameScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "Store.h"
+#include "PlayerUI.h"
 
 
 player::player()
@@ -21,6 +22,12 @@ HRESULT player::init()
 
 	_knight.x = 600;
 	_knight.y = 200;
+
+	// Skill_Heal image
+	_knightHeal.img = IMAGEMANAGER->addFrameImage("knightHeal", PathFile("image", "healing_sprite").c_str(), 1020, 233, 10, 1, true, RGB(255, 0, 255));
+	_knightHeal.rc = RectMakeCenter(_knight.x, _knight.y, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
+	// Skill_Heal bool
+	_isSkillHeal = false;
 
 	// Skill_1 images
 	_skill_1 = IMAGEMANAGER->addFrameImage("skill1", PathFile("image", "Skill1_sprite").c_str(), 1850, 180, 11, 2, true, RGB(255, 0, 255));
@@ -47,10 +54,11 @@ HRESULT player::init()
 
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameX());
 
-	_count = _index = _indexExtra = 0;
+	_count = _index = _indexExtra = _indexHeal = 0;
 	_countAttack = 0;
 	_countSkill = 0;
 	_countSkill2 = 0;
+	_countHeal = 0;
 
 	_speed = KNIGHTSPEED;
 
@@ -70,7 +78,10 @@ HRESULT player::init()
 	_skill->init();
 
 	// player (money)
-	_money = 2000;
+	_money = 4000;
+
+	_playerHP = 100;
+	_playerMP = 100;
 
 	return S_OK;
 }
@@ -82,31 +93,31 @@ void player::release()
 void player::update(HDC hdc)
 {
 	// idle
-	if (KEYMANAGER->isOnceKeyUp('D'))
+	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
 	{
 		_knightDirection = RIGHT_STAND;
 	}
-	if (KEYMANAGER->isOnceKeyUp('A'))
+	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 	{
 		_knightDirection = LEFT_STAND;
 	}
 	// move
-	if (KEYMANAGER->isStayKeyDown('D'))
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
 		_knightDirection = RIGHT_RUN;
 		_knight.x += _speed;
 	}
-	if (KEYMANAGER->isStayKeyDown('A'))
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
 		_knightDirection = LEFT_RUN;
 		_knight.x -= _speed;
 	}
 	// (speed reset) for 벽 충돌
-	if (KEYMANAGER->isOnceKeyDown('D'))
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		_speed = KNIGHTSPEED;
 	}
-	if (KEYMANAGER->isOnceKeyDown('A'))
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
 		_speed = KNIGHTSPEED;
 	}
@@ -119,8 +130,26 @@ void player::update(HDC hdc)
 
 	// Skill_1 함수
 	knightSkill_1(); // key : Q
+	// Skill_Heal 함수
+	knightSkill_Heal(); // Key : W
 	// Skill_2 함수
 	knightSkill_2(); // key : E
+
+	// for player's MP
+	if (_playerMP >= 100)
+	{
+		_playerMP = 100;
+	}
+	else _playerMP += 0.1f;
+	// for player's HP
+	if (_playerHP >= 100)
+	{
+		_playerHP = 100;
+	}
+	if (_playerHP <= 0)
+	{
+		_playerHP = 0;
+	}
 
 	// 메타나이트 FrameImage
 	_count++;
@@ -192,6 +221,16 @@ void player::update(HDC hdc)
 					_knightDirection = RIGHT_STAND;
 					_isSkill2 = false;
 				}
+			}
+		}
+		if (_isSkillHeal == true)
+		{
+			_knightHeal.img->setFrameX(_indexHeal);
+			_indexHeal++;
+			if (_indexHeal == 9)
+			{
+				_indexHeal = 0;
+				_isSkillHeal = false;
 			}
 		}
 
@@ -288,9 +327,15 @@ void player::update(HDC hdc)
 	}
 	PlayerCollision(hdc);
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
+	_knightHeal.rc = RectMakeCenter(_knight.x + 3, _knight.y - 14, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 
 	_skill->update();
+	_Ui->update();
+
+	// player HP/MP
+	_Ui->SetHpLine(_playerHP, 100);
+	_Ui->SetPtLine(_playerMP, 100);
 }
 
 void player::render()
@@ -298,12 +343,17 @@ void player::render()
 	_knight.img->frameRender(getMemDC(), _knight.rc.left, _knight.rc.top);
 	_skill->render();
 
+	if (_isSkillHeal == true)
+	{
+		_knightHeal.img->frameRender(getMemDC(), _knightHeal.rc.left, _knightHeal.rc.top);
+	}
 	if (_isSkill2 == true)
 	{
 		_skill_2_Right.img->frameRender(getMemDC(), _skill_2_Right.rc.left + 30, _skill_2_Right.rc.top - 30);
 		_skill_2_Left.img->frameRender(getMemDC(), _skill_2_Left.rc.left + 30, _skill_2_Left.rc.top - 30);
 	}
-	Rectangle(getMemDC(), _attackRange.rc.left, _attackRange.rc.top, _attackRange.rc.right, _attackRange.rc.bottom);
+
+	_Ui->render();
 }
 
 void player::knightJump()
@@ -311,7 +361,7 @@ void player::knightJump()
 	// stand,move 방향에 따른 jump 방향/jump 키
 	if (_knightDirection == RIGHT_STAND || _knightDirection == RIGHT_RUN)
 	{
-		if (KEYMANAGER->isOnceKeyDown('W'))
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		{
 			_index = 0;
 			_gravity = 0.1f;
@@ -322,7 +372,7 @@ void player::knightJump()
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
 	{
-		if (KEYMANAGER->isOnceKeyDown('W'))
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		{
 			_index = 8;
 			_gravity = 0.1f;
@@ -441,6 +491,9 @@ void player::knightSkill_1()
 			_knightDirection = RIGHT_SKILL1;
 			BULLET->Shot("bulletSwordRight", _knight.x, _knight.y, 0, 0, 10);
 			BULLET->Shot("bulletSwordRight", _knight.x, _knight.y - 15, 0, 0, 10);
+			
+			// for player's MP
+			_playerMP -= 10;
 		}
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN || _knightDirection == LEFT_JUMP)
@@ -450,6 +503,33 @@ void player::knightSkill_1()
 			_knightDirection = LEFT_SKILL1;
 			BULLET->Shot("bulletSwordLeft", _knight.x, _knight.y, PI, 0, 10);
 			BULLET->Shot("bulletSwordLeft", _knight.x, _knight.y - 15, PI, 0, 10);
+		
+			// for player's MP
+			_playerMP -= 10;
+		}
+	}
+}
+
+void player::knightSkill_Heal()
+{
+	if (_isAvailableHeal == true)
+	{
+		_Ui->setSkillHealUIBool(true);
+
+		if (_playerMP >= 20)
+		{
+			if (KEYMANAGER->isOnceKeyDown('W'))
+			{
+				_isSkillHeal = true;
+				_playerHP += 20;
+
+				_Ui->setSkillHealUIBool(true);
+				_Ui->_frameSkillW = true;
+				_Ui->_indexHeal = 0;
+
+				// for player's MP
+				_playerMP -= 20;
+			}
 		}
 	}
 }
@@ -458,14 +538,26 @@ void player::knightSkill_2()
 {
 	if (_isAvailable2 == true)
 	{
-		if (KEYMANAGER->isOnceKeyDown('E'))
-		{
-			_skill_2_Right.x = _knight.x - 100; // skill_2_Right 'x' position
-			_skill_2_Right.y = _knight.y; // skill_2_Right 'y' position
-			_skill_2_Left.x = _knight.x - 100; // skill_2_Right 'x' position
-			_skill_2_Left.y = _knight.y; // skill_2_Right 'y' position
+		_Ui->setSkill2UIBool(true);
 
-			_knightDirection = KNIGHT_SPIN;
+		if (_playerMP >= 100)
+		{
+			if (KEYMANAGER->isOnceKeyDown('E'))
+			{
+				_skill_2_Right.x = _knight.x - 100; // skill_2_Right 'x' position
+				_skill_2_Right.y = _knight.y; // skill_2_Right 'y' position
+				_skill_2_Left.x = _knight.x - 100; // skill_2_Right 'x' position
+				_skill_2_Left.y = _knight.y; // skill_2_Right 'y' position
+
+				_knightDirection = KNIGHT_SPIN;
+
+				_Ui->setSkill2UIBool(true);
+				_Ui->_frameSkillE = true;
+				_Ui->_index = 0;
+
+				// for player's MP
+				_playerMP -= 100;
+			}
 		}
 	}
 	if (_isSkill2 == true)

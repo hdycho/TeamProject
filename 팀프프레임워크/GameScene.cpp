@@ -5,6 +5,7 @@
 #include "ItemManager.h"
 #include "ObstacleManager.h"
 #include "Store.h"
+#include "PlayerUI.h"
 
 GameScene::GameScene()
 {
@@ -33,6 +34,9 @@ HRESULT GameScene::init()
 
 	_metaKnight = new player;
 	_metaKnight->init();
+
+	_Ui = new PlayerUI;
+	_Ui->init();
 
 	camSpeed = 4;
 	//===============카메라 셋팅===============//
@@ -68,6 +72,8 @@ HRESULT GameScene::init()
 	// player/store link 함수
 	_store->setPlayerAddress(_metaKnight);
 	_metaKnight->setStoreAddress(_store);
+	// player/UI link 함수
+	_metaKnight->setUIAddress(_Ui);
 	//==============================================
 
 	// Store/player link 함수 for player (money)

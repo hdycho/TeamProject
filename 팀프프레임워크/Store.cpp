@@ -185,10 +185,15 @@ ITEM* Store::buyItem(int index, int* money)
 			_message = "정상 구매 되었습니다. 감사합니다.";
 			_vItem[index]->isSell = true;
 			if (index == 0)
+			{
 				_vItem[index]->image = IMAGEMANAGER->findImage("스킬2_OFF");
+				// SkillW 샀을때 ON
+				_metaKnight->setSkillHealBool(true);
+			}
 			else if (index == 1)
 			{
 				_vItem[index]->image = IMAGEMANAGER->findImage("스킬3_OFF");
+				// SkillE 샀을때 ON
 				_metaKnight->setSkill2Bool(true);
 			}
 			return _vItem[index];

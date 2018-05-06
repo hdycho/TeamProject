@@ -18,6 +18,7 @@ class player;
 class enemyManager;
 class ItemManager;
 class ObstacleManager;
+class PlayerUI;
 
 class GameScene:public gameNode
 {
@@ -31,6 +32,7 @@ private:
 	ItemManager* _im;
 	ObstacleManager* _om;
 	Store* _store;
+	PlayerUI* _Ui;
 	
 
 	//보스방 입장렉트

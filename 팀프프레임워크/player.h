@@ -4,7 +4,6 @@
 #include "Skill.h"
 
 #define KNIGHTSPEED 4;
-class Skill;
 
 enum KNIGHTDIRECTION
 {
@@ -33,45 +32,43 @@ struct KNIGHTPOSITION
 	float x, y;
 };
 
+class Skill;
 class Store;
+class PlayerUI;
 class player : public gameNode
 {
 private:
+	Skill * _skill;
+	Store* _store;
+	PlayerUI* _Ui;
+
 	KNIGHTDIRECTION _knightDirection;
 	KNIGHTPOSITION _knight;
-
-	// for Skill_2
-	KNIGHTPOSITION _skill_2_Right;
-	KNIGHTPOSITION _skill_2_Left;
-
+		
 	image* _run;
 	image* _stand;
 	image* _jump;
 	image* _attack;
 	image* _attackUp;
 
+	// for Skill_1 (Q)
 	image* _skill_1;
 	image* _bulletSwordRight;
 	image* _bulletSwordLeft;
 
-	// for Skill_2
+	// for Skill_Heal (W)
+	KNIGHTPOSITION _knightHeal;
+	bool _isSkillHeal;
+	bool _isAvailableHeal;
+
+	// for Skill_2 (E)
+	KNIGHTPOSITION _skill_2_Right;
+	KNIGHTPOSITION _skill_2_Left;
 	image* _spin;
 	image* _tornado;
 	bool _isSkill2;
 	bool _isAvailable2;
-
-	PixelCol*pCol;
-	float _playerX, _playerY;
-
-	int _count, _index, _indexExtra;
-	int _countAttack; // attack speed
-	int _countSkill;  // count used in skill
-	int _countSkill2; // count used in Skill_2;
-
-	bool _isCollision;
-
-	int _speed; // player speed
-
+	
 	// for Jump
 	float _jumpPower;
 	float _gravity;
@@ -81,8 +78,21 @@ private:
 	KNIGHTPOSITION _attackRange;
 	bool _isAttack;
 
-	Skill* _skill;
-	Store* _store;
+	// for HP/MP
+	float _playerHP;
+	float _playerMP;
+
+	// for PixelCollision
+	PixelCol*pCol;
+	float _playerX, _playerY;
+	bool _isCollision;
+
+	int _speed;
+	int _count, _index, _indexExtra, _indexHeal;
+	int _countAttack; // attack speed
+	int _countSkill;  // count used in skill
+	int _countSkill2; // count used in Skill_2;
+	int _countHeal;
 
 public:
 	player();
@@ -98,6 +108,7 @@ public:
 	void knightJump();
 	void knightAttack();
 
+	void knightSkill_Heal();
 	void knightSkill_1();
 	void knightSkill_2();
 
@@ -111,8 +122,16 @@ public:
 	// Skill_2 (bool) get,set
 	void setSkill2Bool(bool value) { _isAvailable2 = value; }
 	bool getSkill2Bool() { return _isAvailable2; }
+	// Skill_Heal (bool) get,set
+	void setSkillHealBool(bool valueH) { _isAvailableHeal = valueH; }
+	bool getSkillHealBool() { return _isAvailableHeal; }
 
 	// Store과의 링크함수
 	void setStoreAddress(Store* str) { _store = str; }
 	inline void InitGravity() { _gravity = 0;_jumpPower = 0; }
+	// UI와의 링크함수
+	void setUIAddress(PlayerUI* ui) { _Ui = ui; }
+
+	// player (money) get
+	int&getMoney() { return _money; }
 };
