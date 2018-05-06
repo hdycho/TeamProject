@@ -114,8 +114,8 @@ void Store::update()
 	if (buttonType == BUY_BUTTON)
 	{
 		_temp = buyItem(_index, _money);	//_money == 포인터
-		if (_temp != NULL);
-			_gc->getVItem().push_back(_temp);	// 나중에 플레이어가 지닌 아이템 백터에 push_back해줄 것
+		//if (_temp != NULL);
+			//_gc->getVItem().push_back(_temp);	// 나중에 플레이어가 지닌 아이템 백터에 push_back해줄 것
 	}
 	else if (buttonType == BACK_BUTTON)
 		_gc->setsState(IN_GAME);		// BACK버튼을 누를시, STORE씬 -> IN_GAME씬으로 전환
