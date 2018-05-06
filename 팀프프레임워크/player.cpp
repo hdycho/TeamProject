@@ -61,6 +61,7 @@ HRESULT player::init()
 	_countHeal = 0;
 
 	_speed = KNIGHTSPEED;
+	_speedDamaged = 70;
 
 	// for Jump
 	_jumpPower = 0.0f;
@@ -373,6 +374,8 @@ void player::knightJump()
 			_knightDirection = RIGHT_JUMP;
 			_isJump = true;
 		}
+
+		_knight.angle = 0;
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN)
 	{
@@ -384,6 +387,8 @@ void player::knightJump()
 			_knightDirection = LEFT_JUMP;
 			_isJump = true;
 		}
+
+		_knight.angle = PI;
 	}
 
 	_knight.y -= _jumpPower;
@@ -458,7 +463,7 @@ void player::knightSkill_1()
 	// stand,move 방향에 따른 bullet 방향
 	if (_knightDirection == RIGHT_STAND || _knightDirection == RIGHT_RUN || _knightDirection == RIGHT_JUMP)
 	{
-		if (KEYMANAGER->isOnceKeyDown('Q'))
+		if (KEYMANAGER->isOnceKeyDown('Q') && _playerMP >= 5)
 		{
 			_knightDirection = RIGHT_SKILL1;
 			BULLET->Shot("bulletSwordRight", _knight.x, _knight.y, 0, 0, 10);
@@ -470,7 +475,7 @@ void player::knightSkill_1()
 	}
 	if (_knightDirection == LEFT_STAND || _knightDirection == LEFT_RUN || _knightDirection == LEFT_JUMP)
 	{
-		if (KEYMANAGER->isOnceKeyDown('Q'))
+		if (KEYMANAGER->isOnceKeyDown('Q') && _playerMP >= 5)
 		{
 			_knightDirection = LEFT_SKILL1;
 			BULLET->Shot("bulletSwordLeft", _knight.x, _knight.y, PI, 0, 10);
@@ -539,6 +544,18 @@ void player::knightSkill_2()
 
 		_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x, _skill_2_Right.y, 100, 1000);
 		_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x, _skill_2_Left.y, 100, 1000);
+	}
+}
+
+void player::knightDamaged(RECT rc)
+{
+	RECT temp;
+	if (IntersectRect(&temp, &rc, &_knight.rc))
+	{
+		_knight.angle = getAngle(GetCenterPos(rc).x, GetCenterPos(rc).y, _knight.x, _knight.y);
+
+		_knight.x += cosf(_knight.angle) * _speedDamaged;
+		_knight.y += -sinf(_knight.angle) * _speedDamaged;
 	}
 }
 

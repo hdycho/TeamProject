@@ -30,6 +30,7 @@ struct KNIGHTPOSITION
 	image* img;
 	RECT rc;
 	float x, y;
+	float angle;
 };
 
 class Skill;
@@ -87,7 +88,7 @@ private:
 	float _playerX, _playerY;
 	bool _isCollision;
 
-	int _speed;
+	int _speed, _speedDamaged;
 	int _count, _index, _indexExtra, _indexHeal;
 	int _countAttack; // attack speed
 	int _countSkill;  // count used in skill
@@ -109,8 +110,10 @@ public:
 	void knightAttack();
 
 	void knightSkill_Heal();
-	void knightSkill_1();
 	void knightSkill_2();
+	void knightSkill_1();
+
+	void knightDamaged(RECT rc);
 
 	void PlayerCollision(HDC hdc);
 
