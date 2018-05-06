@@ -45,6 +45,12 @@ private:
 	int _countSkillQ;
 	int _countSkillE;
 	int _countSkillW;
+
+	//shop
+	image* _shopimage;
+	RECT _shopimagerc;
+
+
 public:
 	// SkillW bool (frame)
 	bool _frameSkillQ;

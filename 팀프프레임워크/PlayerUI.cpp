@@ -38,6 +38,10 @@ HRESULT PlayerUI::init()
 	_ptline.img = IMAGEMANAGER->addImage("Ptline", PathFile("image", "PtUp").c_str(), 109, 15, true, RGB(255, 0, 255));
 	_ptline.count = 0;
 
+	//shop
+	_shopimage = new image;
+	_shopimage = IMAGEMANAGER->addImage("Shop", PathFile("image", "상점유아이").c_str(), 130, 77, true, RGB(255, 0, 255));
+
 	_skillq.UION = true;
 	_skillw.UION = false;
 	_skille.UION = false;
@@ -85,6 +89,9 @@ void PlayerUI::update()
 
 	//PTLine 좌표
 	_ptline.imagerc = RectMake(CAM->getCamRc().left + 7, CAM->getCamRc().top + 70, _ptline.img->getFrameWidth(), _ptline.img->getFrameHeight());
+
+	//shoprc
+	_shopimagerc = RectMake(CAM->getCamRc().left + 210, CAM->getCamRc().top, 130, 77);
 
 	SkillQImageChange();
 	SkillWImageChange();
@@ -156,6 +163,9 @@ void PlayerUI::render()
 	{
 		_skille.img->frameRender(getMemDC(), _skille.imagerc.left, _skille.imagerc.top);
 	}
+
+	//shop
+	_shopimage->render(getMemDC(), _shopimagerc.left, _shopimagerc.top);
 }
 
 //_skillui->update() 안쓸때 쓰는거
