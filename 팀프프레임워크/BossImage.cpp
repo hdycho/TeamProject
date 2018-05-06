@@ -22,9 +22,9 @@ void Boss::GetImageInit()
 		/*¹é´ë½Ã*/
 	IMAGEMANAGER->addFrameImage("BACK",          PathFile("image", "BOSS_RL_BACK_DASH").c_str(),    2054, 552, 13, 2, true, RGB(255, 0, 255));
 	int rBack[] = { 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
-	KEYANIMANAGER->addArrayFrameAnimation("RBACK", "BACK", rBack, 13, 20, true);
+	KEYANIMANAGER->addArrayFrameAnimation("RBACK", "BACK", rBack, 13, 15, true);
 	int lBack[] = { 0,   1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12};
-	KEYANIMANAGER->addArrayFrameAnimation("LBACK", "BACK", lBack, 13, 20, true);
+	KEYANIMANAGER->addArrayFrameAnimation("LBACK", "BACK", lBack, 13, 15, true);
 	//=======================//
 		/*º¸½º°¡ Á×Àº ¸ð½À*/
 	IMAGEMANAGER->addFrameImage("DEAD",          PathFile("image", "BOSS_RL_DEAD").c_str(), 1264, 552, 8, 2, true, RGB(255, 0, 255));
@@ -91,9 +91,9 @@ void Boss::GetImageInit()
 	//=======================//
 		/*ÁÂ¿ì ÀÌµ¿*/
 	int rMove[] = {  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17  };
-	KEYANIMANAGER->addArrayFrameAnimation("R_MOVE", "BOSSMOVE", rMove,       18,  4,  true  );
+	KEYANIMANAGER->addArrayFrameAnimation("R_MOVE", "BOSSMOVE", rMove,       18,  10,  true  );
 	int lMove[] = { 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18  };
-	KEYANIMANAGER->addArrayFrameAnimation("L_MOVE", "BOSSMOVE", lMove,       18,  4,  true  );
+	KEYANIMANAGER->addArrayFrameAnimation("L_MOVE", "BOSSMOVE", lMove,       18,  10,  true  );
 	//=======================//															    
 		/*ÁÂ¿ì ÃÑ½î±â*/
 	int gunRightAtk[] = { 0,   1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16};

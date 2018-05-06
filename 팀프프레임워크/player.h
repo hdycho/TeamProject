@@ -120,6 +120,8 @@ public:
 	//image* getPlayerImage() {return }
 	KNIGHTPOSITION&getKnightImage() { return _knight; }
 	KNIGHTPOSITION&getAttackRc() { return _attackRange; }
+	KNIGHTPOSITION&getSkill2Left() { return _skill_2_Left; }
+	KNIGHTPOSITION&getSkill2Right() { return _skill_2_Right; }
 	void setKnightPosition(KNIGHTPOSITION position) { _knight = position; }
 
 	// Skill_2 (bool) get,set

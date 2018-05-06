@@ -135,7 +135,8 @@ public:
 	BOSSSTATE   GetState        ()                 { return _bossState       ;}
 	GRAVITY     GetGravity      ()                 { return _bossGravityState;}
 	animation*	GetAni			()	               { return _bossAni         ;}
-	RECT        &GetRc          ()                 { return _bossRc          ;}
+	RECT        &GetBossRc      ()                 { return _bossRc          ;}
+	RECT        &GetSwordBox    ()                 { return _swordBox        ;}
 	void        SetState        (BOSSSTATE state)  { _bossState = state      ;}
 	void        SetGravity      (GRAVITY     gra)  { _bossGravityState = gra ;}
 	void        SetAni          (animation*  ani)  { _bossAni   = ani        ;}

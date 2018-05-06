@@ -71,9 +71,8 @@ HRESULT player::init()
 	// for Attack
 	_isAttack = false;
 	pCol = new PixelCol;
-
 	pCol->init(20, 20);
-
+	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 	//====== Skill ======
 	_skill = new Skill;
 	_skill->init();

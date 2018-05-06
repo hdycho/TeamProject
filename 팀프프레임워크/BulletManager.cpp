@@ -79,9 +79,10 @@ void BulletManager::BulletUpdate()
 
 			(*bIter)->x += cosf((*bIter)->angle)*(*bIter)->speed;
 			(*bIter)->y += -sinf((*bIter)->angle)*(*bIter)->speed+ (*bIter)->gravity;
-			(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getFrameWidth(), (*bIter)->img->getFrameHeight());
 
-			if (getDistance((*bIter)->initX, (*bIter)->initY, (*bIter)->x, (*bIter)->y) > 350)
+			(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getFrameWidth(), (*bIter)->img->getFrameHeight());
+			
+			if (getDistance((*bIter)->initX, (*bIter)->initY, (*bIter)->x, (*bIter)->y) > 600)
 			{
 				(*bIter)->isShot = false;
 				(*bIter)->rc = { 0,0,0,0 };
@@ -90,7 +91,9 @@ void BulletManager::BulletUpdate()
 			}
 
 			if ((*bIter)->isAnimation)
+			{
 				(*bIter)->anim->frameUpdate(TIMEMANAGER->getElapsedTime());
+			}
 
 			if ((*bIter)->useCollision)
 				(*bIter)->pcol->UpdatePosition((*bIter)->x, (*bIter)->y);

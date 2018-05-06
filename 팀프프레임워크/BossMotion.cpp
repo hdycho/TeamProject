@@ -11,11 +11,11 @@ void Boss::BossMoveUpdate()
 	if(_isMotion1 == true)
 	{
 
-		if (0 < _bossHp < 40)
+		if (_bossHp < 40)
 		{
 			_bossImg = IMAGEMANAGER->findImage("HURT");
-			_bossAni = KEYANIMANAGER->findAnimation("H_EF");
-			_bossAni->start();
+			_bossHurtAni = KEYANIMANAGER->findAnimation("H_EF");
+			_bossHurtAni->start();
 		}
 
 		switch (_bossState)
@@ -57,7 +57,8 @@ void Boss::BossMoveUpdate()
 						 }
 					 }
 
-					 else if (30 < _centerX - _plyCenterX < 100)
+					 else if (30 < _centerX - _plyCenterX &&
+							       _centerX - _plyCenterX < 100)
 					 {
 						 if (ONE >= 1)
 						 {
@@ -114,7 +115,8 @@ void Boss::BossMoveUpdate()
 
 						 }
 					 }
-					 else if(30 <_plyCenterX - _centerX < 100)
+					 else if(30 <_plyCenterX - _centerX &&
+							     _plyCenterX - _centerX <100)
 					 {
 						 if (ONE >= 1)
 						 {
@@ -195,7 +197,8 @@ void Boss::BossMoveUpdate()
 								}
 							}
 
-							else if (30 < _plyCenterX - _centerX < 100)
+							else if (30 < _plyCenterX - _centerX &&
+										  _plyCenterX - _centerX < 100)
 							{
 								if (TWO >= 2)
 								{
@@ -250,7 +253,8 @@ void Boss::BossMoveUpdate()
 								}
 							}
 
-							else if (50 < _centerX - _plyCenterX < 100)
+							else if (50 < _centerX - _plyCenterX &&
+									      _centerX - _plyCenterX < 100)
 							{
 								
 
@@ -339,7 +343,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 < _plyCenterX - _centerX < 100)
+						else if (30 < _plyCenterX - _centerX &&
+									  _plyCenterX - _centerX < 100)
 						{
 							if (THREE >= 1)
 							{
@@ -386,18 +391,13 @@ void Boss::BossMoveUpdate()
 					{
 						if (_centerX - _plyCenterX >= 120)
 						{
-							if (THREE >= 1)
+							if (THREE >= 2)
 							{
 
-								_bossState        = L_JUMP;
+								_bossState        = L_MOVE;
 							
-
-								_bossJumpPower    = 15.0f;
-								_bossGravityPower = 0.3f;
-
-							
-								_bossImg          = IMAGEMANAGER->findImage("JUMP");
-								_bossAni          = KEYANIMANAGER->findAnimation("LJ");
+								_bossImg          = IMAGEMANAGER->findImage("BOSSMOVE");
+								_bossAni          = KEYANIMANAGER->findAnimation("L_MOVE");
 										          
 								_bossAni->start();
 
@@ -406,7 +406,8 @@ void Boss::BossMoveUpdate()
 
 						}
 
-						else if (60 < _centerX - _plyCenterX < 120)
+						else if (60 < _centerX - _plyCenterX &&
+								      _centerX - _plyCenterX< 120)
 						{
 							if (THREE >= 1)
 							{
@@ -492,7 +493,8 @@ void Boss::BossMoveUpdate()
 											FOUR = 0;
 										}
 									}
-									else if (30 < _centerX - _plyCenterX < 100)
+									else if (30 < _centerX - _plyCenterX  && 
+										          _centerX - _plyCenterX< 100)
 									{
 										if (FOUR >= 1)
 										{
@@ -545,7 +547,8 @@ void Boss::BossMoveUpdate()
 										}
 									}
 
-									else if (50 < _plyCenterX - _centerX <= 100)
+									else if (50 < _plyCenterX - _centerX &&
+												  _plyCenterX - _centerX <= 100)
 									{
 										if (FOUR >= 2)
 										{
@@ -629,7 +632,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 < _centerX - _plyCenterX < 100)
+						else if (30 < _centerX - _plyCenterX &&
+									  _centerX - _plyCenterX < 100)
 						{
 							if (FIVE >= 2)
 							{
@@ -677,7 +681,8 @@ void Boss::BossMoveUpdate()
 
 						}
 
-						else if (30 < _plyCenterX - _centerX <= 100)
+						else if (30 < _plyCenterX - _centerX &&
+									  _plyCenterX - _centerX  <= 100)
 						{
 							if (FIVE >= 1)
 							{
@@ -758,7 +763,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 <= _centerX - _plyCenterX < 100)
+						else if (30 <= _centerX - _plyCenterX  &&
+							           _centerX - _plyCenterX < 100)
 						{
 							if (SIX >= 2)
 							{
@@ -806,7 +812,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 < _plyCenterX - _centerX < 100)
+						else if (30 < _plyCenterX - _centerX && 
+							          _plyCenterX - _centerX < 100)
 						{
 							if (SIX >= 1)
 							{
@@ -887,7 +894,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 < _centerX - _plyCenterX < 100)
+						else if (30 < _centerX - _plyCenterX && 
+							          _centerX - _plyCenterX < 100)
 						{
 							if (SEVEN >= 2)
 							{
@@ -961,7 +969,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 <= _plyCenterX - _centerX < 100)
+						else if (30 <= _plyCenterX - _centerX && 
+							           _plyCenterX - _centerX < 100)
 						{
 							if (SEVEN >= 2)
 							{
@@ -1029,7 +1038,8 @@ void Boss::BossMoveUpdate()
 									}
 								}
 
-								else if (30 < _plyCenterX - _centerX < 100)
+								else if (30 < _plyCenterX - _centerX &&
+									          _plyCenterX - _centerX < 100)
 								{
 									if (EIGHT >= 1)
 									{
@@ -1055,6 +1065,9 @@ void Boss::BossMoveUpdate()
 									if (EIGHT >= 1)
 									{
 										_bossState = R_JUMP;
+
+										_bossJumpPower = 15.0f;
+										_bossGravityPower = 0.3f;
 
 										_bossImg = IMAGEMANAGER->findImage("JUMP");
 										_bossAni = KEYANIMANAGER->findAnimation("RJ");
@@ -1089,7 +1102,8 @@ void Boss::BossMoveUpdate()
 
 									}
 								}
-								else if (50 < _centerX - _plyCenterX < 100)
+								else if (50 < _centerX - _plyCenterX && 
+									          _centerX - _plyCenterX < 100)
 								{
 									if (EIGHT >= 3)
 									{
@@ -1108,6 +1122,9 @@ void Boss::BossMoveUpdate()
 									if (EIGHT >= 1)
 									{
 										_bossState = L_JUMP;
+
+										_bossJumpPower    = 15.0f;
+										_bossGravityPower = 0.3f;
 
 										_bossImg = IMAGEMANAGER->findImage("JUMP");
 										_bossAni = KEYANIMANAGER->findAnimation("LJ");
@@ -1161,18 +1178,15 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (30 < _centerX - _plyCenterX < 100)
+						else if (30 < _centerX - _plyCenterX &&
+							          _centerX - _plyCenterX < 100)
 						{
 							if (NINE >= 2)
 							{
-									_bossState = L_JUMP;
+									_bossState = L_BACK_MOVE;
 
-									_bossJumpPower = 15.0f;
-									_bossGravityPower = 0.3f;
-									
-
-									_bossImg = IMAGEMANAGER->findImage("JUMP");
-									_bossAni = KEYANIMANAGER->findAnimation("LJ");
+									_bossImg = IMAGEMANAGER->findImage("BACK");
+									_bossAni = KEYANIMANAGER->findAnimation("LBACK");
 
 									_bossAni->start();
 
@@ -1213,7 +1227,8 @@ void Boss::BossMoveUpdate()
 							}
 						}
 
-						else if (60 <= _plyCenterX - _centerX < 100)
+						else if (60 <= _plyCenterX - _centerX &&
+							           _plyCenterX - _centerX < 100)
 						{
 							if (NINE >= 3)
 							{
@@ -1537,7 +1552,8 @@ void Boss::BossMoveUpdate()
 								END = 0;
 							}
 
-							else if (30 <= _plyCenterX - _centerX < 100)
+							else if (30 <= _plyCenterX - _centerX && 
+								           _plyCenterX - _centerX < 100)
 							{
 								_bossState = R_MOVE;
 
@@ -1566,45 +1582,59 @@ void Boss::BossMoveUpdate()
 
 					else if (_plyCenterX <= _centerX)
 					{
-						if (END >= 1)
+						if (_centerX - _plyCenterX > 100)
 						{
-							if (_centerX - _plyCenterX > 100)
+							if (END >= 2)
 							{
-								_bossState = L_MOVE;
 
-								_bossImg = IMAGEMANAGER->findImage("BOSSMOVE");
-								_bossAni = KEYANIMANAGER->findAnimation("L_MOVE");
+									_bossState = L_MOVE;
 
-								_bossAni->start();
-								END = 0;
+									_bossImg = IMAGEMANAGER->findImage("BOSSMOVE");
+									_bossAni = KEYANIMANAGER->findAnimation("L_MOVE");
+
+									_bossAni->start();
+									END = 0;
 							}
-
-							else if (30 < _centerX - _plyCenterX <= 100)
-							{
-								_bossState = L_IDLE;
-
-								_bossImg = IMAGEMANAGER->findImage("BOSS");
-								_bossAni = KEYANIMANAGER->findAnimation("L_IDLE");
-
-								_bossAni->start();
-
-								END = 0;
-							}
-
-
-							else if (_centerX - _plyCenterX <= 30)
-							{
-								_bossState = R_BACK_MOVE;
-
-								_bossImg = IMAGEMANAGER->findImage("BACK");
-								_bossAni = KEYANIMANAGER->findAnimation("RBACK");
-
-								_bossAni->start();
-
-								END = 0;
-							}
-
 						}
+					
+						else if (30 < _centerX - _plyCenterX && 
+						      _centerX - _plyCenterX  <= 100)
+						{
+							if (END >= 1)
+							{
+									_bossState = L_IDLE;
+
+									_bossImg = IMAGEMANAGER->findImage("BOSS");
+									_bossAni = KEYANIMANAGER->findAnimation("L_IDLE");
+
+									_bossAni->start();
+
+									END = 0;
+							}
+						}
+						//else if (_centerX - _plyCenterX <= 30)
+						//{
+						//	if (END >= 3)
+						//	{
+						//			/*_bossState = R_BACK_MOVE;
+
+						//			_bossImg = IMAGEMANAGER->findImage("BACK");
+						//			_bossAni = KEYANIMANAGER->findAnimation("RBACK");
+
+						//			_bossAni->start();*/
+
+						//			_bossState = L_MOVE;
+
+						//			_bossImg = IMAGEMANAGER->findImage("BOSSMOVE");
+						//			_bossAni = KEYANIMANAGER->findAnimation("L_MOVE");
+
+						//			_bossAni->start();
+
+						//			END = 0;
+						//		
+						//	}
+
+						//}
 					}
 
 				}

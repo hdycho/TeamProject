@@ -6,6 +6,7 @@
 #include "ObstacleManager.h"
 #include "Store.h"
 #include "PlayerUI.h"
+#include "Boss.h"
 
 GameScene::GameScene()
 {
@@ -20,6 +21,8 @@ GameScene::GameScene()
 	IMAGEMANAGER->addFrameImage("검은화면1", PathFile("image", "검은화면").c_str(), 800, 600, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("로딩화면", PathFile("image", "로딩화면").c_str(), 800, 600, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("로딩창", PathFile("image", "로딩창").c_str(), 3000, 100, 9, 1, true, RGB(255,0,255));
+	EFFECTMANAGER->addEffect("총알터지는거", PathFile("image", "FIRE_EF").c_str(), 1400, 100, 100, 100, 30, 1, 30);
+	EFFECTMANAGER->addEffect("폭탄터지는거", PathFile("image", "BOMB_EF").c_str(), 4000, 250, 250, 250, 30, 1, 50);
 }
 
 
@@ -35,6 +38,10 @@ HRESULT GameScene::init()
 	_metaKnight = new player;
 	_metaKnight->init();
 
+	_bs = new Boss;
+	_bs->init();
+	_bs->SetPlayerLink(_metaKnight);
+	
 	_Ui = new PlayerUI;
 	_Ui->init();
 
@@ -135,11 +142,7 @@ void GameScene::update()
 		//CamMove(4);
 		gameTime += TIMEMANAGER->getElapsedTime();
 
-	/*	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		{
-			_im->DropGold(300, 300, 8, 1);
-		}*/
-
+	
 		RECT temp;
 		if (IntersectRect(&temp, &bossEnterRc, &_metaKnight->getKnightImage().rc))
 		{
@@ -210,6 +213,7 @@ void GameScene::update()
 			sState = IN_GAME;
 		}
 		_metaKnight->update(IMAGEMANAGER->findImage("보스방충돌맵")->getMemDC());
+		_bs->update();
 		//CamMove(4);
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, 1600, 0, 800);
@@ -218,22 +222,22 @@ void GameScene::update()
 		OtherCollision();
 		PlayerDieSet();
 
-		////보스체력다달면 몇초간 보스터지면서 
-		////다터지고 페이드아웃으로 넘어가고
-		//if (/*보스죽으면*/)
-		//{
-		//	//이펙트보여주기
-		//	static float bossDieTime = 0;
-		//	bossDieTime += TIMEMANAGER->getElapsedTime();
-		//	
-		//	if (bossDieTime > 3)
-		//	{
-		//		bossDieTime = 0;
-		//		alpha = 0;
-		//		sState = FADE_OUT;
-		//		MetaStageData = BOSS_DIE;
-		//	}
-		//}
+		//보스체력다달면 몇초간 보스터지면서 
+		//다터지고 페이드아웃으로 넘어가고
+		if (_bs->GetHp()<0)
+		{
+			//이펙트보여주기
+			static float bossDieTime = 0;
+			bossDieTime += TIMEMANAGER->getElapsedTime();
+			
+			if (bossDieTime > 3)
+			{
+				bossDieTime = 0;
+				alpha = 0;
+				sState = FADE_OUT;
+				MetaStageData = BOSS_DIE;
+			}
+		}
 	}
 	break;
 	case BOSS_ENTER:
@@ -308,7 +312,9 @@ void GameScene::render()
 			IMAGEMANAGER->findImage("보스방충돌맵")->render(getMemDC(), 0, 0);
 
 		_metaKnight->render();
+		_bs->render();
 		ShowGameTime();
+		
 		//CamRender();
 	}
 	break;
@@ -334,7 +340,7 @@ void GameScene::render()
 			{
 				alpha = 0;
 				sState = BOSS_ROOM;
-				CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
+				CAM->CamInit(DYNAMIC_CAMERA, 0,0, 300, 150, 4);
 			}
 		}
 		if (MetaStageData == BOSS_DIE)
@@ -448,7 +454,7 @@ void GameScene::PlayerCollision()
 		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
 		{
 			//플레이어 돈 올려준다
-			_metaKnight->getMoney() += 100;
+			_metaKnight->getMoney() += 200;
 			EFFECTMANAGER->play("동전먹을때", GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).y + 15);
 			_im->GetGoldItecVec()[i]->GetShowState() = false;
 			_im->GetGoldItecVec()[i]->GetRect() = RectMake(0, 0, 0, 0);
@@ -474,14 +480,143 @@ void GameScene::PlayerCollision()
 	}
 
 	//플레이어 에너미 폭탄
+	for (int i = 0; BULLET->GetBulletVec("LBomb").size(); i++)
+	{
+		RECT col;
+		if (!BULLET->GetBulletVec("LBomb")[i]->isShot)continue;
+		if (IntersectRect(&col, &BULLET->GetBulletVec("LBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
+		{
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).y);
+			BULLET->Destroy("LBomb", i);
+		}
+	}
+	for (int i = 0; BULLET->GetBulletVec("RBomb").size(); i++)
+	{
+		RECT col;
+		if (!BULLET->GetBulletVec("RBomb")[i]->isShot)continue;
+		if (IntersectRect(&col, &BULLET->GetBulletVec("RBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
+		{
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).y);
+			BULLET->Destroy("RBomb", i);
+		}
+	}
 
 	//플레이어 에너미 부메랑
+	for (int i = 0; BULLET->GetBulletVec("BEffect").size(); i++)
+	{
+		RECT col;
+		if (!BULLET->GetBulletVec("BEffect")[i]->isShot)continue;
+		if (IntersectRect(&col, &BULLET->GetBulletVec("BEffect")[i]->rc, &_metaKnight->getKnightImage().rc))
+		{
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("에너미죽을때", _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
+			BULLET->Destroy("BEffect", i);
+		}
+	}
 
-	//플레이어 보스
-	
-	//플레이어 보스총알1
+	if (sState == BOSS_ROOM)
+	{//플레이어 보스
+		RECT bCol;
+		if (IntersectRect(&bCol, &_metaKnight->getKnightImage().rc, &_bs->GetBossRc()))
+		{
+			//_metaKnight->knightDamaged(_bs->GetBossRc());
+			_metaKnight->GetHp() -= 0.1;
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
+		}
 
-	//플레이어 보스총알2
+		//플레이어 보스총알1
+		for (int i = 0; i < BULLET->GetBulletVec("RGF").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("RGF")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("RGF")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				BULLET->Destroy("RGF", i);
+				EFFECTMANAGER->play("총알터지는거", BULLET->GetBulletVec("RGF")[i]->x - 20, BULLET->GetBulletVec("RGF")[i]->y);
+				break;
+			}
+		}
+		for (int i = 0; i < BULLET->GetBulletVec("LGF").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("LGF")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("LGF")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				BULLET->Destroy("LGF", i);
+				EFFECTMANAGER->play("총알터지는거", BULLET->GetBulletVec("LGF")[i]->x + 20, BULLET->GetBulletVec("LGF")[i]->y);
+				break;
+			}
+		}
+
+		//플레이어 보스총알2
+		for (int i = 0; i < BULLET->GetBulletVec("CC").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("CC")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC")[i]->x, BULLET->GetBulletVec("CC")[i]->y);
+				BULLET->Destroy("CC", i);
+				break;
+			}
+		}
+		for (int i = 0; i < BULLET->GetBulletVec("CC1").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("CC1")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC1")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC1")[i]->x, BULLET->GetBulletVec("CC1")[i]->y);
+				BULLET->Destroy("CC1", i);
+				break;
+			}
+		}
+		for (int i = 0; i < BULLET->GetBulletVec("CC2").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("CC2")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC2")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC2")[i]->x, BULLET->GetBulletVec("CC2")[i]->y);
+				BULLET->Destroy("CC2", i);
+				break;
+			}
+		}
+		for (int i = 0; i < BULLET->GetBulletVec("CC3").size(); i++)
+		{
+			RECT bCol2;
+			if (!BULLET->GetBulletVec("CC3")[i]->isShot)continue;
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC3")[i]->rc))
+			{
+				//이펙트 터지는거
+				_metaKnight->GetHp() -= 10;
+				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC3")[i]->x, BULLET->GetBulletVec("CC3")[i]->y);
+				BULLET->Destroy("CC3", i);
+				break;
+			}
+		}
+		
+		//보스공격
+		RECT bCol3;
+		if (IntersectRect(&bCol3, &_metaKnight->getKnightImage().rc, &_bs->GetSwordBox()))
+		{
+			_metaKnight->GetHp() -= 0.5f;
+			_metaKnight->knightDamaged(_bs->GetBossRc());
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
+		}
+	}
 }
 
 void GameScene::OtherCollision()
@@ -496,12 +631,19 @@ void GameScene::OtherCollision()
 		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getAttackRc().rc))
 		{
 			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
 			break;
 		}
 	}
 
 	//플레이어 평타 보스
+	RECT bCol4;
+	if (IntersectRect(&bCol4, &_metaKnight->getAttackRc().rc, &_bs->GetBossRc()))
+	{
+		_bs->GetHp() -= 1;
+		EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_metaKnight->getAttackRc().rc).x, GetCenterPos(_metaKnight->getAttackRc().rc).y);
+	}
 
 	//플레이어 스킬1=>총알임 에너미
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
@@ -515,6 +657,7 @@ void GameScene::OtherCollision()
 			if (!BULLET->GetBulletVec("bulletSwordRight")[j]->isShot)continue;
 			if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &BULLET->GetBulletVec("bulletSwordRight")[j]->rc))
 			{
+				_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 				BULLET->Destroy("bulletSwordRight", j);
 				_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
@@ -526,6 +669,7 @@ void GameScene::OtherCollision()
 			if (!BULLET->GetBulletVec("bulletSwordLeft")[j]->isShot)continue;
 			if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &BULLET->GetBulletVec("bulletSwordLeft")[j]->rc))
 			{
+				_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 				BULLET->Destroy("bulletSwordLeft", j);
 				_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
@@ -535,11 +679,66 @@ void GameScene::OtherCollision()
 	}
 
 	//플레이어 스킬1 보스
+	for (int j = 0; j < BULLET->GetBulletVec("bulletSwordRight").size(); j++)
+	{
+		RECT temp;
+		if (!BULLET->GetBulletVec("bulletSwordRight")[j]->isShot)continue;
+		if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordRight")[j]->rc))
+		{
+			_bs->GetHp() -= 10;
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).x-30, GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).y);
+			BULLET->Destroy("bulletSwordRight", j);
+			break;
+		}
+	}
+	for (int j = 0; j < BULLET->GetBulletVec("bulletSwordLeft").size(); j++)
+	{
+		RECT temp;
+		if (!BULLET->GetBulletVec("bulletSwordLeft")[j]->isShot)continue;
+		if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordLeft")[j]->rc))
+		{
+			_bs->GetHp() -= 10;
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).x+30, GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).y);
+			BULLET->Destroy("bulletSwordLeft", j);
+			break;
+		}
+	}
 
 	//플레이어 스킬2 에너미
+	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
+	{
+		RECT r;
+		if (!IntersectRect(&r, &CAM->getCamRc(), &_em->GetEnemyVec()[i]->getRect()))continue;
+		if (_em->GetEnemyVec()[i]->GetisEnemyDie())continue;
+		RECT temp;
+		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getSkill2Left().rc))
+		{
+			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
+			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
+			break;
+		}
+		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getSkill2Right().rc))
+		{
+			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
+			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
+			break;
+		}
 
+	}
 
 	//플레이어 스킬2 보스
+	RECT rec1;
+	if (IntersectRect(&rec1, &_metaKnight->getSkill2Left().rc, &_bs->GetBossRc()))
+	{
+		_bs->GetHp() -= 2;
+	}
+	RECT rec2;
+	if (IntersectRect(&rec2, &_metaKnight->getSkill2Right().rc, &_bs->GetBossRc()))
+	{
+		_bs->GetHp() -= 2;
+	}
 }
 
 void GameScene::PlayerDieSet()
@@ -562,7 +761,7 @@ void GameScene::PlayerDieSet()
 	else if (sState == BOSS_ROOM)
 	{
 		//페이드아웃후 게임오버로 보내준다
-		if (_metaKnight->GetHp() < 0)
+		if (_metaKnight->GetHp() <= 0)
 		{
 			sState = FADE_OUT;
 			MetaStageData = GAME_OVER;

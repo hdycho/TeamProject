@@ -43,7 +43,6 @@ public:
 	void pause(string animationKeyName);
 	void resume(string animationKeyName);
 
-
 	animation* findAnimation(string animationKeyName);
 
 	void deleteAll();
