@@ -25,6 +25,7 @@ HRESULT bug::init(int x, int y)
 
 	epCol = new PixelCol;
 	epCol->init(40, 20);
+	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 
 	IMAGEMANAGER->addFrameImage("bug", PathFile("image", "bug").c_str(), 300, 120, 4, 2, true, RGB(255, 0, 255));
 	img = new image;

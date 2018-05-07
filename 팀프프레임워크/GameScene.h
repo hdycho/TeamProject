@@ -3,6 +3,7 @@
 
 enum STAGESTATE
 {
+	NULL_SCENE,
 	ENTER_GAME,		//게임입장
 	IN_GAME,		//게임중
 	STORE,			//상점
@@ -34,7 +35,7 @@ private:
 	PlayerUI*			 _Ui;
 	Boss*				 _bs;
 
-private:	
+private:
 	//객체들 넣어서 사용하면 됩니다.
 	RECT				rc;
 	STAGESTATE			sState;
@@ -65,13 +66,13 @@ public:
 	GameScene();
 	~GameScene();
 
-	virtual HRESULT init     ();
-	virtual void	release  ();
-	virtual void	update   ();
-	virtual void	render   ();
+	virtual HRESULT init();
+	virtual void	release();
+	virtual void	update();
+	virtual void	render();
 
 	//테스트용
-	void			CamMove  (int speed);
+	void			CamMove(int speed);
 	void			CamRender();
 
 	void			setsState(STAGESTATE state) { sState = state; }

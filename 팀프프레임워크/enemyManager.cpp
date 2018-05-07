@@ -4,6 +4,12 @@
 
 enemyManager::enemyManager()
 {
+	IMAGEMANAGER->addFrameImage("RB", PathFile("image", "rightBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
+	BULLET->BulletSetting("RBomb", IMAGEMANAGER->findImage("RB"), 30, true, 20);
+	IMAGEMANAGER->addFrameImage("LB", PathFile("image", "leftBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
+	BULLET->BulletSetting("LBomb", IMAGEMANAGER->findImage("LB"), 30, true, 20);
+	IMAGEMANAGER->addFrameImage("BE", PathFile("image", "boomerangEffect").c_str(), 448, 44, 8, 1, true, RGB(255, 0, 255));
+	BULLET->BulletSetting("BEffect", IMAGEMANAGER->findImage("BE"), 30, true, 5);
 }
 
 

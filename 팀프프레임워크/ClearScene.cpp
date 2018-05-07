@@ -17,7 +17,7 @@ HRESULT ClearScene::init()
 	//===============카메라 셋팅===============//
 	//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 4);
 	//========================================//
-
+	CAM->CamInit(DYNAMIC_CAMERA, WINSIZEX / 2, WINSIZEY / 2 + 400, 300, 150, 4);
 	alpha = 255;
 	fadeout = IMAGEMANAGER->findImage("검은화면");
 

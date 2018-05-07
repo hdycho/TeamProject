@@ -20,7 +20,7 @@ GameScene::GameScene()
 	EFFECTMANAGER->addEffect("에너미죽을때", PathFile("image", "에너미죽었을때").c_str(), 312, 48, 312 / 6, 48, 20, 1, 30);
 	IMAGEMANAGER->addFrameImage("검은화면1", PathFile("image", "검은화면").c_str(), 800, 600, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("로딩화면", PathFile("image", "로딩화면").c_str(), 800, 600, 1, 1, false, NULL);
-	IMAGEMANAGER->addFrameImage("로딩창", PathFile("image", "로딩창").c_str(), 3000, 100, 9, 1, true, RGB(255,0,255));
+	IMAGEMANAGER->addFrameImage("로딩창", PathFile("image", "로딩창").c_str(), 3000, 100, 9, 1, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("총알터지는거", PathFile("image", "FIRE_EF").c_str(), 1400, 100, 100, 100, 30, 1, 30);
 	EFFECTMANAGER->addEffect("폭탄터지는거", PathFile("image", "BOMB_EF").c_str(), 4000, 250, 250, 250, 20, 1, 50);
 	EFFECTMANAGER->addEffect("플레이어등장", PathFile("image", "장애물폭발").c_str(), 700, 100, 100, 100, 25, 1, 50);
@@ -42,7 +42,7 @@ HRESULT GameScene::init()
 	_bs = new Boss;
 	_bs->init();
 	_bs->SetPlayerLink(_metaKnight);
-	
+
 	_Ui = new PlayerUI;
 	_Ui->init();
 
@@ -52,7 +52,7 @@ HRESULT GameScene::init()
 	//========================================//
 
 	//================ Store init ==================
-	
+
 	_store = new Store;
 	_store->setGameSceneAddress(this);
 
@@ -104,7 +104,7 @@ void GameScene::release()
 
 void GameScene::update()
 {
-	
+
 	switch (sState)
 	{
 	case ENTER_GAME:
@@ -155,25 +155,19 @@ void GameScene::update()
 		//CamMove(4);
 		gameTime += TIMEMANAGER->getElapsedTime();
 
-	
+
 		RECT temp;
 		if (IntersectRect(&temp, &bossEnterRc, &_metaKnight->getKnightImage().rc))
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 			{
 				sState = FADE_OUT;
-				_metaKnight->getKnightImage().x = 300;
-				_metaKnight->getKnightImage().y = 500;
-				_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
 				MetaStageData = BOSS_ENTER;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_F1))
 		{
 			sState = FADE_OUT;
-			_metaKnight->getKnightImage().x = 300;
-			_metaKnight->getKnightImage().y = 500;
-			_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
 			MetaStageData = BOSS_ENTER;
 		}
 		if (KEYMANAGER->isOnceKeyDown('R'))
@@ -182,7 +176,7 @@ void GameScene::update()
 			sState = STORE;
 			_store->_message = "아이템이 가장 저렴한 상점입니다.";
 		}
-		
+
 		_metaKnight->update(IMAGEMANAGER->findImage("충돌맵")->getMemDC());
 		_store->update();
 		_em->update();
@@ -232,7 +226,7 @@ void GameScene::update()
 			//이펙트보여주기
 			static float bossDieTime = 0;
 			bossDieTime += TIMEMANAGER->getElapsedTime();
-			
+
 			if (bossDieTime > 3)
 			{
 				bossDieTime = 0;
@@ -245,6 +239,8 @@ void GameScene::update()
 	break;
 	case BOSS_ENTER:
 	{
+		CAM->CamInit(CENTER_CAMERA, _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y, 800, 600, 4);
+		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, 1600, 0, 800);
 		static float bossRoomTime = 0;
 		bossRoomTime += TIMEMANAGER->getElapsedTime();
 		static int idx = 0;
@@ -264,7 +260,7 @@ void GameScene::update()
 	}
 	break;
 	}
-	
+
 }
 
 void GameScene::render()
@@ -313,7 +309,7 @@ void GameScene::render()
 	}
 	break;
 	case STORE:
-	{	
+	{
 		if (!onceShow)
 		{
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, 200);
@@ -337,7 +333,7 @@ void GameScene::render()
 		_bs->render();
 		ShowGameTime();
 		fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
-		
+
 		//CamRender();
 	}
 	break;
@@ -345,9 +341,9 @@ void GameScene::render()
 	{
 		if (MetaStageData == BOSS_ENTER)
 		{
-			alpha+=3;
+			alpha += 3;
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
-			
+
 			if (alpha > 254)
 			{
 				alpha = 0;
@@ -356,18 +352,21 @@ void GameScene::render()
 		}
 		if (MetaStageData == BOSS_ROOM)
 		{
-			alpha+=3;
+			alpha += 3;
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 
 			if (alpha > 254)
 			{
+				_metaKnight->getKnightImage().x = 300;
+				_metaKnight->getKnightImage().y = 500;
+				_metaKnight->getKnightImage().rc = RectMakeCenter(300, 500, 70, 56);
 				alpha = 255;
 				sState = BOSS_ROOM;
 			}
 		}
 		if (MetaStageData == BOSS_DIE)
 		{
-			alpha+=3;
+			alpha += 3;
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 
 			if (alpha > 254)
@@ -376,7 +375,7 @@ void GameScene::render()
 				//클리어씬이동시키기
 				isClear = true;
 				SaveTime();
-				CAM->CamInit(DYNAMIC_CAMERA, WINSIZEX / 2, WINSIZEY / 2, 300+400, 150, 4);
+				sState = NULL_SCENE;
 				SCENEMANAGER->changeScene("클리어씬");
 			}
 		}
@@ -388,7 +387,7 @@ void GameScene::render()
 			{
 				alpha = 0;
 				SaveTime();
-				CAM->CamInit(DYNAMIC_CAMERA,WINSIZEX/2,WINSIZEY/2+400 , 300, 150, 4);
+				sState = NULL_SCENE;
 				SCENEMANAGER->changeScene("게임오버씬");
 			}
 		}
@@ -399,7 +398,6 @@ void GameScene::render()
 		//로딩화면보여줌
 		IMAGEMANAGER->render("로딩화면", getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top);
 		IMAGEMANAGER->frameRender("로딩창", getMemDC(), CAM->getCamRc().left + 250, CAM->getCamRc().top + 500);
-		
 	}
 	break;
 	}
@@ -438,7 +436,7 @@ void GameScene::CamRender()
 void GameScene::PlayerCollision()
 {
 	//==========플레이어 아이템충돌===========//
-	
+
 	//토마토,바나나
 	for (int i = 0; i < _im->GetMapItemVec().size(); i++)
 	{
@@ -450,14 +448,14 @@ void GameScene::PlayerCollision()
 		{
 			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
 			{
-				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
-				if(_metaKnight->GetHp()<100)
+				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y + 15);
+				if (_metaKnight->GetHp()<100)
 					_metaKnight->GetHp() += 10;
 				//플레이어 체력올려준다
 			}
 			else if (_im->GetMapItemVec()[i]->GetItemType() == POTION_MP)
 			{
-				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x+15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y+15);
+				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y + 15);
 				if (_metaKnight->GetMp()<100)
 					_metaKnight->GetMp() += 10;
 				//플레이어 마나올려준다
@@ -504,44 +502,51 @@ void GameScene::PlayerCollision()
 	}
 
 	//플레이어 에너미 폭탄
-	//for (int i = 0; BULLET->GetBulletVec("LBomb").size(); i++)
-	//{
-	//	RECT col;
-	//	if (!BULLET->GetBulletVec("LBomb")[i]->isShot)continue;
-	//	if (IntersectRect(&col, &BULLET->GetBulletVec("LBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
-	//	{
-	//		_metaKnight->GetHp() -= 5;
-	//		EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).y);
-	//		BULLET->Destroy("LBomb", i);
-	//	}
-	//}
-	//for (int i = 0; BULLET->GetBulletVec("RBomb").size(); i++)
-	//{
-	//	RECT col;
-	//	if (!BULLET->GetBulletVec("RBomb")[i]->isShot)continue;
-	//	if (IntersectRect(&col, &BULLET->GetBulletVec("RBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
-	//	{
-	//		_metaKnight->GetHp() -= 5;
-	//		EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).y);
-	//		BULLET->Destroy("RBomb", i);
-	//	}
-	//}
+	for (int i = 0; i < BULLET->GetBulletVec("LBomb").size(); i++)
+	{
+		RECT bCol2;
+		if (!BULLET->GetBulletVec("LBomb")[i]->isShot)continue;
+		if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("LBomb")[i]->rc))
+		{
+			//이펙트 터지는거
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("LBomb")[i]->x, BULLET->GetBulletVec("LBomb")[i]->y);
+			BULLET->Destroy("LBomb", i);
+			break;
+		}
+	}
+	for (int i = 0; i < BULLET->GetBulletVec("RBomb").size(); i++)
+	{
+		RECT bCol2;
+		if (!BULLET->GetBulletVec("RBomb")[i]->isShot)continue;
+		if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("RBomb")[i]->rc))
+		{
+			//이펙트 터지는거
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("RBomb")[i]->x, BULLET->GetBulletVec("RBomb")[i]->y);
+			BULLET->Destroy("RBomb", i);
+			break;
+		}
+	}
 
 	////플레이어 에너미 부메랑
-	//for (int i = 0; BULLET->GetBulletVec("BEffect").size(); i++)
-	//{
-	//	RECT col;
-	//	if (!BULLET->GetBulletVec("BEffect")[i]->isShot)continue;
-	//	if (IntersectRect(&col, &BULLET->GetBulletVec("BEffect")[i]->rc, &_metaKnight->getKnightImage().rc))
-	//	{
-	//		_metaKnight->GetHp() -= 5;
-	//		EFFECTMANAGER->play("에너미죽을때", _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
-	//		BULLET->Destroy("BEffect", i);
-	//	}
-	//}
+	for (int i = 0; i < BULLET->GetBulletVec("BEffect").size(); i++)
+	{
+		RECT bCol2;
+		if (!BULLET->GetBulletVec("BEffect")[i]->isShot)continue;
+		if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("BEffect")[i]->rc))
+		{
+			//이펙트 터지는거
+			_metaKnight->GetHp() -= 5;
+			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("BEffect")[i]->x, BULLET->GetBulletVec("BEffect")[i]->y);
+			BULLET->Destroy("BEffect", i);
+			break;
+		}
+	}
 
 	if (sState == BOSS_ROOM)
-	{//플레이어 보스
+	{
+		//플레이어 보스
 		RECT bCol;
 		if (IntersectRect(&bCol, &_metaKnight->getKnightImage().rc, &_bs->GetBossRc()))
 		{
@@ -631,7 +636,7 @@ void GameScene::PlayerCollision()
 				break;
 			}
 		}
-		
+
 		//보스공격
 		RECT bCol3;
 		if (IntersectRect(&bCol3, &_metaKnight->getKnightImage().rc, &_bs->GetSwordBox()))
@@ -661,14 +666,16 @@ void GameScene::OtherCollision()
 		}
 	}
 
-	//플레이어 평타 보스
-	RECT bCol4;
-	if (IntersectRect(&bCol4, &_metaKnight->getAttackRc().rc, &_bs->GetBossRc()))
+	if (sState == BOSS_ROOM)
 	{
-		_bs->GetHp() -= 1;
-		EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_metaKnight->getAttackRc().rc).x, GetCenterPos(_metaKnight->getAttackRc().rc).y);
+		//플레이어 평타 보스
+		RECT bCol4;
+		if (IntersectRect(&bCol4, &_metaKnight->getAttackRc().rc, &_bs->GetBossRc()))
+		{
+			_bs->GetHp() -= 1;
+			EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_metaKnight->getAttackRc().rc).x, GetCenterPos(_metaKnight->getAttackRc().rc).y);
+		}
 	}
-
 	//플레이어 스킬1=>총알임 에너미
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
 	{
@@ -701,33 +708,34 @@ void GameScene::OtherCollision()
 			}
 		}
 	}
-
-	//플레이어 스킬1 보스
-	for (int j = 0; j < BULLET->GetBulletVec("bulletSwordRight").size(); j++)
+	if (sState == BOSS_ROOM)
 	{
-		RECT temp;
-		if (!BULLET->GetBulletVec("bulletSwordRight")[j]->isShot)continue;
-		if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordRight")[j]->rc))
+		//플레이어 스킬1 보스
+		for (int j = 0; j < BULLET->GetBulletVec("bulletSwordRight").size(); j++)
 		{
-			_bs->GetHp() -= 10;
-			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).x-30, GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).y);
-			BULLET->Destroy("bulletSwordRight", j);
-			break;
+			RECT temp;
+			if (!BULLET->GetBulletVec("bulletSwordRight")[j]->isShot)continue;
+			if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordRight")[j]->rc))
+			{
+				_bs->GetHp() -= 10;
+				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).x - 30, GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).y);
+				BULLET->Destroy("bulletSwordRight", j);
+				break;
+			}
+		}
+		for (int j = 0; j < BULLET->GetBulletVec("bulletSwordLeft").size(); j++)
+		{
+			RECT temp;
+			if (!BULLET->GetBulletVec("bulletSwordLeft")[j]->isShot)continue;
+			if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordLeft")[j]->rc))
+			{
+				_bs->GetHp() -= 10;
+				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).x + 30, GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).y);
+				BULLET->Destroy("bulletSwordLeft", j);
+				break;
+			}
 		}
 	}
-	for (int j = 0; j < BULLET->GetBulletVec("bulletSwordLeft").size(); j++)
-	{
-		RECT temp;
-		if (!BULLET->GetBulletVec("bulletSwordLeft")[j]->isShot)continue;
-		if (IntersectRect(&temp, &_bs->GetBossRc(), &BULLET->GetBulletVec("bulletSwordLeft")[j]->rc))
-		{
-			_bs->GetHp() -= 10;
-			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).x+30, GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).y);
-			BULLET->Destroy("bulletSwordLeft", j);
-			break;
-		}
-	}
-
 	//플레이어 스킬2 에너미
 	for (int i = 0; i < _em->GetEnemyVec().size(); i++)
 	{
@@ -751,17 +759,19 @@ void GameScene::OtherCollision()
 		}
 
 	}
-
-	//플레이어 스킬2 보스
-	RECT rec1;
-	if (IntersectRect(&rec1, &_metaKnight->getSkill2Left().rc, &_bs->GetBossRc()))
+	if (sState == BOSS_ROOM)
 	{
-		_bs->GetHp() -= 2;
-	}
-	RECT rec2;
-	if (IntersectRect(&rec2, &_metaKnight->getSkill2Right().rc, &_bs->GetBossRc()))
-	{
-		_bs->GetHp() -= 2;
+		//플레이어 스킬2 보스
+		RECT rec1;
+		if (IntersectRect(&rec1, &_metaKnight->getSkill2Left().rc, &_bs->GetBossRc()))
+		{
+			_bs->GetHp() -= 2;
+		}
+		RECT rec2;
+		if (IntersectRect(&rec2, &_metaKnight->getSkill2Right().rc, &_bs->GetBossRc()))
+		{
+			_bs->GetHp() -= 2;
+		}
 	}
 }
 
@@ -804,7 +814,7 @@ void GameScene::SaveTime()
 	char term = '\t';
 	char next = '\n';
 	char end = '@';
-	
+
 	data = "ClearState\tTime\n";
 	fwrite(data.c_str(), data.size(), 1, fp);
 
@@ -815,7 +825,7 @@ void GameScene::SaveTime()
 	else
 		clearState = "LOSE";
 
-	data = clearState + term + to_string(min) + term + to_string(sec)+next;
+	data = clearState + term + to_string(min) + term + to_string(sec) + next;
 	fwrite(data.c_str(), data.size(), 1, fp);
 
 	fwrite(&end, sizeof(end), 1, fp);
@@ -824,24 +834,24 @@ void GameScene::SaveTime()
 
 void GameScene::ShowGameTime()
 {
-	gameTime += TIMEMANAGER->getElapsedTime()/4;
+	gameTime += TIMEMANAGER->getElapsedTime() / 4;
 	revertTime = (int)gameTime;
-	
+
 	min = revertTime / 60;
 	sec = revertTime % 60;
 
 
 	HFONT font, oldFont;
-	SetTextColor(getMemDC(), RGB(0,0,0));
+	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	font = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, "휴먼둥근헤드라인");
-	oldFont = (HFONT)SelectObject(getMemDC(),font);
+	oldFont = (HFONT)SelectObject(getMemDC(), font);
 	char temp[256];
 	if (min < 1)
 	{
 		if (sec < 10)
 		{
 			sprintf(temp, "PlayTime: 00:0%d", sec);
-			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top+100,temp,strlen(temp));
+			TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 		}
 		else
 		{
@@ -855,7 +865,7 @@ void GameScene::ShowGameTime()
 		{
 			if (sec < 10)
 			{
-				sprintf(temp, "PlayTime: 0%d:0%d", min,sec);
+				sprintf(temp, "PlayTime: 0%d:0%d", min, sec);
 				TextOut(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top + 100, temp, strlen(temp));
 			}
 			else

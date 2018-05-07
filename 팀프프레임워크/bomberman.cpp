@@ -23,22 +23,13 @@ HRESULT bomberman::init(int x, int y)
 
 	epCol = new PixelCol;
 	epCol->init(70, 20);
+	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 
 	enemy::init();
 
 	IMAGEMANAGER->addFrameImage("bomberman", PathFile("image", "bomberman").c_str(), 988, 120, 13, 2, true, RGB(255, 0, 255));
 	img = new image;
 	img->init(PathFile("image", "bomberman").c_str(), 988, 120, 13, 2, true, RGB(255, 0, 255));
-
-	IMAGEMANAGER->addFrameImage("LB", PathFile("image", "leftBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
-	Lweapon = new image;
-	Lweapon->init(PathFile("image", "leftBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
-	BULLET->BulletSetting("LBomb", IMAGEMANAGER->findImage("LB"), 30, true, 20);
-
-	IMAGEMANAGER->addFrameImage("RB", PathFile("image", "rightBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
-	Rweapon = new image;
-	Rweapon->init(PathFile("image", "rightBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
-	BULLET->BulletSetting("RBomb", IMAGEMANAGER->findImage("RB"), 30, true, 20);
 
 	EFFECTMANAGER->addEffect("bombEffect", PathFile("image", "bombEffect").c_str(), 560, 112, 112, 112, 10, 1, 30);
 
@@ -267,14 +258,14 @@ void bomberman::move()
 void bomberman::draw()
 {
 	img->aniRender(getMemDC(), rc.left, rc.top, eMotion);
-	if (eState == LEFT_OFFENCE)
-	{
-		Lweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
-	}
-	else if (eState == RIGHT_OFFENCE)
-	{
-		Rweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
-	}
+	//if (eState == LEFT_OFFENCE)
+	//{
+	//	Lweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
+	//}
+	//else if (eState == RIGHT_OFFENCE)
+	//{
+	//	Rweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
+	//}
 }
 
 

@@ -24,15 +24,11 @@ HRESULT boomerang::init(int x, int y)
 	enemy::init();
 	epCol = new PixelCol;
 	epCol->init(70, 20);
+	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 
 	IMAGEMANAGER->addFrameImage("boomerang", PathFile("image", "boomerang").c_str(), 572, 120, 9, 2, true, RGB(255, 0, 255));
 	img = new image;
 	img->init(PathFile("image", "boomerang").c_str(), 572, 120, 9, 2, true, RGB(255, 0, 255));
-
-	IMAGEMANAGER->addFrameImage("BE", PathFile("image", "boomerangEffect").c_str(), 448, 44, 8, 1, true, RGB(255, 0, 255));
-	Lweapon = new image;
-	Lweapon->init(PathFile("image", "boomerangEffect").c_str(), 448, 44, 8, 1, true, RGB(255, 0, 255));
-	BULLET->BulletSetting("BEffect", IMAGEMANAGER->findImage("BE"), 30, true, 5);
 
 	//EFFECTMANAGER->addEffect("boomerangEffect", PathFile("image", "boomerangEffect").c_str(), 224, 22, 28, 22, 60, 1, 30);
 
@@ -290,7 +286,7 @@ void boomerang::move()
 void boomerang::draw()
 {
 	img->aniRender(getMemDC(), rc.left, rc.top, eMotion);
-	Lweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
+	//Lweapon->aniRender(getMemDC(), rc.left, rc.top, eMotion);
 }
 
 void boomerang::enemyCollision()

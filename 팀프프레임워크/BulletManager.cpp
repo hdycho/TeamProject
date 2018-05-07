@@ -14,6 +14,10 @@ BulletManager::~BulletManager()
 //이미지메니저로 미리만든 이미지삽입해야함
 void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum, bool isAnim, int animSpeed)
 {
+	bulletMapIter bMapIter = bMap.find(bulletName);
+	if (bMapIter != bMap.end())
+		return;
+
 	bulletVec bVec;
 	if (isAnim)//에니메이션 총알이미지일때
 	{
@@ -58,10 +62,6 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 			bVec.push_back(bullet);
 		}
 	}
-	
-	bulletMapIter bMapIter = bMap.find(bulletName);
-	if (bMapIter != bMap.end())
-		return;
 	bMap.insert(pair<string, bulletVec>(bulletName, bVec));
 	bIdxMap.insert(pair<string, int>(bulletName, 0));
 }

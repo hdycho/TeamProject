@@ -32,7 +32,7 @@ HRESULT baby::init(int x, int y)
 
 	epCol = new PixelCol;
 	epCol->init(70, 20);
-
+	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 	//currentFrameX = currentFrameY = 0;
 
 	eState = LEFT_MOVE;
