@@ -1,51 +1,9 @@
-﻿  GameScene.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-GameScene.cpp(65): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(443): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(472): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(491): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(549): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-GameScene.cpp(554): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(563): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(567): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(576): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(582): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(590): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(595): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(603): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(608): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(616): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(621): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(629): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(649): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(673): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(679): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(691): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(706): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(718): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(732): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(778): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(779): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(843): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(848): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(858): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(863): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(871): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(876): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+﻿  ClearScene.cpp
+  GameOverScene.cpp
   코드를 생성하고 있습니다.
-  1 of 2568 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  2 of 2568 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.exe
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.pdb (Full PDB)

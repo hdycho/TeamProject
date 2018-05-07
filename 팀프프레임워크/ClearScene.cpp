@@ -40,10 +40,13 @@ void ClearScene::update()
 {
 	RECT rc = RectMake(0, 0, 70, 56);
 	CAM->CamUpdate(rc, 0, 1600, 0, 1200);
-	if (alpha > 1)
-		alpha -= 3;
-	else
-		alpha = 0;
+	if (!sceneChange)
+	{
+		if (alpha > 1)
+			alpha -= 3;
+		else
+			alpha = 0;
+	}
 	Loby->Update(VK_LBUTTON, true);
 	Quit->Update(VK_LBUTTON, true);
 	if (Loby->IsClick())
