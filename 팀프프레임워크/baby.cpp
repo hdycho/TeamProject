@@ -107,22 +107,16 @@ void baby::update()
 	{
 		enemy::update();
 		//KEYANIMANAGER->update();
+		enemyCollision();
 		move();
 		rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
-		enemyCollision();
 		epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 	}
 }
 
 void baby::render()
 {
-	if (getDistance(px, py, x, y) < 800)
-	{
 		draw();
-		char temp[255];
-		sprintf(temp, "%p", eMotion);
-		TextOut(getMemDC(), x, y, temp, strlen(temp));
-	}
 }
 
 void baby::move()

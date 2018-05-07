@@ -107,6 +107,14 @@ void GameScene::update()
 
 	switch (sState)
 	{
+	case NULL_SCENE2:
+	{
+		if (MetaStageData == 10)
+		{
+			sState = IN_GAME;
+			MetaStageData = 0;
+		}
+	}
 	case ENTER_GAME:
 	{
 		alpha -= 3;
@@ -145,8 +153,9 @@ void GameScene::update()
 		{
 			pos = { 0,0 };
 			oncePlay = false;
-			sState = IN_GAME;
-			CAM->CamInit(DYNAMIC_CAMERA, GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y, 300, 150, 4);
+			sState = NULL_SCENE2;
+			MetaStageData = 10;
+			CAM->getSpeed() = 4;
 		}
 	}
 	break;
@@ -444,7 +453,7 @@ void GameScene::PlayerCollision()
 		if (!IntersectRect(&r, &CAM->getCamRc(), &_im->GetMapItemVec()[i]->GetRect()))continue;
 		if (!_im->GetMapItemVec()[i]->GetShowState())continue;
 		RECT temp;
-		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetMapItemVec()[i]->GetRect()))
+		if (IntersectRect(&temp, &_metaKnight->getKnightImage().playerColRect, &_im->GetMapItemVec()[i]->GetRect()))
 		{
 			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
 			{
@@ -473,7 +482,7 @@ void GameScene::PlayerCollision()
 		if (!IntersectRect(&r, &CAM->getCamRc(), &_im->GetGoldItecVec()[i]->GetRect()))continue;
 		if (!_im->GetGoldItecVec()[i]->GetShowState())continue;
 		RECT temp;
-		if (IntersectRect(&temp, &_metaKnight->getKnightImage().rc, &_im->GetGoldItecVec()[i]->GetRect()))
+		if (IntersectRect(&temp, &_metaKnight->getKnightImage().playerColRect, &_im->GetGoldItecVec()[i]->GetRect()))
 		{
 			//플레이어 돈 올려준다
 			_metaKnight->getMoney() += 200;
@@ -492,11 +501,11 @@ void GameScene::PlayerCollision()
 		if (!IntersectRect(&r, &CAM->getCamRc(), &_em->GetEnemyVec()[i]->getRect()))continue;
 		if (_em->GetEnemyVec()[i]->GetisEnemyDie())continue;
 		RECT temp;
-		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getKnightImage().rc))
+		if (IntersectRect(&temp, &_em->GetEnemyVec()[i]->getRect(), &_metaKnight->getKnightImage().playerColRect))
 		{
 			_metaKnight->knightDamaged(_em->GetEnemyVec()[i]->getRect());
 			_metaKnight->GetHp() -= 10;
-			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().playerColRect).x, GetCenterPos(_metaKnight->getKnightImage().playerColRect).y);
 			break;
 		}
 	}
@@ -548,11 +557,11 @@ void GameScene::PlayerCollision()
 	{
 		//플레이어 보스
 		RECT bCol;
-		if (IntersectRect(&bCol, &_metaKnight->getKnightImage().rc, &_bs->GetBossRc()))
+		if (IntersectRect(&bCol, &_metaKnight->getKnightImage().playerColRect, &_bs->GetBossRc()))
 		{
 			//_metaKnight->knightDamaged(_bs->GetBossRc());
 			_metaKnight->GetHp() -= 0.1;
-			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().playerColRect).x, GetCenterPos(_metaKnight->getKnightImage().playerColRect).y);
 		}
 
 		//플레이어 보스총알1
@@ -560,7 +569,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("RGF")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("RGF")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("RGF")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -573,7 +582,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("LGF")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("LGF")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("LGF")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -588,7 +597,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("CC")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("CC")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -601,7 +610,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("CC1")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC1")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("CC1")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -614,7 +623,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("CC2")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC2")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("CC2")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -627,7 +636,7 @@ void GameScene::PlayerCollision()
 		{
 			RECT bCol2;
 			if (!BULLET->GetBulletVec("CC3")[i]->isShot)continue;
-			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().rc, &BULLET->GetBulletVec("CC3")[i]->rc))
+			if (IntersectRect(&bCol2, &_metaKnight->getKnightImage().playerColRect, &BULLET->GetBulletVec("CC3")[i]->rc))
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
@@ -639,11 +648,11 @@ void GameScene::PlayerCollision()
 
 		//보스공격
 		RECT bCol3;
-		if (IntersectRect(&bCol3, &_metaKnight->getKnightImage().rc, &_bs->GetSwordBox()))
+		if (IntersectRect(&bCol3, &_metaKnight->getKnightImage().playerColRect, &_bs->GetSwordBox()))
 		{
 			_metaKnight->GetHp() -= 0.5f;
 			_metaKnight->knightDamaged(_bs->GetBossRc());
-			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().rc).x, GetCenterPos(_metaKnight->getKnightImage().rc).y);
+			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().playerColRect).x, GetCenterPos(_metaKnight->getKnightImage().playerColRect).y);
 		}
 	}
 }
@@ -780,7 +789,7 @@ void GameScene::PlayerDieSet()
 	//플레이어체력이0보다 낮아지면
 	if (sState == IN_GAME)
 	{
-		if (_metaKnight->GetHp() < 0)
+		if (_metaKnight->GetHp() < 1)
 		{
 			sState = PLAYER_DIE;
 			_metaKnight->GetHp() = 100;
@@ -789,6 +798,8 @@ void GameScene::PlayerDieSet()
 			diePosY = _metaKnight->getKnightImage().y;
 			_metaKnight->getKnightImage().x = 300;
 			_metaKnight->getKnightImage().y = 200;
+			_metaKnight->getKnightImage().rc = RectMakeCenter(300, 200, 70, 56);
+			_metaKnight->getPcol()->UpdatePosition(_metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
 		}
 		//플레이어 다이로보내준다
 	}

@@ -45,7 +45,6 @@ void enemy::release()
 
 void enemy::update()
 {
-
 	if (eHP <= 0 && !isEnemyDie)
 	{
 		isEnemyDie = true;
@@ -66,20 +65,4 @@ void enemy::move()
 void enemy::draw()
 {
 	img->frameRender(getMemDC(), rc.left, rc.top, currentFrameX, currentFrameY);
-}
-
-void enemy::enemyCollision()
-{
-	////¹Ù´Ú
-	//if (epCol->RayCastingDownY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0));
-	//{
-	//	epCol->setPosDownY(y);
-	//	gravity = 0;
-	//}
-	//
-	////ÃµÀå
-	//if (epCol->RayCastingDownY(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 255, 0, 0)) epCol->setPosUpY(y);
-	//
-	////º®
-	//if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0));
 }

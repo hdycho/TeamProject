@@ -26,7 +26,7 @@ HRESULT player::init()
 	_knight.img = _stand;
 	_knightDirection = RIGHT_STAND;
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameX());
-
+	_knight.playerColRect= RectMakeCenter(_knight.x, _knight.y, 18, 20);
 	// Skill_1 images
 	_skill_1 = IMAGEMANAGER->addFrameImage("skill1", PathFile("image", "Skill1_sprite").c_str(), 1850, 180, 11, 2, true, RGB(255, 0, 255));
 	_bulletSwordRight = IMAGEMANAGER->addFrameImage("knightBulletRight", PathFile("image", "Skill1_bullet_right_sprite").c_str(), 45, 17, 1, 1, true, RGB(255, 0, 255));
@@ -358,6 +358,7 @@ void player::update(HDC hdc)
 	}
 	PlayerCollision(hdc);
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
+	_knight.playerColRect = RectMakeCenter(_knight.x, _knight.y, 25, 20);
 	_knightHeal.rc = RectMakeCenter(_knight.x + 3, _knight.y - 14, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
 	if (_isAttack == false)
 	{
@@ -633,7 +634,7 @@ void player::knightSkill_2()
 void player::knightDamaged(RECT rc)
 {
 	RECT temp;
-	if (IntersectRect(&temp, &rc, &_knight.rc))
+	if (IntersectRect(&temp, &rc, &_knight.playerColRect))
 	{
 		_knight.angle = getAngle(GetCenterPos(rc).x, GetCenterPos(rc).y, _knight.x, _knight.y);
 

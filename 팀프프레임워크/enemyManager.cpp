@@ -32,6 +32,8 @@ void enemyManager::update()
 {
 	for (int i = 0; i < _vMinion.size(); i++)
 	{
+		RECT temp;
+		if (!IntersectRect(&temp, &CAM->getCamRc(), &_vMinion[i]->getRect()))continue;
 		if (!_vMinion[i]->GetisEnemyDie())
 			_vMinion[i]->update();
 	}
@@ -43,6 +45,8 @@ void enemyManager::render()
 {
 	for (int i = 0; i < _vMinion.size(); i++)
 	{
+		RECT temp;
+		if (!IntersectRect(&temp, &CAM->getCamRc(), &_vMinion[i]->getRect()))continue;
 		if (!_vMinion[i]->GetisEnemyDie())
 			_vMinion[i]->render();
 	}

@@ -31,6 +31,7 @@ struct KNIGHTPOSITION
 {
 	image* img;
 	RECT rc;
+	RECT playerColRect;
 	float x, y;
 	float angle;
 };
@@ -152,4 +153,5 @@ public:
 
 	inline float&GetHp() { return _playerHP; }
 	inline float&GetMp() { return _playerMP; }
+	inline PixelCol*getPcol() { return pCol; }
 };

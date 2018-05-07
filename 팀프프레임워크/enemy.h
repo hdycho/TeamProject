@@ -19,8 +19,6 @@ class enemy : public gameNode
 {
 protected:
 	image* img; //이미지
-	image* Lweapon;	//무기이미지(왼쪽)
-	image* Rweapon;	//무기이미지(오른쪽)
 	RECT rc;	//충돌렉트
 	ENEMYSTATE eState;  //미니언들의 상태값
 	animation* eMotion; //애니메이션
@@ -59,7 +57,7 @@ public:
 
 	virtual void move();
 	virtual void draw();		//그려주는 함수
-	virtual void enemyCollision();
+	virtual void enemyCollision() = 0;
 
 	void setPlayerMemoryAddressLink(player* player) { _player = player; }	//링크연결
 	inline RECT getRect() { return rc; }				//에너미 렉트를 얻어가는 함수

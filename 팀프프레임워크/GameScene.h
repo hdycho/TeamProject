@@ -4,6 +4,7 @@
 enum STAGESTATE
 {
 	NULL_SCENE,
+	NULL_SCENE2,
 	ENTER_GAME,		//게임입장
 	IN_GAME,		//게임중
 	STORE,			//상점

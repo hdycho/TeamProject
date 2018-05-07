@@ -43,6 +43,7 @@ public:
 
 	inline image*getCamBuffer() { return camBuffer; }
 	inline RECT&getViewRc() { return camRc; }
+	inline int&getSpeed() { return camSpeed; }
 	RECT getCamRc();
 };
 
