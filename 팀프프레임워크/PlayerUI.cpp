@@ -217,7 +217,7 @@ void PlayerUI::SkillQ()
 //이거 같이상희 하면서 고치는 거
 void PlayerUI::SkillW()
 {
-	if (_countSkillW >= 100)
+	if (_countSkillW >= 30)
 	{
 		_indexHeal++;
 		if (_indexHeal > 12)

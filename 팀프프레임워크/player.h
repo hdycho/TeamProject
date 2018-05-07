@@ -23,7 +23,9 @@ enum KNIGHTDIRECTION
 
 	KNIGHT_SKILL2,
 	KNIGHT_SPIN,
-	KNIGHT_TORNADO
+	KNIGHT_TORNADO,
+
+	KNIGHT_CLIMB
 };
 struct KNIGHTPOSITION
 {
@@ -49,6 +51,7 @@ private:
 	image* _run;
 	image* _stand;
 	image* _jump;
+	image* _climb;
 	image* _attack;
 	image* _attackUp;
 
@@ -69,6 +72,7 @@ private:
 	image* _tornado;
 	bool _isSkill2;
 	bool _isAvailable2;
+	bool _skill2Rect;
 	
 	// for Jump
 	float _jumpPower;
@@ -89,11 +93,16 @@ private:
 	bool _isCollision;
 
 	int _speed, _speedDamaged;
-	int _count, _index, _indexExtra, _indexHeal;
+	int _count, _index, _indexExtra, _indexHeal, _indexJump;
 	int _countAttack; // attack speed
 	int _countSkill;  // count used in skill
 	int _countSkill2; // count used in Skill_2;
 	int _countHeal;
+
+	// ladder
+	KNIGHTPOSITION _ladder;
+	bool _isClimb;
+	bool _climbFrame;
 
 public:
 	player();
@@ -107,6 +116,7 @@ public:
 	void render();
 
 	void knightJump();
+	void knightClimb();
 	void knightAttack();
 
 	void knightSkill_Heal();

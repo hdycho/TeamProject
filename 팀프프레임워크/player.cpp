@@ -18,16 +18,14 @@ HRESULT player::init()
 	_run = IMAGEMANAGER->addFrameImage("run", PathFile("image", "run_sprite").c_str(), 700, 112, 10, 2, true, RGB(255, 0, 255));
 	_stand = IMAGEMANAGER->addFrameImage("stand", PathFile("image", "stand_sprite").c_str(), 70, 112, 1, 2, true, RGB(255, 0, 255));
 	_jump = IMAGEMANAGER->addFrameImage("jump", PathFile("image", "jump_sprite").c_str(), 603, 144, 9, 2, true, RGB(255, 0, 255));
+	_climb = IMAGEMANAGER->addFrameImage("climb", PathFile("image", "climb_sprite").c_str(), 280, 56, 4, 1, true, RGB(255, 0, 255));
 	_attack = IMAGEMANAGER->addFrameImage("attack", PathFile("image", "attack_sprite").c_str(), 2700, 172, 19, 2, true, RGB(255, 0, 255));
 
-	_knight.x = 400;
+	_knight.x = 600;
 	_knight.y = 200;
-
-	// Skill_Heal image
-	_knightHeal.img = IMAGEMANAGER->addFrameImage("knightHeal", PathFile("image", "healing_sprite").c_str(), 1020, 233, 10, 1, true, RGB(255, 0, 255));
-	_knightHeal.rc = RectMakeCenter(_knight.x, _knight.y, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
-	// Skill_Heal bool
-	_isSkillHeal = false;
+	_knight.img = _stand;
+	_knightDirection = RIGHT_STAND;
+	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameX());
 
 	// Skill_1 images
 	_skill_1 = IMAGEMANAGER->addFrameImage("skill1", PathFile("image", "Skill1_sprite").c_str(), 1850, 180, 11, 2, true, RGB(255, 0, 255));
@@ -36,6 +34,12 @@ HRESULT player::init()
 	// for _bulletSword (bullet)
 	BULLET->BulletSetting("bulletSwordRight", IMAGEMANAGER->findImage("knightBulletRight"), 30, true, 1);
 	BULLET->BulletSetting("bulletSwordLeft", IMAGEMANAGER->findImage("knightBulletLeft"), 30, true, 1);
+
+	// Skill_Heal image
+	_knightHeal.img = IMAGEMANAGER->addFrameImage("knightHeal", PathFile("image", "healing_sprite").c_str(), 1020, 233, 10, 1, true, RGB(255, 0, 255));
+	_knightHeal.rc = RectMakeCenter(_knight.x, _knight.y, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
+	// Skill_Heal bool
+	_isSkillHeal = false;
 
 	// Skill_2 image,position
 	_skill_2_Right.img = IMAGEMANAGER->addFrameImage("skill2Right", PathFile("image", "Skill2_sprite").c_str(), 2520, 1500, 12, 1, true, RGB(255, 0, 255));
@@ -48,20 +52,7 @@ HRESULT player::init()
 	// Skill_2 bool
 	_isSkill2 = false;
 	_isAvailable2 = false;
-
-	_knight.img = _stand;
-	_knightDirection = RIGHT_STAND;
-
-	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameX());
-
-	_count = _index = _indexExtra = _indexHeal = 0;
-	_countAttack = 0;
-	_countSkill = 0;
-	_countSkill2 = 0;
-	_countHeal = 0;
-
-	_speed = KNIGHTSPEED;
-	_speedDamaged = 70;
+	_skill2Rect = false;
 
 	// for Jump
 	_jumpPower = 0.0f;
@@ -71,17 +62,30 @@ HRESULT player::init()
 	// for Attack
 	_isAttack = false;
 	pCol = new PixelCol;
-	pCol->init(20, 20);
-	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
-	//====== Skill ======
-	_skill = new Skill;
-	_skill->init();
+	
+	_speed = KNIGHTSPEED;
+	_speedDamaged = 70;
+	_count = _index = _indexExtra = _indexHeal  = _indexJump = 0;
+	_countAttack = 0;
+	_countSkill = 0;
+	_countSkill2 = 0;
+	_countHeal = 0;
 
-	// player (money)
+	// player's (money)
 	_money = 4000;
-
+	// player's HP/MP
 	_playerHP = 100;
 	_playerMP = 100;
+	// player's PixelCollision range/position
+	pCol->init(10, 10);
+	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
+
+	// ladder
+	_ladder.x = 9975;
+	_ladder.y = 530;
+	_ladder.rc = RectMakeCenter(_ladder.x, _ladder.y, 50, 800);
+	_isClimb = false;
+	_climbFrame = false;
 
 	return S_OK;
 }
@@ -124,6 +128,9 @@ void player::update(HDC hdc)
 
 	// jump 함수
 	knightJump(); // Key: W
+
+	// climb(ladder) 함수
+	knightClimb(); // Key : Up, Down
 
 	 // attack 함수
 	knightAttack(); // Key : F
@@ -220,6 +227,7 @@ void player::update(HDC hdc)
 					_countSkill2 = 0;
 					_knightDirection = RIGHT_STAND;
 					_isSkill2 = false;
+					_skill2Rect = false;
 				}
 			}
 		}
@@ -233,6 +241,13 @@ void player::update(HDC hdc)
 				_isSkillHeal = false;
 			}
 		}
+		else if (_knightDirection == KNIGHT_CLIMB)
+		{
+			_knight.img = _climb;
+			_knight.img->setFrameX(_indexJump);
+			if (_climbFrame == true) _indexJump++;
+			if (_indexJump > 3) _indexJump = 0;
+		}
 
 		_count = 0;
 	}
@@ -242,7 +257,10 @@ void player::update(HDC hdc)
 	{
 		if (_knightDirection == RIGHT_ATTACK)
 		{
-			_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
+			if (_isAttack == true)
+			{
+				_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 80, 50);
+			}
 			_knight.img = _attack;
 			_knight.img->setFrameY(0);
 			_knight.img->setFrameX(_index);
@@ -257,7 +275,10 @@ void player::update(HDC hdc)
 		}
 		else if (_knightDirection == LEFT_ATTACK)
 		{
-			_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
+			if (_isAttack == true)
+			{
+				_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 80, 50);
+			}
 			_knight.img = _attack;
 			_knight.img->setFrameY(1);
 			_knight.img->setFrameX(_index);
@@ -307,8 +328,11 @@ void player::update(HDC hdc)
 		}
 		else if (_knightDirection == KNIGHT_TORNADO)
 		{
-			_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x, _skill_2_Right.y, 100, 1000);
-			_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x, _skill_2_Left.y, 100, 1000);
+			if (_skill2Rect == true)
+			{
+				_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 100, 1000);
+				_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 100, 1000);
+			}
 			_knight.img = _tornado;
 			_knight.img->setFrameX(_index);
 			_index++;
@@ -319,8 +343,11 @@ void player::update(HDC hdc)
 
 				if (_countSkill == 4)
 				{
-					_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x, _skill_2_Right.y, 100, 1000);
-					_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x, _skill_2_Left.y, 100, 1000);
+					if (_skill2Rect == true)
+					{
+						_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 100, 1000);
+						_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 100, 1000);
+					}
 					_countSkill = 0;
 					_isSkill2 = true;
 				}
@@ -332,9 +359,18 @@ void player::update(HDC hdc)
 	PlayerCollision(hdc);
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	_knightHeal.rc = RectMakeCenter(_knight.x + 3, _knight.y - 14, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
+	if (_isAttack == false)
+	{
+		_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 0, 0);
+		_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 0, 0);
+	}
+	if (_skill2Rect == false)
+	{
+		_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 0, 0);
+		_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 0, 0);
+	}
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 
-	_skill->update();
 	_Ui->update();
 
 	// player HP/MP
@@ -345,7 +381,6 @@ void player::update(HDC hdc)
 void player::render()
 {
 	_knight.img->frameRender(getMemDC(), _knight.rc.left, _knight.rc.top);
-	_skill->render();
 
 	if (_isSkillHeal == true)
 	{
@@ -353,11 +388,12 @@ void player::render()
 	}
 	if (_isSkill2 == true)
 	{
-		_skill_2_Right.img->frameRender(getMemDC(), _skill_2_Right.rc.left + 30, _skill_2_Right.rc.top - 30);
-		_skill_2_Left.img->frameRender(getMemDC(), _skill_2_Left.rc.left + 30, _skill_2_Left.rc.top - 30);
+		_skill_2_Right.img->frameRender(getMemDC(), _skill_2_Right.rc.left - 70, _skill_2_Right.rc.top - 30);
+		_skill_2_Left.img->frameRender(getMemDC(), _skill_2_Left.rc.left - 70, _skill_2_Left.rc.top - 30);
 	}
 
 	_Ui->render();
+
 }
 
 void player::knightJump()
@@ -404,6 +440,52 @@ void player::knightJump()
 		if (_knightDirection == LEFT_RUN)
 		{
 			_knightDirection = LEFT_JUMP;
+		}
+	}
+}
+
+void player::knightClimb()
+{
+	if (_knight.x < _ladder.rc.right && _knight.x > _ladder.rc.left)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		{
+			_isClimb = true;
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			_isClimb = true;
+		}
+	}
+	else
+	{
+		_isClimb = false;
+		if (_isClimb == false) _indexJump = 0;
+	}
+
+	if (_isClimb == true)
+	{
+		_gravity = 0;
+		_jumpPower = 0;
+		_knightDirection = KNIGHT_CLIMB;
+		if (KEYMANAGER->isStayKeyDown(VK_UP))
+		{
+			_climbFrame = true;
+			_knight.y -= KNIGHTSPEED;
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+		{
+			_climbFrame = true;
+			_knight.y += KNIGHTSPEED;
+		}
+		// for climb (frame image)
+		if (KEYMANAGER->isOnceKeyUp(VK_UP))
+		{
+			_climbFrame = false;
+		}
+		if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+		{
+			_climbFrame = false;
 		}
 	}
 }
@@ -531,6 +613,8 @@ void player::knightSkill_2()
 				_Ui->_frameSkillE = true;
 				_Ui->_index = 0;
 
+				_skill2Rect = true;
+
 				// for player's MP
 				_playerMP -= 100;
 			}
@@ -541,8 +625,8 @@ void player::knightSkill_2()
 		_skill_2_Right.x += 3;
 		_skill_2_Left.x -= 3;
 
-		_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x, _skill_2_Right.y, 100, 1000);
-		_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x, _skill_2_Left.y, 100, 1000);
+		_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 100, 1000);
+		_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 100, 1000);
 	}
 }
 
@@ -582,6 +666,15 @@ void player::PlayerCollision(HDC hdc)
 				_index = 8;
 			}
 		}
+
+		// for Climb
+		if (_isClimb == true)
+		{
+			if (KEYMANAGER->isStayKeyDown(VK_UP))
+			{
+				_knight.y -= KNIGHTSPEED;
+			}
+		}
 	}
 	else
 	{
@@ -596,6 +689,14 @@ void player::PlayerCollision(HDC hdc)
 			pCol->setPosUpY(_knight.y);
 
 			_jumpPower = 0;
+		}
+
+		// for Climb
+		if (_isClimb == true)
+		{
+			pCol->setPosUpY(_knight.y);
+
+			_knight.y += 4;
 		}
 	}
 

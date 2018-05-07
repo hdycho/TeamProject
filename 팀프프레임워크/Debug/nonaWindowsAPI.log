@@ -1,56 +1,25 @@
-﻿  GameScene.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(64): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(74): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(419): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(448): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(467): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(514): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(525): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(530): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(539): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(543): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(552): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(558): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(566): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(571): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(579): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(584): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(592): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(597): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(605): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(625): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(649): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(655): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(667): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(682): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(694): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(708): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(754): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(755): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(819): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(824): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(834): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(839): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(847): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(852): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-  BulletManager.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(83): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(85): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(139): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(158): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(168): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(202): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(217): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  코드를 생성하고 있습니다...
-  nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
-  nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)
+﻿  player.cpp
+c:\users\younj\desktop\teamproject\팀프프레임워크\skill.h(23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(262): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(273): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(280): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(291): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(333): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(334): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(348): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(349): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(360): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(361): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(364): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(365): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(369): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(370): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(628): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(629): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(638): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+  nonaWindowsAPI.vcxproj -> C:\Users\younj\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
