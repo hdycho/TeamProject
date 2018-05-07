@@ -24,6 +24,7 @@ public:
 	virtual void ObstacleUpdate() = 0;
 
 	inline bool&GetShowState() { return isShow; }
+	inline RECT&getRect() { return rc; }
 	inline void LinkPlayer(player*_p) { p = _p; }
 };
 

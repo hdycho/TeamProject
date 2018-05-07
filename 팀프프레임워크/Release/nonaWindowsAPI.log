@@ -1,103 +1,6 @@
-﻿  stdafx.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(73): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(74): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(76): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(90): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(92): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(93): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(97): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(105): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\image.h(149): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\image.h(149): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\commonMacroFunction.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-  Bomb.cpp
+﻿  Bomb.cpp
 c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Bomb.cpp(31): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Boss.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Boss.cpp(70): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Boss.cpp(88): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Boss.cpp(109): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-Boss.cpp(131): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Boss.cpp(132): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Boss.cpp(143): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  BossImage.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-  BossMotion.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(11): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-BossMotion.cpp(269): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(270): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(271): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(272): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(273): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(321): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(322): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(323): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(508): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(509): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(510): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(511): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(512): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(608): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(610): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(611): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(612): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(744): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(909): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(910): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(911): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(912): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(913): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1156): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1284): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1285): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1301): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1302): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1305): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1306): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1307): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1366): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1367): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1407): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1408): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1417): warning C4553: '==': 의미 없는 연산자입니다. '='을(를) 사용하려고 했습니까?
-BossMotion.cpp(1424): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1425): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1428): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1429): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1430): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-BossMotion.cpp(1487): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1488): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1722): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BossMotion.cpp(1728): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  BossPixelCol.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  BulletManager.cpp
-BulletManager.cpp(86): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BulletManager.cpp(88): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BulletManager.cpp(103): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BulletManager.cpp(142): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BulletManager.cpp(161): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-BulletManager.cpp(171): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-BulletManager.cpp(205): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-BulletManager.cpp(221): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  CameraManager.cpp
-  ClearScene.cpp
-  EditScene.cpp
-EditScene.cpp(99): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-EditScene.cpp(129): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-EditScene.cpp(234): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  GameOverScene.cpp
   GameScene.cpp
 c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
@@ -158,78 +61,16 @@ Iron.cpp(41): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 �
 Iron.cpp(46): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Iron.cpp(52): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Iron.cpp(57): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Item.cpp
   ItemManager.cpp
 ItemManager.cpp(145): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(157): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(165): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(230): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(238): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+ItemManager.cpp(159): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+ItemManager.cpp(167): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+ItemManager.cpp(232): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+ItemManager.cpp(240): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Obstacle.cpp
   ObstacleManager.cpp
 ObstacleManager.cpp(22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 ObstacleManager.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  PixelCol.cpp
-PixelCol.cpp(60): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PixelCol.cpp(75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PixelCol.cpp(96): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PixelCol.cpp(118): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PixelCol.cpp(142): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PixelCol.cpp(157): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  PlayerUI.cpp
-PlayerUI.cpp(61): warning C4552: '!': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
-PlayerUI.cpp(64): warning C4552: '!': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
-PlayerUI.cpp(252): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-PlayerUI.cpp(258): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Skill.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Skill.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Skill.cpp(38): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Skill.cpp(66): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  StartScene.cpp
-StartScene.cpp(110): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-StartScene.cpp(116): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-StartScene.cpp(118): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-StartScene.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-StartScene.cpp(145): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-StartScene.cpp(150): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-StartScene.cpp(157): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-StartScene.cpp(161): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-StartScene.cpp(228): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  컴파일하고 있습니다...
-  Store.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(13): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(52): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(60): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(61): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(63): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(82): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(83): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(87): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(91): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(95): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(105): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(106): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(107): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(127): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(129): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(136): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-Store.cpp(142): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(153): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Store.cpp(139): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-Store.cpp(152): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-Store.cpp(165): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Wood.cpp
 c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Wood.cpp(28): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -238,130 +79,10 @@ Wood.cpp(41): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 �
 Wood.cpp(46): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Wood.cpp(52): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 Wood.cpp(57): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  action.cpp
-  animation.cpp
-  baby.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-baby.cpp(21): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-baby.cpp(22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-baby.cpp(106): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-baby.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  bomberman.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(21): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(93): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(128): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(134): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(156): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(192): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bomberman.cpp(191): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-  boomerang.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(21): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(156): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(161): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(186): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(207): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(213): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(234): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-boomerang.cpp(250): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  bug.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(21): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(74): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(88): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(93): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-bug.cpp(92): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-bug.cpp(107): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  button.cpp
-button.cpp(18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  effect.cpp
-  effectManager.cpp
-  enemy.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-enemy.cpp(51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  enemyManager.cpp
-enemyManager.cpp(33): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-enemyManager.cpp(46): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  gameNode.cpp
-gameNode.cpp(96): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-gameNode.cpp(97): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-gameNode.cpp(85): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
-gameNode.cpp(84): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
-  image.cpp
-image.cpp(343): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-image.cpp(353): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-image.cpp(508): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-image.cpp(515): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-image.cpp(521): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  imageManager.cpp
-  iniDataManager.cpp
-iniDataManager.cpp(56): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-iniDataManager.cpp(76): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-iniDataManager.cpp(94): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-  keyAniManager.cpp
-  keyManager.cpp
-  playGround.cpp
-  컴파일하고 있습니다...
-  player.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(86): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(262): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(273): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(280): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(291): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(333): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(334): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(348): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(349): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(360): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(361): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(362): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(365): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(366): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(370): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(371): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(629): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(630): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-player.cpp(639): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  progressBar.cpp
-progressBar.cpp(22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-progressBar.cpp(23): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-progressBar.cpp(26): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-progressBar.cpp(56): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  sceneManager.cpp
-  soundManager.cpp
-  timeManager.cpp
-  timer.cpp
-  txtData.cpp
-txtData.cpp(53): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-txtData.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-txtData.cpp(57): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(90): note: 'strcat' 선언을 참조하십시오.
-txtData.cpp(90): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: 'strtok' 선언을 참조하십시오.
-txtData.cpp(94): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: 'strtok' 선언을 참조하십시오.
-txtData.cpp(86): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-  utils.cpp
-  winMain.cpp
   코드를 생성하고 있습니다.
-  2 of 2604 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  1 of 2605 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.exe
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.pdb (Full PDB)

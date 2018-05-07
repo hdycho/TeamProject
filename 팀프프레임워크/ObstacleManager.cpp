@@ -30,6 +30,8 @@ void ObstacleManager::update()
 {
 	for (int i = 0; i < obsVec.size(); i++)
 	{
+		RECT temp;
+		if (!IntersectRect(&temp, &CAM->getCamRc(), &obsVec[i]->getRect()))continue;
 		if (obsVec[i]->GetShowState())
 		{
 			obsVec[i]->update();

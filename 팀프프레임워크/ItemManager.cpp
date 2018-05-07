@@ -144,6 +144,8 @@ void ItemManager::update()
 {
 	for (int i = 0; i < _vGold.size(); ++i)
 	{
+		RECT temp;
+		if (!IntersectRect(&temp, &CAM->getCamRc(), &_vGold[i]->GetRect()))continue;
 		if (_vGold[i]->GetShowState())
 		{
 			_vGold[i]->update();
