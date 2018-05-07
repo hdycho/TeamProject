@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "baby.h"
-
+#include "player.h"
 
 baby::baby()
 {
@@ -20,6 +20,9 @@ HRESULT baby::init(int x, int y)
 {
 	this->x = x;
 	this->y = y;
+
+	/*x = 1150;
+	y = 360;*/
 
 	enemy::init();
 
@@ -92,25 +95,34 @@ HRESULT baby::init(int x, int y)
 
 void baby::release()
 {
+
 }
 
 void baby::update()
 {
-	enemy::update();
-	KEYANIMANAGER->update();
-	move();
-	rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
-	enemyCollision();
-	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
+	px = GetCenterPos(_player->getKnightImage().rc).x;
+	py = GetCenterPos(_player->getKnightImage().rc).y;
+
+	if (getDistance(px, py, x, y) < 800)
+	{
+		enemy::update();
+		//KEYANIMANAGER->update();
+		move();
+		rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
+		enemyCollision();
+		epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
+	}
 }
 
 void baby::render()
 {
-	draw();
-	char temp[255];
-	sprintf(temp, "%p", eMotion);
-
-	TextOut(getMemDC(), x, y, temp, strlen(temp));
+	if (getDistance(px, py, x, y) < 800)
+	{
+		draw();
+		char temp[255];
+		sprintf(temp, "%p", eMotion);
+		TextOut(getMemDC(), x, y, temp, strlen(temp));
+	}
 }
 
 void baby::move()
@@ -169,8 +181,26 @@ void baby::enemyCollision()
 	}
 
 	//º®
-	//if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
-	//{
-	//	speed = 0;
-	//}
+	if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
+	{
+		//speed = 0;
+		if (!isRight)
+		{
+			isRight = true;
+			getTime = 0;
+			speed *= -1;
+			eState = RIGHT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("babyRightMove");
+			eMotion->start();
+		}
+		else if (isRight)
+		{
+			isRight = false;
+			speed *= -1;
+			getTime = 0;
+			eState = LEFT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("babyLeftMove");
+			eMotion->start();
+		}
+	}
 }

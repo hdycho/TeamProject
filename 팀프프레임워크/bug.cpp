@@ -24,7 +24,7 @@ HRESULT bug::init(int x, int y)
 	enemy::init();
 
 	epCol = new PixelCol;
-	epCol->init(70, 20);
+	epCol->init(40, 20);
 
 	IMAGEMANAGER->addFrameImage("bug", PathFile("image", "bug").c_str(), 300, 120, 4, 2, true, RGB(255, 0, 255));
 	img = new image;
@@ -45,9 +45,11 @@ HRESULT bug::init(int x, int y)
 	eMotion->start();
 
 	epCol = new PixelCol;
-	epCol->init(70, 20);
+	epCol->init(40, 20);
 
+	isRight = false;
 	getTime = 0;
+	getCollisionTime = 0;
 	speed = 2.5f;
 	gravity = 1.0f;
 	return S_OK;
@@ -65,35 +67,50 @@ void bug::release()
 
 void bug::update()
 {
-	enemy::update();
-	//KEYANIMANAGER->update();
-	move();
-	rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
-	enemyCollision();
-	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
+
+	px = GetCenterPos(_player->getKnightImage().rc).x;
+	py = GetCenterPos(_player->getKnightImage().rc).y;
+	if (getDistance(px, py, x, y) < 800)
+	{
+		enemy::update();
+		//KEYANIMANAGER->update();
+		move();
+		rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
+		enemyCollision();
+		epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
+	}
+
 }
 
 void bug::render()
 {
-	draw();
-	char temp[255];
-	sprintf(temp, "%p", eMotion);
-	TextOut(getMemDC(), x, y, temp, strlen(temp));
+	if (getDistance(px, py, x, y) < 800)
+	{
+		draw();
+		char temp[255];
+		sprintf(temp, "%p", eMotion);
+		TextOut(getMemDC(), x, y, temp, strlen(temp));
+	}
+
 }
 
 void bug::move()
 {
-	int px, py;
+
 	//_player->getKnightImage().rc;
-	px = GetCenterPos(_player->getKnightImage().rc).x;
-	py = GetCenterPos(_player->getKnightImage().rc).y;
+
+
 
 	getTime += TIMEMANAGER->getElapsedTime();
 
 	if (getDistance(px, py, x, y) < 500)
 	{
+		if (y < py && fabs(py - y) > speed) y += speed - gravity;
+		else if (y > py && fabs(py - y) > speed) y -= speed;
+
 		if (x < px)
 		{
+			isRight = true;
 			x += speed;
 			eState = RIGHT_MOVE;
 			if (getTime > 1.0f)
@@ -103,29 +120,10 @@ void bug::move()
 				eMotion->start();
 			}
 
-			if (y < py && fabs(py - y) > speed)
-			{
-				y += speed;
-				if (getTime > 1.0f)
-				{
-					getTime = 0;
-					*eMotion = *KEYANIMANAGER->findAnimation("bugRightMove");
-					eMotion->start();
-				}
-			}
-			else if (y > py && fabs(py - y) > speed)
-			{
-				y -= speed;
-				if (getTime > 1.0f)
-				{
-					getTime = 0;
-					*eMotion = *KEYANIMANAGER->findAnimation("bugRightMove");
-					eMotion->start();
-				}
-			}
 		}
 		else if (x > px)
 		{
+			isRight = false;
 			x -= speed;
 			eState = LEFT_MOVE;
 			if (getTime > 1.0f)
@@ -133,27 +131,6 @@ void bug::move()
 				getTime = 0;
 				*eMotion = *KEYANIMANAGER->findAnimation("bugLeftMove");
 				eMotion->start();
-			}
-
-			if (y < py && fabs(py - y) > speed)
-			{
-				y += speed;
-				if (getTime > 1.0f)
-				{
-					getTime = 0;
-					*eMotion = *KEYANIMANAGER->findAnimation("bugLeftMove");
-					eMotion->start();
-				}
-			}
-			else if (y > py && fabs(py - y) > speed)
-			{
-				y -= speed;
-				if (getTime > 1.0f)
-				{
-					getTime = 0;
-					*eMotion = *KEYANIMANAGER->findAnimation("bugLeftMove");
-					eMotion->start();
-				}
 			}
 		}
 	}
@@ -173,6 +150,18 @@ void bug::enemyCollision()
 		epCol->setPosDownY(y);
 		gravity = 0;
 	}
+	//º®
+	if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
+	{
+
+		//y -= 3;
+		if (!isRight) x += 3;
+		else if (isRight) x -= 3;
+
+
+		//if (!isRight) x -= 4;
+		//else if (isRight) x += 4;
+	}
 	else
 	{
 		y += gravity;
@@ -185,10 +174,5 @@ void bug::enemyCollision()
 		epCol->setPosUpY(y);
 	}
 
-	//º®
-	//if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
-	//{
-	//	speed = 0;
-	//	y -= 10;
-	//}
+
 }

@@ -205,7 +205,8 @@ bool BulletManager::IsCollision(string bulletName, int*bulletPosX, int*bulletPos
 		for (int i = 0; i < bMapIter->second.size(); i++)
 		{
 			if (!bMapIter->second[i]->isShot)continue;
-			if (bMapIter->second[i]->pcol->RayCastRange(hdc, 255, 0, 0))
+			if (bMapIter->second[i]->pcol->RayCastRange(hdc, 255, 0, 0)
+				|| bMapIter->second[i]->pcol->RayCastRange(hdc, 0, 0, 255))
 			{
 				*bulletPosX = GetCenterPos(bMapIter->second[i]->rc).x;
 				*bulletPosY = GetCenterPos(bMapIter->second[i]->rc).y;

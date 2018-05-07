@@ -47,10 +47,10 @@ HRESULT boomerang::init(int x, int y)
 	KEYANIMANAGER->addArrayFrameAnimation("boomerangRightMove", "boomerang", rightMove, 1, 4, true);
 
 	int leftOffence[] = { 15,14,13,12,11,10 };
-	KEYANIMANAGER->addArrayFrameAnimation("boomerangLeftOffence", "boomerang", leftOffence, 6, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("boomerangLeftOffence", "boomerang", leftOffence, 6, 7, false);
 
 	int rightOffence[] = { 2,3,4,5,6,7 };
-	KEYANIMANAGER->addArrayFrameAnimation("boomerangRightOffence", "boomerang", rightOffence, 6, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("boomerangRightOffence", "boomerang", rightOffence, 6, 7, false);
 
 	int leftDie[] = { 9 };
 	KEYANIMANAGER->addArrayFrameAnimation("boomerangLeftDie", "boomerang", leftDie, 1, 4, true);
@@ -64,6 +64,7 @@ HRESULT boomerang::init(int x, int y)
 
 	isRight = false;
 	isOffence = false;
+	isEnemyBulletFire = false;
 	speed = 0;
 	getTime = 0;
 	getDelayTime = 0;
@@ -149,94 +150,112 @@ void boomerang::update()
 	//		}
 	//	}
 	//}
-	enemy::update();
 
-	int px, py;
 	px = GetCenterPos(_player->getKnightImage().rc).x;
 	py = GetCenterPos(_player->getKnightImage().rc).y;
-	eMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
-
-	rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
-
-	static int bx = 0, by = 0;
-	BULLET->IsCollision("BEffect", &bx, &by, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0));
 
 
-	getDelayTime += TIMEMANAGER->getElapsedTime();
 
-	if (getDelayTime > 1.5f)
+
+	if (getDistance(px, py, x, y) < 800)
 	{
-		if (getDistance(px, py, x, y) < 200 && !isRight)
+		enemy::update();
+		eMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
+
+		rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
+
+		if (isEnemyBulletFire && !eMotion->isPlay())
 		{
-
-			isOffence = true;
-			getDelayTime = 0;
-			if (px < x)
+			if (eState == LEFT_OFFENCE)
 			{
-				if (!eMotion->isPlay())
-					BULLET->Shot("BEffect", x, y, PI, 0, 10);
-				eState = LEFT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftOffence");
-				eMotion->start();
-
+				BULLET->Shot("BEffect", x, y, PI, 0, 10);
+				isEnemyBulletFire = false;
 			}
-			else if (px > x)
+			else if (eState == RIGHT_OFFENCE)
 			{
-				if (!eMotion->isPlay())
-					BULLET->Shot("BEffect", x, y, PI * 2, 0, 10);
-				eState = RIGHT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightOffence");
-				eMotion->start();
-
+				BULLET->Shot("BEffect", x, y, PI * 2, 0, 10);
+				isEnemyBulletFire = false;
 			}
 
 		}
-		else if (getDistance(px, py, x, y) > 200)
-		{
-			isOffence = false;
-			move();
-		}
 
-		if (getDistance(px, py, x, y) < 200 && isRight)
+		static int bx = 0, by = 0;
+		BULLET->IsCollision("BEffect", &bx, &by, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0));
+
+
+		getDelayTime += TIMEMANAGER->getElapsedTime();
+
+		if (getDelayTime > 1.6f)
 		{
-			isOffence = true;
-			getDelayTime = 0;
-			if (px < x)
+			if (getDistance(px, py, x, y) < 200 && !isRight)
 			{
-				if (!eMotion->isPlay())
-					BULLET->Shot("BEffect", x, y, PI, 0, 10);
-				eState = LEFT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftOffence");
-				eMotion->start();
+
+				isOffence = true;
+				getDelayTime = 0;
+				if (px < x)
+				{
+					eState = LEFT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+				else if (px > x)
+				{
+					eState = RIGHT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
 
 			}
-			else if (px > x)
+			else if (getDistance(px, py, x, y) > 200)
 			{
-				if (!eMotion->isPlay())
-					BULLET->Shot("BEffect", x, y, PI * 2, 0, 10);
-				eState = RIGHT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightOffence");
-				eMotion->start();
-
+				isOffence = false;
+				move();
 			}
 
+			if (getDistance(px, py, x, y) < 200 && isRight)
+			{
+				isOffence = true;
+				getDelayTime = 0;
+				if (px < x)
+				{
+					eState = LEFT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+				else if (px > x)
+				{
+					eState = RIGHT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
 
+
+			}
+			else if (getDistance(px, py, x, y) > 200)
+			{
+				isOffence = false;
+				move();
+			}
 		}
-		else if (getDistance(px, py, x, y) > 200)
-		{
-			isOffence = false;
-			move();
-		}
+
+		enemyCollision();
+		epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 	}
 
-	enemyCollision();
-	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 
 }
 
 void boomerang::render()
 {
-	draw();
+	if (getDistance(px, py, x, y) < 800)
+	{
+		draw();
+	}
+
 }
 
 void boomerang::move()
@@ -295,8 +314,8 @@ void boomerang::enemyCollision()
 	}
 
 	//º®
-	//if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
-	//{
-	//	speed = 0;
-	//}
+	if (epCol->RayCastingX(IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), 0, 0, 255, 0))
+	{
+		speed = 0;
+	}
 }

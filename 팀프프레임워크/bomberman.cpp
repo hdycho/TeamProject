@@ -40,7 +40,7 @@ HRESULT bomberman::init(int x, int y)
 	Rweapon->init(PathFile("image", "rightBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("RBomb", IMAGEMANAGER->findImage("RB"), 30, true, 20);
 
-	EFFECTMANAGER->addEffect("bombEffect", PathFile("image", "bombEffect").c_str(), 560, 112, 112, 112, 60, 1, 30);
+	EFFECTMANAGER->addEffect("bombEffect", PathFile("image", "bombEffect").c_str(), 560, 112, 112, 112, 10, 1, 30);
 
 	eState = LEFT_MOVE;
 
@@ -52,11 +52,11 @@ HRESULT bomberman::init(int x, int y)
 	int rightMove[] = { 0,1 };
 	KEYANIMANAGER->addArrayFrameAnimation("bombermanRightMove", "bomberman", rightMove, 2, 6, true);
 
-	int leftOffence[] = { 23,22,21,20,19,18,17,16,15,14 };
-	KEYANIMANAGER->addArrayFrameAnimation("bombermanLeftOffence", "bomberman", leftOffence, 10, 5, false);
+	int leftOffence[] = { 23,22,21,20,19,18,17,16,15 };
+	KEYANIMANAGER->addArrayFrameAnimation("bombermanLeftOffence", "bomberman", leftOffence, 9, 9, false);
 
-	int rightOffence[] = { 2,3,4,5,6,7,8,9,10,11 };
-	KEYANIMANAGER->addArrayFrameAnimation("bombermanRightOffence", "bomberman", rightOffence, 10, 5, false);
+	int rightOffence[] = { 2,3,4,5,6,7,8,9,10 };
+	KEYANIMANAGER->addArrayFrameAnimation("bombermanRightOffence", "bomberman", rightOffence, 9, 9, false);
 
 	int leftDie[] = { 12 };
 	KEYANIMANAGER->addArrayFrameAnimation("bombermanLeftDie", "bomberman", leftDie, 1, 4, true);
@@ -70,10 +70,13 @@ HRESULT bomberman::init(int x, int y)
 
 	isRight = false;
 	isOffence = false;
+	isEnemyBulletFire = false;
+	isCollision = false;
 	speed = 1.0f;
 	getTime = 0;
 	getDelayTime = 0;
 	gravity = 1.0f;
+	cnt = 0;
 
 	BULLET->UseCollision("LBomb", 16, 16);
 	BULLET->UseCollision("RBomb", 16, 16);
@@ -92,84 +95,101 @@ void bomberman::release()
 
 void bomberman::update()
 {
-	enemy::update();
-	static int exX = 0, exy = 0;
-	if (BULLET->IsCollision("LBomb", &exX, &exy, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0)))
-	{
-		EFFECTMANAGER->play("bombEffect", exX, exy);
-	}
-	else if (BULLET->IsCollision("RBomb", &exX, &exy, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0)))
-	{
-		EFFECTMANAGER->play("bombEffect", exX, exy);
-	}
-	int px, py;
 	px = GetCenterPos(_player->getKnightImage().rc).x;
 	py = GetCenterPos(_player->getKnightImage().rc).y;
-	eMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
 
-	rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
 
-	getDelayTime += TIMEMANAGER->getElapsedTime();
-	if (getDelayTime > 1.6f)
+	if (getDistance(px, py, x, y) < 800)
 	{
-		if (getDistance(px, py, x, y) < 200 && !isRight)
+
+
+		if (isEnemyBulletFire && !eMotion->isPlay())
 		{
-
-			isOffence = true;
-			getDelayTime = 0;
-			if (px < x)
+			if (eState == LEFT_OFFENCE)
 			{
-				eState = LEFT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftOffence");
-				eMotion->start();
-				BULLET->Shot("LBomb", x, y, PI / 3 * 2, 1.0f, 15);
-
+				BULLET->Shot("LBomb", x, y, PI / 3 * 2, 1.0f, 14);
+				isEnemyBulletFire = false;
 			}
-			else if (px > x)
+			else if (eState == RIGHT_OFFENCE)
 			{
-				eState = RIGHT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightOffence");
-				eMotion->start();
-				BULLET->Shot("RBomb", x, y, PI / 3, 1.0f, 15);
+				BULLET->Shot("RBomb", x, y, PI / 3, 1.0f, 14);
+				isEnemyBulletFire = false;
 			}
-
 		}
-		else if (getDistance(px, py, x, y) > 200)
+
+		enemy::update();
+		static int exX = 0, exy = 0;
+		if (BULLET->IsCollision("LBomb", &exX, &exy, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0)))
 		{
+			EFFECTMANAGER->play("bombEffect", exX, exy);
 			isOffence = false;
-			move();
-		}
-
-		if (getDistance(px, py, x, y) < 200 && isRight)
-		{
-			isOffence = true;
-			getDelayTime = 0;
-			if (px < x)
-			{
-				eState = LEFT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftOffence");
-				eMotion->start();
-				BULLET->Shot("LBomb", x, y, PI / 4 * 3, 1.0f, 15);
-			}
-			else if (px > x)
-			{
-				eState = RIGHT_OFFENCE;
-				*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightOffence");
-				eMotion->start();
-				BULLET->Shot("RBomb", x, y, PI / 4, 1.0f, 15);
-			}
-
 
 		}
-		else if (getDistance(px, py, x, y) > 200)
+		else if (BULLET->IsCollision("RBomb", &exX, &exy, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0)))
 		{
+			EFFECTMANAGER->play("bombEffect", exX, exy);
 			isOffence = false;
-			move();
+
 		}
+
+		eMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
+
+		rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
+
+		getDelayTime += TIMEMANAGER->getElapsedTime();
+		if (getDelayTime > 1.8f)
+		{
+			if (!isOffence) move();
+			if (getDistance(px, py, x, y) < 200 && !isRight)
+			{
+				cnt++;
+				isOffence = true;
+				getDelayTime = 0;
+				if (px < x)
+				{
+					eState = LEFT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+				else if (px > x)
+				{
+					eState = RIGHT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+			}
+
+
+			if (getDistance(px, py, x, y) < 200 && isRight)
+			{
+				cnt++;
+				isOffence = true;
+				getDelayTime = 0;
+				if (px < x)
+				{
+					eState = LEFT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+				else if (px > x)
+				{
+					eState = RIGHT_OFFENCE;
+					*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightOffence");
+					eMotion->start();
+					isEnemyBulletFire = true;
+				}
+			}
+		}
+
+
+
+		enemyCollision();
+		epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 	}
 
-	enemyCollision();
-	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 	//KEYANIMANAGER->update();
 }
 
@@ -178,7 +198,6 @@ void bomberman::render()
 	draw();
 	char temp[255];
 	sprintf(temp, "%p", eMotion);
-
 	TextOut(getMemDC(), x, y, temp, strlen(temp));
 }
 
@@ -188,27 +207,59 @@ void bomberman::move()
 	x -= speed;
 	getTime += TIMEMANAGER->getElapsedTime();
 
-	if (getTime > 1.8f)
+	if (!eMotion->isPlay() && cnt != 0)
 	{
-		if (!isRight)
+		if (!isRight && eState == LEFT_OFFENCE)
 		{
-			isRight = true;
-			speed *= -1;
-			getTime = 0;
+			eState = LEFT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftMove");
+			eMotion->start();
+		}
+		else if (!isRight && eState == RIGHT_OFFENCE)
+		{
+			eState = LEFT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftMove");
+			eMotion->start();
+		}
+		else if (isRight && eState == LEFT_OFFENCE)
+		{
 			eState = RIGHT_MOVE;
 			*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightMove");
 			eMotion->start();
 		}
+		else if (isRight && eState == RIGHT_OFFENCE)
+		{
+			eState = RIGHT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightMove");
+			eMotion->start();
+		}
+		cnt = 0;
+	}
+
+
+	if (getTime > 1.8f && cnt == 0)
+	{
+		if (!isRight)
+		{
+			isRight = true;
+			getTime = 0;
+			speed *= -1;
+			eState = RIGHT_MOVE;
+			*eMotion = *KEYANIMANAGER->findAnimation("bombermanRightMove");
+			eMotion->start();
+		}
+
 		else if (isRight)
 		{
 			isRight = false;
-			speed *= -1;
 			getTime = 0;
+			speed *= -1;
 			eState = LEFT_MOVE;
 			*eMotion = *KEYANIMANAGER->findAnimation("bombermanLeftMove");
 			eMotion->start();
 		}
 	}
+
 
 
 }

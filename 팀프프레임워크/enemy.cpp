@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "enemy.h"
+#include "player.h"
 
 
 enemy::enemy()

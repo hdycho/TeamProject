@@ -4,7 +4,8 @@
 class bomberman : public enemy
 {
 private:
-
+	int cnt = 1;
+	bool _isMotion = false;
 public:
 	bomberman();
 	~bomberman();

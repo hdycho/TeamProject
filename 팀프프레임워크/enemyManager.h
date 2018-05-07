@@ -6,7 +6,7 @@
 #include "boomerang.h"
 #include <vector>
 
-class player;
+
 
 class enemyManager : public gameNode
 {
@@ -30,6 +30,6 @@ public:
 	//미니언 셋팅 함수
 	void setMinion();
 
-	inline vEnemy&GetEnemyVec() { return _vMinion; }
+	inline vEnemy&GetEnemyVec() { return _vMinion; } //에너미 벡터에 연결
 };
 
