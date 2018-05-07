@@ -4,9 +4,9 @@
 
 enemyManager::enemyManager()
 {
-	IMAGEMANAGER->addFrameImage("RB", PathFile("image", "rightBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("RB", PathFile("image", "rightBomb").c_str(), 80, 40, 2, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("RBomb", IMAGEMANAGER->findImage("RB"), 30, true, 20);
-	IMAGEMANAGER->addFrameImage("LB", PathFile("image", "leftBomb").c_str(), 66, 33, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("LB", PathFile("image", "leftBomb").c_str(), 80, 40, 2, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("LBomb", IMAGEMANAGER->findImage("LB"), 30, true, 20);
 	IMAGEMANAGER->addFrameImage("BE", PathFile("image", "boomerangEffect").c_str(), 448, 44, 8, 1, true, RGB(255, 0, 255));
 	BULLET->BulletSetting("BEffect", IMAGEMANAGER->findImage("BE"), 30, true, 5);
@@ -30,10 +30,11 @@ void enemyManager::release()
 
 void enemyManager::update()
 {
+	RECT updateRc = RectMakeCenter(GetCenterPos(CAM->getCamRc()).x, GetCenterPos(CAM->getCamRc()).y, 1600, 1200);
 	for (int i = 0; i < _vMinion.size(); i++)
 	{
 		RECT temp;
-		if (!IntersectRect(&temp, &CAM->getCamRc(), &_vMinion[i]->getRect()))continue;
+		if (!IntersectRect(&temp, &updateRc, &_vMinion[i]->getRect()))continue;
 		if (!_vMinion[i]->GetisEnemyDie())
 			_vMinion[i]->update();
 	}
@@ -43,6 +44,7 @@ void enemyManager::update()
 
 void enemyManager::render()
 {
+
 	for (int i = 0; i < _vMinion.size(); i++)
 	{
 		RECT temp;
@@ -198,12 +200,12 @@ void enemyManager::setMinion()
 	//º½¹ö¸Ç ¼ÂÆÃ
 	enemy* ebomberman1;
 	ebomberman1 = new bomberman;
-	ebomberman1->init(1700, WINSIZEY / 2);
+	ebomberman1->init(1700, 330);
 	_vMinion.push_back(ebomberman1);
 
 	enemy* ebomberman2;
 	ebomberman2 = new bomberman;
-	ebomberman2->init(2820, 300);
+	ebomberman2->init(2820, 330);
 	_vMinion.push_back(ebomberman2);
 
 	enemy* ebomberman3;

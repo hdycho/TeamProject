@@ -22,14 +22,14 @@ HRESULT bomberman::init(int x, int y)
 	this->y = y;
 
 	epCol = new PixelCol;
-	epCol->init(70, 20);
+	epCol->init(10, 10);
 	epCol->UpdatePosition(GetCenterPos(rc).x, GetCenterPos(rc).y);
 
 	enemy::init();
 
-	IMAGEMANAGER->addFrameImage("bomberman", PathFile("image", "bomberman").c_str(), 988, 120, 13, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("bomberman", PathFile("image", "bomberman").c_str(), 1235, 150, 13, 2, true, RGB(255, 0, 255));
 	img = new image;
-	img->init(PathFile("image", "bomberman").c_str(), 988, 120, 13, 2, true, RGB(255, 0, 255));
+	img->init(PathFile("image", "bomberman").c_str(), 1235, 150, 13, 2, true, RGB(255, 0, 255));
 
 	EFFECTMANAGER->addEffect("bombEffect", PathFile("image", "bombEffect").c_str(), 560, 112, 112, 112, 10, 1, 30);
 
@@ -68,9 +68,10 @@ HRESULT bomberman::init(int x, int y)
 	getDelayTime = 0;
 	gravity = 1.0f;
 	cnt = 0;
+	moveCnt = 1;
 
-	BULLET->UseCollision("LBomb", 16, 16);
-	BULLET->UseCollision("RBomb", 16, 16);
+	BULLET->UseCollision("LBomb", 20, 20);
+	BULLET->UseCollision("RBomb", 20, 20);
 	return S_OK;
 }
 
@@ -90,9 +91,14 @@ void bomberman::update()
 	py = GetCenterPos(_player->getKnightImage().rc).y;
 
 
+
 	if (getDistance(px, py, x, y) < 800)
 	{
-
+		if (moveCnt == 1)
+		{
+			move();
+			moveCnt = 0;
+		}
 
 		if (isEnemyBulletFire && !eMotion->isPlay())
 		{
@@ -187,9 +193,6 @@ void bomberman::update()
 void bomberman::render()
 {
 	draw();
-	char temp[255];
-	sprintf(temp, "%p", eMotion);
-	TextOut(getMemDC(), x, y, temp, strlen(temp));
 }
 
 void bomberman::move()

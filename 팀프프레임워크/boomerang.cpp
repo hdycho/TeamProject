@@ -82,70 +82,7 @@ void boomerang::release()
 
 void boomerang::update()
 {
-	//static int bx = 0, by = 0;
-	//BULLET->IsCollision("BEffect", &bx, &by, true, IMAGEMANAGER->findImage("Ãæµ¹¸Ê")->getMemDC(), RectMake(0, 0, 0, 0));
-	//
-	//int px, py;
-	//px = GetCenterPos(_player->getKnightImage().rc).x;
-	//py = GetCenterPos(_player->getKnightImage().rc).y;
-	//eMotion->frameUpdate(TIMEMANAGER->getElapsedTime());
-	//
-	//rc = RectMakeCenter(x, y, img->getFrameWidth(), img->getFrameHeight());
-	//
-	//getTime += TIMEMANAGER->getElapsedTime();
-	//getDelayTime += TIMEMANAGER->getElapsedTime();
-	//
-	//if (getDelayTime > 1.8f)
-	//{
-	//	if (px < x)
-	//	{
-	//		isRight = false;
-	//		eState = LEFT_MOVE;
-	//		*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftMove");
-	//		eMotion->start();
-	//
-	//		if (getDistance(px, py, x, y) < 200 && !isRight)
-	//		{
-	//			eState = LEFT_OFFENCE;
-	//			*eMotion = *KEYANIMANAGER->findAnimation("boomerangLeftOffence");
-	//			eMotion->start();
-	//			isOffence = true;
-	//			getTime = getDelayTime;
-	//			getDelayTime = 0;
-	//		
-	//			if (getTime > 2.8f)
-	//			{
-	//				BULLET->Shot("BEffect", x, y, PI, 0, 5);
-	//				getTime = 0;
-	//			}
-	//			
-	//		}
-	//		
-	//	}
-	//	else if (px > x)
-	//	{
-	//		isRight = true;
-	//		eState = RIGHT_MOVE;
-	//		*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightMove");
-	//		eMotion->start();
-	//
-	//		if (getDistance(px, py, x, y) < 200 && isRight)
-	//		{
-	//			eState = RIGHT_OFFENCE;
-	//			*eMotion = *KEYANIMANAGER->findAnimation("boomerangRightOffence");
-	//			eMotion->start();
-	//			isOffence = true;
-	//			getTime = getDelayTime;
-	//			getDelayTime = 0;
-	//			
-	//			if (getTime > 2.8f)
-	//			{
-	//				BULLET->Shot("BEffect", x, y, PI * 2, 0, 15);
-	//				getTime = 0;
-	//			}
-	//		}
-	//	}
-	//}
+
 
 	px = GetCenterPos(_player->getKnightImage().rc).x;
 	py = GetCenterPos(_player->getKnightImage().rc).y;
@@ -247,11 +184,7 @@ void boomerang::update()
 
 void boomerang::render()
 {
-	if (getDistance(px, py, x, y) < 800)
-	{
-		draw();
-	}
-
+	draw();
 }
 
 void boomerang::move()
