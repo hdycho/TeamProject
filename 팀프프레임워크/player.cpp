@@ -20,7 +20,7 @@ HRESULT player::init()
 	_jump = IMAGEMANAGER->addFrameImage("jump", PathFile("image", "jump_sprite").c_str(), 603, 144, 9, 2, true, RGB(255, 0, 255));
 	_attack = IMAGEMANAGER->addFrameImage("attack", PathFile("image", "attack_sprite").c_str(), 2700, 172, 19, 2, true, RGB(255, 0, 255));
 
-	_knight.x = 600;
+	_knight.x = 400;
 	_knight.y = 200;
 
 	// Skill_Heal image

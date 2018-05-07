@@ -4,42 +4,53 @@ c:\users\adyda\desktop\teamproject\팀프프레임워크\boss.h(7): warning C400
   c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(64): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(74): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(423): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(452): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(471): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(496): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(501): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(510): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(514): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(523): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(529): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(537): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(542): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(550): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(555): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(563): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(568): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(576): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(596): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(619): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(419): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(448): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(467): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(514): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(525): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(530): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(539): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(543): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(552): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(558): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(566): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(571): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(579): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(584): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(592): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(597): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(605): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(625): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(636): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(650): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(662): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(676): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(720): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(721): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(785): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(649): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(655): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(667): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(682): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(694): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(708): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(754): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(755): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(819): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(790): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(824): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(800): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(834): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(805): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(839): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(813): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(847): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(818): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\gamescene.cpp(852): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  BulletManager.cpp
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(83): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(85): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(139): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(158): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(168): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(202): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\adyda\desktop\teamproject\팀프프레임워크\bulletmanager.cpp(217): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
   nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.pdb (Full PDB)

@@ -22,7 +22,8 @@ GameScene::GameScene()
 	IMAGEMANAGER->addFrameImage("로딩화면", PathFile("image", "로딩화면").c_str(), 800, 600, 1, 1, false, NULL);
 	IMAGEMANAGER->addFrameImage("로딩창", PathFile("image", "로딩창").c_str(), 3000, 100, 9, 1, true, RGB(255,0,255));
 	EFFECTMANAGER->addEffect("총알터지는거", PathFile("image", "FIRE_EF").c_str(), 1400, 100, 100, 100, 30, 1, 30);
-	EFFECTMANAGER->addEffect("폭탄터지는거", PathFile("image", "BOMB_EF").c_str(), 4000, 250, 250, 250, 30, 1, 50);
+	EFFECTMANAGER->addEffect("폭탄터지는거", PathFile("image", "BOMB_EF").c_str(), 4000, 250, 250, 250, 20, 1, 50);
+	EFFECTMANAGER->addEffect("플레이어등장", PathFile("image", "장애물폭발").c_str(), 700, 100, 100, 100, 25, 1, 50);
 }
 
 
@@ -32,7 +33,7 @@ GameScene::~GameScene()
 
 HRESULT GameScene::init()
 {
-	sState = IN_GAME;
+	sState = ENTER_GAME;
 	fadeOut = IMAGEMANAGER->findImage("검은화면1");
 
 	_metaKnight = new player;
@@ -86,7 +87,7 @@ HRESULT GameScene::init()
 	// Store/player link 함수 for player (money)
 	_store->setLinkMoney(&_metaKnight->_money);
 
-	alpha = 0;
+	alpha = 255;
 	bossEnterRc = RectMakeCenter(18910, 720, 100, 100);
 	diePosX = diePosY = 0;
 	isClear = false;
@@ -106,6 +107,18 @@ void GameScene::update()
 	
 	switch (sState)
 	{
+	case ENTER_GAME:
+	{
+		alpha -= 3;
+		EFFECTMANAGER->play("플레이어등장", _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
+		if (alpha < 1)
+		{
+			alpha = 0;
+			sState = IN_GAME;
+		}
+		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
+	}
+	break;
 	case PLAYER_DIE:
 	{
 		_metaKnight->update(IMAGEMANAGER->findImage("충돌맵")->getMemDC());
@@ -181,16 +194,6 @@ void GameScene::update()
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
 		//==============================================//
-		
-		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-		{
-			alpha = 0;
-			//클리어씬이동시키기
-			isClear = true;
-			SaveTime();
-			SCENEMANAGER->changeScene("클리어씬");
-		}
-	
 	}
 	break;
 	case STORE:
@@ -268,6 +271,20 @@ void GameScene::render()
 {
 	switch (sState)
 	{
+	case ENTER_GAME:
+	{
+		IMAGEMANAGER->findImage("스테이지")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+			IMAGEMANAGER->findImage("충돌맵")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
+
+		//_metaKnight->render();
+		_em->render();
+		_im->render();
+		_om->render();
+		//ShowGameTime();
+		fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
+	}
+	break;
 	case PLAYER_DIE:
 	{
 		IMAGEMANAGER->findImage("스테이지")->render(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, CAM->getCamRc().left, CAM->getCamRc().top, WINSIZEX, WINSIZEY);
@@ -307,6 +324,11 @@ void GameScene::render()
 	break;
 	case BOSS_ROOM:
 	{
+		if (alpha < 1)
+			alpha = 0;
+		else
+			alpha -= 4;
+
 		IMAGEMANAGER->findImage("보스방")->render(getMemDC(), 0, 0);
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 			IMAGEMANAGER->findImage("보스방충돌맵")->render(getMemDC(), 0, 0);
@@ -314,6 +336,7 @@ void GameScene::render()
 		_metaKnight->render();
 		_bs->render();
 		ShowGameTime();
+		fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 		
 		//CamRender();
 	}
@@ -338,9 +361,8 @@ void GameScene::render()
 
 			if (alpha > 254)
 			{
-				alpha = 0;
+				alpha = 255;
 				sState = BOSS_ROOM;
-				CAM->CamInit(DYNAMIC_CAMERA, 0,0, 300, 150, 4);
 			}
 		}
 		if (MetaStageData == BOSS_DIE)
@@ -354,17 +376,19 @@ void GameScene::render()
 				//클리어씬이동시키기
 				isClear = true;
 				SaveTime();
+				CAM->CamInit(DYNAMIC_CAMERA, WINSIZEX / 2, WINSIZEY / 2, 300+400, 150, 4);
 				SCENEMANAGER->changeScene("클리어씬");
 			}
 		}
 		if (MetaStageData == GAME_OVER)
 		{
-			alpha += 3;
+			alpha += 2;
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
 			if (alpha > 254)
 			{
 				alpha = 0;
 				SaveTime();
+				CAM->CamInit(DYNAMIC_CAMERA,WINSIZEX/2,WINSIZEY/2+400 , 300, 150, 4);
 				SCENEMANAGER->changeScene("게임오버씬");
 			}
 		}
@@ -480,41 +504,41 @@ void GameScene::PlayerCollision()
 	}
 
 	//플레이어 에너미 폭탄
-	for (int i = 0; BULLET->GetBulletVec("LBomb").size(); i++)
-	{
-		RECT col;
-		if (!BULLET->GetBulletVec("LBomb")[i]->isShot)continue;
-		if (IntersectRect(&col, &BULLET->GetBulletVec("LBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
-		{
-			_metaKnight->GetHp() -= 5;
-			EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).y);
-			BULLET->Destroy("LBomb", i);
-		}
-	}
-	for (int i = 0; BULLET->GetBulletVec("RBomb").size(); i++)
-	{
-		RECT col;
-		if (!BULLET->GetBulletVec("RBomb")[i]->isShot)continue;
-		if (IntersectRect(&col, &BULLET->GetBulletVec("RBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
-		{
-			_metaKnight->GetHp() -= 5;
-			EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).y);
-			BULLET->Destroy("RBomb", i);
-		}
-	}
+	//for (int i = 0; BULLET->GetBulletVec("LBomb").size(); i++)
+	//{
+	//	RECT col;
+	//	if (!BULLET->GetBulletVec("LBomb")[i]->isShot)continue;
+	//	if (IntersectRect(&col, &BULLET->GetBulletVec("LBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
+	//	{
+	//		_metaKnight->GetHp() -= 5;
+	//		EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("LBomb")[i]->rc).y);
+	//		BULLET->Destroy("LBomb", i);
+	//	}
+	//}
+	//for (int i = 0; BULLET->GetBulletVec("RBomb").size(); i++)
+	//{
+	//	RECT col;
+	//	if (!BULLET->GetBulletVec("RBomb")[i]->isShot)continue;
+	//	if (IntersectRect(&col, &BULLET->GetBulletVec("RBomb")[i]->rc, &_metaKnight->getKnightImage().rc))
+	//	{
+	//		_metaKnight->GetHp() -= 5;
+	//		EFFECTMANAGER->play("bombEffect", GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).x, GetCenterPos(BULLET->GetBulletVec("RBomb")[i]->rc).y);
+	//		BULLET->Destroy("RBomb", i);
+	//	}
+	//}
 
-	//플레이어 에너미 부메랑
-	for (int i = 0; BULLET->GetBulletVec("BEffect").size(); i++)
-	{
-		RECT col;
-		if (!BULLET->GetBulletVec("BEffect")[i]->isShot)continue;
-		if (IntersectRect(&col, &BULLET->GetBulletVec("BEffect")[i]->rc, &_metaKnight->getKnightImage().rc))
-		{
-			_metaKnight->GetHp() -= 5;
-			EFFECTMANAGER->play("에너미죽을때", _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
-			BULLET->Destroy("BEffect", i);
-		}
-	}
+	////플레이어 에너미 부메랑
+	//for (int i = 0; BULLET->GetBulletVec("BEffect").size(); i++)
+	//{
+	//	RECT col;
+	//	if (!BULLET->GetBulletVec("BEffect")[i]->isShot)continue;
+	//	if (IntersectRect(&col, &BULLET->GetBulletVec("BEffect")[i]->rc, &_metaKnight->getKnightImage().rc))
+	//	{
+	//		_metaKnight->GetHp() -= 5;
+	//		EFFECTMANAGER->play("에너미죽을때", _metaKnight->getKnightImage().x, _metaKnight->getKnightImage().y);
+	//		BULLET->Destroy("BEffect", i);
+	//	}
+	//}
 
 	if (sState == BOSS_ROOM)
 	{//플레이어 보스

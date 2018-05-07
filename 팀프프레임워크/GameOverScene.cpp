@@ -15,9 +15,9 @@ GameOverScene::~GameOverScene()
 HRESULT GameOverScene::init()
 {
 	//===============카메라 셋팅===============//
-	CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 4);
+	//CAM->CamInit(DYNAMIC_CAMERA, 0, 0, 300, 150, 4);
 	//========================================//
-	alpha = 0;
+	alpha = 255;
 	fadeout = IMAGEMANAGER->findImage("검은화면");
 
 	Loby = new button;
@@ -37,6 +37,14 @@ void GameOverScene::release()
 
 void GameOverScene::update()
 {
+	RECT rc = RectMake(0, 0, 70, 56);
+	CAM->CamUpdate(rc, 0, 1600, 0, 1200);
+	if (alpha > 1)
+		alpha -= 3;
+	else
+		alpha = 0;
+
+
 	Loby->Update(VK_LBUTTON, true);
 	Quit->Update(VK_LBUTTON, true);
 	if (Loby->IsClick())

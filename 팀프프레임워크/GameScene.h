@@ -3,6 +3,7 @@
 
 enum STAGESTATE
 {
+	ENTER_GAME,		//게임입장
 	IN_GAME,		//게임중
 	STORE,			//상점
 	BOSS_ENTER,		//보스방 입장로딩

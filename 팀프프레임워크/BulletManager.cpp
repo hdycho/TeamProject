@@ -42,18 +42,21 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 	}
 	else//단일 총알이미지일때
 	{
-		Bullet*bullet = new Bullet;
-		bullet->rc = { 0,0,0,0 };
-		bullet->img = img;
-		bullet->bulletName = bulletName;
-		bullet->speed = 0;
-		bullet->gravity = 0;
-		bullet->addGravity = 0;
-		bullet->isShot = false;
-		bullet->isAnimation = isAnim;
-		bullet->useCollision = false;
+		for (int i = 0; i < bulletNum; i++)
+		{
+			Bullet*bullet = new Bullet;
+			bullet->rc = { 0,0,0,0 };
+			bullet->img = img;
+			bullet->bulletName = bulletName;
+			bullet->speed = 0;
+			bullet->gravity = 0;
+			bullet->addGravity = 0;
+			bullet->isShot = false;
+			bullet->isAnimation = isAnim;
+			bullet->useCollision = false;
 
-		bVec.push_back(bullet);
+			bVec.push_back(bullet);
+		}
 	}
 	
 	bulletMapIter bMapIter = bMap.find(bulletName);
@@ -79,9 +82,10 @@ void BulletManager::BulletUpdate()
 
 			(*bIter)->x += cosf((*bIter)->angle)*(*bIter)->speed;
 			(*bIter)->y += -sinf((*bIter)->angle)*(*bIter)->speed+ (*bIter)->gravity;
-
-			(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getFrameWidth(), (*bIter)->img->getFrameHeight());
-			
+			if ((*bIter)->isAnimation)
+				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getFrameWidth(), (*bIter)->img->getFrameHeight());
+			else
+				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->getWidth(), (*bIter)->img->getHeight());
 			if (getDistance((*bIter)->initX, (*bIter)->initY, (*bIter)->x, (*bIter)->y) > 600)
 			{
 				(*bIter)->isShot = false;
