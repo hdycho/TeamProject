@@ -24,6 +24,13 @@ GameScene::GameScene()
 	EFFECTMANAGER->addEffect("총알터지는거", PathFile("image", "FIRE_EF").c_str(), 1400, 100, 100, 100, 30, 1, 30);
 	EFFECTMANAGER->addEffect("폭탄터지는거", PathFile("image", "BOMB_EF").c_str(), 4000, 250, 250, 250, 20, 1, 50);
 	EFFECTMANAGER->addEffect("플레이어등장", PathFile("image", "장애물폭발").c_str(), 700, 100, 100, 100, 25, 1, 50);
+	SOUNDMANAGER->addSound("대포", "mp3/Bomb+1.mp3", true, false);
+	SOUNDMANAGER->addSound("보스다이", "mp3/bossDie.wav", true, false);
+	SOUNDMANAGER->addSound("보스브금", "mp3/bossBgm.mp3", true, true);
+	SOUNDMANAGER->addSound("브금", "mp3/bgm.mp3", true, true);
+	SOUNDMANAGER->addSound("아이템", "mp3/getItem.mp3", true, false);
+	SOUNDMANAGER->addSound("총알", "mp3/gun.mp3", true, false);
+	SOUNDMANAGER->addSound("칼질", "mp3/effectSound.mp3", true, false);
 }
 
 
@@ -104,7 +111,10 @@ void GameScene::release()
 
 void GameScene::update()
 {
-
+	if (sState != BOSS_ENTER && sState != BOSS_ROOM && MetaStageData != BOSS_ROOM )
+		if (SOUNDMANAGER->isPlaySound("보스브금"))
+			SOUNDMANAGER->stop("보스브금");
+	
 	switch (sState)
 	{
 	case NULL_SCENE2:
@@ -194,6 +204,12 @@ void GameScene::update()
 		PlayerCollision();
 		OtherCollision();
 		PlayerDieSet();
+
+		SOUNDMANAGER->update();
+		if (SOUNDMANAGER->isPlaySound("보스브금"))
+			SOUNDMANAGER->stop("보스브금");
+		if (!SOUNDMANAGER->isPlaySound("브금"))
+			SOUNDMANAGER->play("브금");
 		//===============이건 만지지 않도록===============//
 		CAM->CamUpdate(_metaKnight->getKnightImage().rc, 0, GAMESIZEX, 0, GAMESIZEY);
 		//==============================================//
@@ -230,7 +246,7 @@ void GameScene::update()
 
 		//보스체력다달면 몇초간 보스터지면서 
 		//다터지고 페이드아웃으로 넘어가고
-		if (_bs->GetHp()<0)
+		if (_bs->GetHp()<=0)
 		{
 			//이펙트보여주기
 			static float bossDieTime = 0;
@@ -243,6 +259,8 @@ void GameScene::update()
 				sState = FADE_OUT;
 				MetaStageData = BOSS_DIE;
 			}
+			if(!SOUNDMANAGER->isPlaySound("보스다이"))
+				SOUNDMANAGER->play("보스다이", 0.7f);
 		}
 	}
 	break;
@@ -266,6 +284,12 @@ void GameScene::update()
 			sState = FADE_OUT;
 			MetaStageData = BOSS_ROOM;
 		}
+
+		SOUNDMANAGER->update();
+		if (SOUNDMANAGER->isPlaySound("브금"))
+			SOUNDMANAGER->stop("브금");
+		if (!SOUNDMANAGER->isPlaySound("보스브금"))
+			SOUNDMANAGER->play("보스브금");
 	}
 	break;
 	}
@@ -377,6 +401,12 @@ void GameScene::render()
 		{
 			alpha += 3;
 			fadeOut->alphaRender(getMemDC(), CAM->getCamRc().left, CAM->getCamRc().top, alpha);
+			
+			if (isPlaySound == false)
+			{
+				SOUNDMANAGER->stop("보스다이");
+				isPlaySound = true;
+			}
 
 			if (alpha > 254)
 			{
@@ -445,7 +475,7 @@ void GameScene::CamRender()
 void GameScene::PlayerCollision()
 {
 	//==========플레이어 아이템충돌===========//
-
+	SOUNDMANAGER->update();
 	//토마토,바나나
 	for (int i = 0; i < _im->GetMapItemVec().size(); i++)
 	{
@@ -458,6 +488,7 @@ void GameScene::PlayerCollision()
 			if (_im->GetMapItemVec()[i]->GetItemType() == POTION_HP)
 			{
 				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y + 15);
+				SOUNDMANAGER->play("아이템");
 				if (_metaKnight->GetHp()<100)
 					_metaKnight->GetHp() += 10;
 				//플레이어 체력올려준다
@@ -465,6 +496,7 @@ void GameScene::PlayerCollision()
 			else if (_im->GetMapItemVec()[i]->GetItemType() == POTION_MP)
 			{
 				EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetMapItemVec()[i]->GetRect()).y + 15);
+				SOUNDMANAGER->play("아이템");
 				if (_metaKnight->GetMp()<100)
 					_metaKnight->GetMp() += 10;
 				//플레이어 마나올려준다
@@ -487,6 +519,7 @@ void GameScene::PlayerCollision()
 			//플레이어 돈 올려준다
 			_metaKnight->getMoney() += 200;
 			EFFECTMANAGER->play("동전먹을때", GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).x + 15, GetCenterPos(_im->GetGoldItecVec()[i]->GetRect()).y + 15);
+			SOUNDMANAGER->play("아이템");
 			_im->GetGoldItecVec()[i]->GetShowState() = false;
 			_im->GetGoldItecVec()[i]->GetRect() = RectMake(0, 0, 0, 0);
 			break;
@@ -506,6 +539,7 @@ void GameScene::PlayerCollision()
 			_metaKnight->knightDamaged(_em->GetEnemyVec()[i]->getRect());
 			_metaKnight->GetHp() -= 10;
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().playerColRect).x, GetCenterPos(_metaKnight->getKnightImage().playerColRect).y);
+			SOUNDMANAGER->play("총알");
 			break;
 		}
 	}
@@ -519,6 +553,7 @@ void GameScene::PlayerCollision()
 		{
 			//이펙트 터지는거
 			_metaKnight->GetHp() -= 5;
+			SOUNDMANAGER->play("대포");
 			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("LBomb")[i]->x, BULLET->GetBulletVec("LBomb")[i]->y);
 			BULLET->Destroy("LBomb", i);
 			break;
@@ -532,6 +567,7 @@ void GameScene::PlayerCollision()
 		{
 			//이펙트 터지는거
 			_metaKnight->GetHp() -= 5;
+			SOUNDMANAGER->play("대포");
 			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("RBomb")[i]->x, BULLET->GetBulletVec("RBomb")[i]->y);
 			BULLET->Destroy("RBomb", i);
 			break;
@@ -548,6 +584,7 @@ void GameScene::PlayerCollision()
 			//이펙트 터지는거
 			_metaKnight->GetHp() -= 5;
 			EFFECTMANAGER->play("에너미죽을때", BULLET->GetBulletVec("BEffect")[i]->x, BULLET->GetBulletVec("BEffect")[i]->y);
+			SOUNDMANAGER->play("칼질");
 			BULLET->Destroy("BEffect", i);
 			break;
 		}
@@ -575,6 +612,7 @@ void GameScene::PlayerCollision()
 				_metaKnight->GetHp() -= 10;
 				BULLET->Destroy("RGF", i);
 				EFFECTMANAGER->play("총알터지는거", BULLET->GetBulletVec("RGF")[i]->x - 20, BULLET->GetBulletVec("RGF")[i]->y);
+				SOUNDMANAGER->play("총알");
 				break;
 			}
 		}
@@ -588,6 +626,7 @@ void GameScene::PlayerCollision()
 				_metaKnight->GetHp() -= 10;
 				BULLET->Destroy("LGF", i);
 				EFFECTMANAGER->play("총알터지는거", BULLET->GetBulletVec("LGF")[i]->x + 20, BULLET->GetBulletVec("LGF")[i]->y);
+				SOUNDMANAGER->play("총알");
 				break;
 			}
 		}
@@ -601,6 +640,7 @@ void GameScene::PlayerCollision()
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
+				SOUNDMANAGER->play("대포");
 				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC")[i]->x, BULLET->GetBulletVec("CC")[i]->y);
 				BULLET->Destroy("CC", i);
 				break;
@@ -614,6 +654,7 @@ void GameScene::PlayerCollision()
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
+				SOUNDMANAGER->play("대포");
 				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC1")[i]->x, BULLET->GetBulletVec("CC1")[i]->y);
 				BULLET->Destroy("CC1", i);
 				break;
@@ -627,6 +668,7 @@ void GameScene::PlayerCollision()
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
+				SOUNDMANAGER->play("대포");
 				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC2")[i]->x, BULLET->GetBulletVec("CC2")[i]->y);
 				BULLET->Destroy("CC2", i);
 				break;
@@ -640,6 +682,7 @@ void GameScene::PlayerCollision()
 			{
 				//이펙트 터지는거
 				_metaKnight->GetHp() -= 10;
+				SOUNDMANAGER->play("대포");
 				EFFECTMANAGER->play("폭탄터지는거", BULLET->GetBulletVec("CC3")[i]->x, BULLET->GetBulletVec("CC3")[i]->y);
 				BULLET->Destroy("CC3", i);
 				break;
@@ -653,6 +696,7 @@ void GameScene::PlayerCollision()
 			_metaKnight->GetHp() -= 0.5f;
 			_metaKnight->knightDamaged(_bs->GetBossRc());
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_metaKnight->getKnightImage().playerColRect).x, GetCenterPos(_metaKnight->getKnightImage().playerColRect).y);
+			SOUNDMANAGER->play("칼질");
 		}
 	}
 }
@@ -671,6 +715,8 @@ void GameScene::OtherCollision()
 			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
 			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
+			SOUNDMANAGER->play("칼질");
+			_metaKnight->setIsAttack2(false);
 			break;
 		}
 	}
@@ -683,6 +729,8 @@ void GameScene::OtherCollision()
 		{
 			_bs->GetHp() -= 1;
 			EFFECTMANAGER->play("아이템먹을때", GetCenterPos(_metaKnight->getAttackRc().rc).x, GetCenterPos(_metaKnight->getAttackRc().rc).y);
+			SOUNDMANAGER->play("칼질");
+			_metaKnight->setIsAttack2(false);
 		}
 	}
 	//플레이어 스킬1=>총알임 에너미
@@ -701,6 +749,7 @@ void GameScene::OtherCollision()
 				BULLET->Destroy("bulletSwordRight", j);
 				_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
+				SOUNDMANAGER->play("총알");
 				break;
 			}
 		}
@@ -712,6 +761,7 @@ void GameScene::OtherCollision()
 				_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 				BULLET->Destroy("bulletSwordLeft", j);
 				_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+				SOUNDMANAGER->play("대포");
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
 				break;
 			}
@@ -728,6 +778,7 @@ void GameScene::OtherCollision()
 			{
 				_bs->GetHp() -= 10;
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).x - 30, GetCenterPos(BULLET->GetBulletVec("bulletSwordRight")[j]->rc).y);
+				SOUNDMANAGER->play("총알");
 				BULLET->Destroy("bulletSwordRight", j);
 				break;
 			}
@@ -740,6 +791,7 @@ void GameScene::OtherCollision()
 			{
 				_bs->GetHp() -= 10;
 				EFFECTMANAGER->play("에너미죽을때", GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).x + 30, GetCenterPos(BULLET->GetBulletVec("bulletSwordLeft")[j]->rc).y);
+				SOUNDMANAGER->play("총알");
 				BULLET->Destroy("bulletSwordLeft", j);
 				break;
 			}
@@ -756,6 +808,7 @@ void GameScene::OtherCollision()
 		{
 			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+			SOUNDMANAGER->play("대포"); // 토네이도 사운드로 교체필요
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
 			break;
 		}
@@ -763,6 +816,7 @@ void GameScene::OtherCollision()
 		{
 			_im->DropGold(GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y, 8, 1);
 			_em->GetEnemyVec()[i]->GetEnemyHp() -= 1;
+			SOUNDMANAGER->play("대포"); // 토네이도 사운드로 교체필요
 			EFFECTMANAGER->play("에너미죽을때", GetCenterPos(_em->GetEnemyVec()[i]->getRect()).x, GetCenterPos(_em->GetEnemyVec()[i]->getRect()).y);
 			break;
 		}
@@ -774,12 +828,14 @@ void GameScene::OtherCollision()
 		RECT rec1;
 		if (IntersectRect(&rec1, &_metaKnight->getSkill2Left().rc, &_bs->GetBossRc()))
 		{
-			_bs->GetHp() -= 2;
+			_bs->GetHp() -= 1;
+			SOUNDMANAGER->play("대포"); // 토네이도 사운드로 교체필요
 		}
 		RECT rec2;
 		if (IntersectRect(&rec2, &_metaKnight->getSkill2Right().rc, &_bs->GetBossRc()))
 		{
-			_bs->GetHp() -= 2;
+			_bs->GetHp() -= 1;
+			SOUNDMANAGER->play("대포"); // 토네이도 사운드로 교체필요
 		}
 	}
 }

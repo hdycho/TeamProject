@@ -360,15 +360,18 @@ void player::update(HDC hdc)
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	_knight.playerColRect = RectMakeCenter(_knight.x, _knight.y, 25, 20);
 	_knightHeal.rc = RectMakeCenter(_knight.x + 3, _knight.y - 14, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
-	if (_isAttack == false)
+	if (_isAttack2 == false)
 	{
-		_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 0, 0);
-		_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 0, 0);
+		_attackRange.rc = RectMakeCenter(-200, -200, 0, 0);
+		//_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 0, 0);
+		//_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 0, 0);
 	}
 	if (_skill2Rect == false)
 	{
-		_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 0, 0);
-		_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 0, 0);
+		_skill_2_Right.rc = RectMakeCenter(-205, -205, 0, 0);
+		_skill_2_Left.rc = RectMakeCenter(-210, -210, 0, 0);
+		//_skill_2_Right.rc = RectMakeCenter(_skill_2_Right.x + 95, _skill_2_Right.y, 0, 0);
+		//_skill_2_Left.rc = RectMakeCenter(_skill_2_Left.x + 95, _skill_2_Left.y, 0, 0);
 	}
 	pCol->UpdatePosition(GetCenterPos(_knight.rc).x, GetCenterPos(_knight.rc).y);
 
@@ -499,6 +502,7 @@ void player::knightAttack()
 		if (KEYMANAGER->isOnceKeyDown('F'))
 		{
 			_isAttack = true;
+			_isAttack2 = true;
 			_index = 0;
 			_knightDirection = RIGHT_ATTACK;
 			//_skill->makeSlash(_knight.x, _knight.y, 40, false);
@@ -509,6 +513,7 @@ void player::knightAttack()
 		if (KEYMANAGER->isOnceKeyDown('F'))
 		{
 			_isAttack = true;
+			_isAttack2 = true;
 			_index = 18;
 			_knightDirection = LEFT_ATTACK;
 			//_skill->makeSlash(_knight.x, _knight.y, 40, true);

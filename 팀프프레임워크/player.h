@@ -83,6 +83,7 @@ private:
 	// for Attack
 	KNIGHTPOSITION _attackRange;
 	bool _isAttack;
+	bool _isAttack2;		// 렉트 삭제용 변수
 
 	// for HP/MP
 	float _playerHP;
@@ -154,4 +155,5 @@ public:
 	inline float&GetHp() { return _playerHP; }
 	inline float&GetMp() { return _playerMP; }
 	inline PixelCol*getPcol() { return pCol; }
+	void setIsAttack2(bool isAttack2) { _isAttack2 = isAttack2; }
 };

@@ -1,9 +1,50 @@
-﻿  Boss.cpp
+﻿  GameScene.cpp
 c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\skill.h(23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(110): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(132): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(133): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(144): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  nonaWindowsAPI.vcxproj -> C:\Users\manoong\Desktop\TT\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(72): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(82): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(128): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(263): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(467): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(498): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(518): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(535): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(543): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(549): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(557): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(565): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(573): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(587): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(592): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(601): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(606): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(615): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(622): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(630): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(636): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(644): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(650): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(658): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(664): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(672): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(694): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(722): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(728): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(741): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(758): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(771): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(786): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(836): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(837): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(841): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(903): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(908): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(918): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(923): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(931): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\gamescene.cpp(936): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.

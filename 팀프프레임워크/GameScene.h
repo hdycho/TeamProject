@@ -63,6 +63,7 @@ private:
 	int					revertTime;
 	int					min;
 	int					sec;
+	bool				isPlaySound = false;
 public:
 	GameScene();
 	~GameScene();
