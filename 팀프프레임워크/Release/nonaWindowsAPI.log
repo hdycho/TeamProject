@@ -1,88 +1,14 @@
-﻿  Bomb.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Bomb.cpp(31): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GameScene.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Boss.h(7): warning C4005: 'PI': 매크로 재정의
-  c:\users\adyda\desktop\teamproject\팀프프레임워크\utils.h(3): note: 'PI'의 이전 정의를 참조하십시오.
-GameScene.cpp(65): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(121): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(251): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(450): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(479): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(498): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(514): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(522): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(527): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(535): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(542): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(550): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(563): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-GameScene.cpp(568): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(577): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(581): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(590): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(596): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(604): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(609): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(617): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(622): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(630): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(635): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(643): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(663): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(689): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(695): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(707): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(723): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(735): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(749): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-GameScene.cpp(797): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(798): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(802): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-GameScene.cpp(864): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(869): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(879): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(884): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(892): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-GameScene.cpp(897): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-  Iron.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(28): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(37): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(41): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(46): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(52): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Iron.cpp(57): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ItemManager.cpp
-ItemManager.cpp(145): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(159): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(167): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(232): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-ItemManager.cpp(240): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Obstacle.cpp
-  ObstacleManager.cpp
-ObstacleManager.cpp(22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-ObstacleManager.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Wood.cpp
-c:\users\adyda\desktop\teamproject\팀프프레임워크\Skill.h(24): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(28): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(37): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(41): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(46): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(52): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Wood.cpp(57): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Boss.cpp
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\Skill.h(23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Boss.cpp(72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Boss.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Boss.cpp(110): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+Boss.cpp(132): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Boss.cpp(133): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Boss.cpp(144): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  1 of 2605 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  2 of 2264 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.exe
-  nonaWindowsAPI.vcxproj -> C:\Users\adyda\Desktop\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.pdb (Full PDB)
+  nonaWindowsAPI.vcxproj -> C:\Users\manoong\Desktop\TT\TeamProject\팀프프레임워크\Release\nonaWindowsAPI.exe

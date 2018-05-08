@@ -1,25 +1,9 @@
-﻿  player.cpp
-c:\users\younj\desktop\teamproject\팀프프레임워크\skill.h(23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(262): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(273): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(280): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(291): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(333): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(334): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(348): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(349): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(360): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(361): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(364): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(365): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(369): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(370): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(628): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(629): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\younj\desktop\teamproject\팀프프레임워크\player.cpp(638): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-  nonaWindowsAPI.vcxproj -> C:\Users\younj\Desktop\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
+﻿  Boss.cpp
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\skill.h(23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(110): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(132): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(133): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\manoong\desktop\tt\teamproject\팀프프레임워크\boss.cpp(144): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  nonaWindowsAPI.vcxproj -> C:\Users\manoong\Desktop\TT\TeamProject\팀프프레임워크\Debug\nonaWindowsAPI.exe
