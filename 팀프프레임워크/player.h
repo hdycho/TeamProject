@@ -84,6 +84,7 @@ private:
 	KNIGHTPOSITION _attackRange;
 	bool _isAttack;
 	bool _isAttack2;		// 렉트 삭제용 변수
+	float _countTime = 0;
 
 	// for HP/MP
 	float _playerHP;

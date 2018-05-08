@@ -360,9 +360,13 @@ void player::update(HDC hdc)
 	_knight.rc = RectMakeCenter(_knight.x, _knight.y, _knight.img->getFrameWidth(), _knight.img->getFrameHeight());
 	_knight.playerColRect = RectMakeCenter(_knight.x, _knight.y, 25, 20);
 	_knightHeal.rc = RectMakeCenter(_knight.x + 3, _knight.y - 14, _knightHeal.img->getFrameWidth(), _knightHeal.img->getFrameHeight());
-	if (_isAttack2 == false)
+	if (_isAttack2 == true)
+		_countTime += TIMEMANAGER->getElapsedTime();	// 기본 공격이 미니언에 안맞을경우, 1초후 기본공격 Rect 삭제함
+	if (_isAttack2 == false || _countTime >= 1)
 	{
+		_countTime = 0;
 		_attackRange.rc = RectMakeCenter(-200, -200, 0, 0);
+		_isAttack2 = false;
 		//_attackRange.rc = RectMakeCenter(_knight.x + 30, _knight.y, 0, 0);
 		//_attackRange.rc = RectMakeCenter(_knight.x - 30, _knight.y, 0, 0);
 	}
